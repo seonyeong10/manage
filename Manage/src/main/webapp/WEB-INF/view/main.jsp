@@ -29,7 +29,7 @@
 				</td>
 			</tr>
 			<tr>
-				<td colspan="3">아이디찾기 / 비밀번호 찾기 / <a href="register/agree">회원가입</a></td>
+				<td colspan="3">아이디찾기 / 비밀번호 찾기 / <a href="#">회원가입</a></td>
 			</tr>
 		</table>
 	</body>
@@ -37,5 +37,6 @@
 <%-- </c:if > --%>
 <%-- <c:if test="${!empty authInfo}"> --%>
 내정보 | 로그아웃  | 회원리스트 | 공지사항 | 자료실 | 상품목록 | 설문조사 | 설문지 등록 | ajaxTest
+<a href="add">사원등록</a>
 <%-- </c:if > --%>
 </html>

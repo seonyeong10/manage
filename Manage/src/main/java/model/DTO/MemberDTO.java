@@ -1,117 +1,104 @@
 package model.DTO;
 
-import java.sql.Timestamp;
-
 public class MemberDTO {
-	String userId;
-	String userPw;
-	String userName;
-	String userGender;
-	Timestamp userBirth; // QueryString으로 전송되어도 자동 형변환
-	String userPh1;
-	String userPh2;
-	String userAddr;
-	String interest; // 배열
-	Timestamp userRegist;
-	String userEmail;
-	
-	// checkok
-	String chkOk;
+	Integer code;
+	String m_name;
+	String m_depart;
+	String m_job;
+	String m_age;
+	String m_phone;
+	String m_email;
+	String m_address;
+	String m_gender;
 
-	public String getUserId() {
-		return userId;
+	public String getM_gender() {
+		return m_gender;
 	}
 
-	public void setUserId(String userId) {
-		this.userId = userId;
+	public void setM_gender(String m_gender) {
+		this.m_gender = m_gender;
 	}
 
-	public String getUserPw() {
-		return userPw;
+	public Integer getCode() {
+		return code;
 	}
 
-	public void setUserPw(String userPw) {
-		this.userPw = userPw;
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 
-	public String getUserName() {
-		return userName;
+	public String getM_name() {
+		return m_name;
 	}
 
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setM_name(String m_name) {
+		this.m_name = m_name;
 	}
 
-	public String getUserGender() {
-		return userGender;
+	public String getM_depart() {
+		return m_depart;
 	}
 
-	public void setUserGender(String userGender) {
-		this.userGender = userGender;
+	public void setM_depart(String m_depart) {
+		this.m_depart = m_depart;
 	}
 
-	public Timestamp getUserBirth() {
-		return userBirth;
+	public String getM_job() {
+		return m_job;
 	}
 
-	public void setUserBirth(Timestamp userBirth) {
-		this.userBirth = userBirth;
+	public void setM_job(String m_job) {
+		this.m_job = m_job;
 	}
 
-	public String getUserPh1() {
-		return userPh1;
+	public String getM_age() {
+		return m_age;
 	}
 
-	public void setUserPh1(String userPh1) {
-		this.userPh1 = userPh1;
+	public void setM_age(String m_age) {
+		this.m_age = m_age;
 	}
 
-	public String getUserPh2() {
-		return userPh2;
+	public String getM_phone() {
+		return m_phone;
 	}
 
-	public void setUserPh2(String userPh2) {
-		this.userPh2 = userPh2;
+	public void setM_phone(String m_phone) {
+		this.m_phone = m_phone;
 	}
 
-	public String getUserAddr() {
-		return userAddr;
+	public String getM_email() {
+		return m_email;
 	}
 
-	public void setUserAddr(String userAddr) {
-		this.userAddr = userAddr;
+	public void setM_email(String m_email) {
+		this.m_email = m_email;
 	}
 
-	public String getInterest() {
-		return interest;
+	public String getM_address() {
+		return m_address;
 	}
 
-	public void setInterest(String interest) {
-		this.interest = interest;
+	public void setM_address(String m_address) {
+		this.m_address = m_address;
 	}
 
-	public Timestamp getUserRegist() {
-		return userRegist;
+	public MemberDTO(Integer code, String m_name, String m_depart, String m_job, String m_age, String m_phone,
+			String m_email, String m_address, String m_gender) {
+		super();
+		this.code = code;
+		this.m_name = m_name;
+		this.m_depart = m_depart;
+		this.m_job = m_job;
+		this.m_age = m_age;
+		this.m_phone = m_phone;
+		this.m_email = m_email;
+		this.m_address = m_address;
+		this.m_gender = m_gender;
 	}
 
-	public void setUserRegist(Timestamp userRegist) {
-		this.userRegist = userRegist;
+	public MemberDTO() {
+		super();
 	}
 
-	public String getUserEmail() {
-		return userEmail;
-	}
-
-	public void setUserEmail(String userEmail) {
-		this.userEmail = userEmail;
-	}
-
-	public String getChkOk() {
-		return chkOk;
-	}
-
-	public void setChkOk(String chkOk) {
-		this.chkOk = chkOk;
-	}
-	
 }
