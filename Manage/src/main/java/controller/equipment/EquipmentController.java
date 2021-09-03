@@ -23,7 +23,8 @@ public class EquipmentController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String openEquipmentList() {
+	public String openEquipmentList(Model model) {
+		equipmentListService.selectEquipments(model);
 		return "equipment/equipmentList";
 	}
 	
@@ -32,7 +33,6 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String openEquipmentForm(Model model) {
-		equipmentListService.selectEquipments(model);
 		return "equipment/equipmentForm";
 	}
 	

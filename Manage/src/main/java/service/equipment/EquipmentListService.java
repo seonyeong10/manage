@@ -19,6 +19,11 @@ public class EquipmentListService {
 		Map<String, Object> param = new HashMap<String, Object>();
 		
 		List<Map<String, Object>> equipmentList = repository.selectEquipments(param);
+		
+		for (int i = 0; i < equipmentList.size(); i++) {
+			
+			System.out.println(equipmentList.get(i).entrySet());
+		}
 	}
 
 }

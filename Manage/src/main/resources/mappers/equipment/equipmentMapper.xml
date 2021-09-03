@@ -12,7 +12,14 @@
 </insert>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
-	
+	select e.code, m_name as emp, name, cpu, os, ram, pannel, shape, m_code, ma_name as manufacture
+	from equipmentView e
+	left outer join
+	member mem
+	on mem.code = e.code
+	left outer join
+	manufacture ma
+	on ma.ma_code = e.m_code
 </select>
 
 </mapper>
