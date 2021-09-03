@@ -33,6 +33,8 @@
   			classpath:spring-jdbc.xml
   			classpath:mybatis-config.xml
   			classpath:spring-mail-config.xml
+  			classpath:manufacture.xml
+  			classpath:equipment.xml
   		</param-value>
   	</init-param>
   </servlet>

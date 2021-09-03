@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.manufacture.manufactureMapper">
+<sql id="baseColumn">
+	ma_code, ma_name, ma_kinds
+</sql>
+
+<insert id="insertManufacture" parameterType="model.DTO.ManufactureDTO">
+	insert into manufacture (<include refid="baseColumn" />)
+	values(#{ma_code}, #{ma_name}, #{ma_kinds})
+</insert>
+
+<select id="selectManufactureList" parameterType="pmap" resultType="pmap">
+	select <include refid="baseColumn" />
+	from manufacture
+</select>
+</mapper>

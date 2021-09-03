@@ -37,6 +37,12 @@
 <%-- </c:if > --%>
 <%-- <c:if test="${!empty authInfo}"> --%>
 내정보 | 로그아웃  | 회원리스트 | 공지사항 | 자료실 | 상품목록 | 설문조사 | 설문지 등록 | ajaxTest
-<a href="add">사원등록</a>
+<br />
+<a href="add">사원등록</a> | 
+<br />
+<a href="openManufactureForm">제조사 등록</a> | 
+<a href="getManufactureList">제조사 조회</a>
+<br />
+<a href="equipment">장비등록</a>
 <%-- </c:if > --%>
 </html>

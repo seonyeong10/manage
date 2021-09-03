@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.equipment.equipmentMapper">
+<sql id="phone">
+	code, p_name, m_code, p_ap, p_os, p_cpu, p_ram, p_capacity, p_battery
+</sql>
+
+<insert id="insertPhone" parameterType="pmap">
+	insert into phone (<include refid="phone" />)
+	values(#{code}, #{p_name}, #{m_code}, #{p_ap}, #{p_os}, #{p_cpu}, #{p_ram}, #{p_capacity}, #{p_battery})
+</insert>
+
+<select id="selectEquipments" parameterType="pmap" resultType="pmap">
+	
+</select>
+
+</mapper>
