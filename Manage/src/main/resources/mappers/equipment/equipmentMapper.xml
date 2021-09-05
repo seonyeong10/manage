@@ -12,7 +12,7 @@
 </insert>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
-	select e.code, m_name as emp, name, cpu, os, ram, pannel, shape, m_code, ma_name as manufacture
+	select ROWNUM, GUBUN, e.code, m_name as emp, name, cpu, os, ram, pannel, shape, m_code, ma_name as manufacture
 	from equipmentView e
 	left outer join
 	member mem
@@ -20,6 +20,75 @@
 	left outer join
 	manufacture ma
 	on ma.ma_code = e.m_code
+	where 1=1
+	<if test="m_name != null">and m_name like '%' || upper(#{m_name}) || '%' or m_name like '%' || lower(#{m_name}) || '%'</if>
+	<if test="ma_name != null">and ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%'</if>
+	<if test="name != null">and name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' </if>
+	<if test="gubun != null">and gubun like '%' || upper(#{gubun}) || '%' or gubun like '%' || lower(#{gubun}) || '%' </if>
 </select>
 
+<select id="getInfo" parameterType="pmap" resultType="pmap">
+	select * from equipmentView e, member mem, manufacture ma
+	where 1=1
+	and e.code = mem.code and e.m_code = ma.ma_code
+	<if test="code != null">and e.code = #{code}</if>
+	<if test="m_code != null">and e.m_code = #{m_code}</if>
+</select>
+
+<update id="updatePhone" parameterType="pmap">
+	update phone
+	set
+		p_ap = #{p_ap},
+		p_os = #{p_os},
+		p_cpu = #{p_cpu},
+		p_ram = #{p_ram},
+		p_capacity = #{p_capacity},
+		p_battery = #{p_battery},
+		p_name = #{p_name}
+	where code = #{code}
+</update>
+
+<update id="updatePC" parameterType="pmap">
+	update phone
+	set
+		pc_gpu = #{p_gpu},
+		pc_os = #{p_os},
+		pc_cpu = #{p_cpu},
+		pc_ram = #{p_ram},
+		pc_capacity = #{p_capacity},
+		pc_name = #{p_name}
+	where code = #{code}
+</update>
+
+<update id="updateMonitor" parameterType="pmap">
+	update phone
+	set
+		mo_pannel = #{mo_pannel},
+		mo_hz = #{mo_hz},
+		mo_resolution = #{mo_resolution},
+		mo_speed = #{mo_speed},
+		mo_shape = #{mo_shape},
+		mo_name = #{mo_name}
+	where code = #{code}
+</update>
+
+<delete id="delPhone" parameterType="pmap">
+	DELETE FROM phone
+	WHERE CODE = #{code} AND M_CODE = #{m_code} 
+</delete>
+
+<delete id="delPC" parameterType="pmap">
+	DELETE FROM pc
+	WHERE CODE = #{code} AND M_CODE = #{m_code} 
+</delete>
+
+<delete id="delMonitor" parameterType="pmap">
+	DELETE FROM monitor
+	WHERE CODE = #{code} AND M_CODE = #{m_code} 
+</delete>
+
+<select id="selectEmps" parameterType="pmap" resultType="pmap">
+ 	select code, m_name, m_depart
+ 	from member
+</select>
 </mapper>

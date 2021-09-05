@@ -1,0 +1,59 @@
+@charset "UTF-8";
+
+table {
+	margin: 0 auto 50px;
+	width: 100%;
+	border-top: 2px solid #333;
+	border-bottom: 2px solid #333;
+}
+
+table:last-child {
+	border: none;
+}
+
+td,th {
+	text-align: center;
+	padding: 10px;
+	border-bottom: 1px solid #808080;
+	width: 700px;
+}
+
+td:first-child , th:first-child{
+	background: #0067a3;
+	border-bottom: 1px solid #333;
+	padding: 20px 10px;
+	color: #fff;
+	font-size: 18px;
+	font-weight: 900;
+	width: 200px;
+}
+
+input[type=text], select {
+	width: 100%;
+	line-height: 50px;
+	font-size: 16px;
+	border: none;
+}
+
+input[type=text]:focus, select:focus {
+	outline: none;
+}
+
+tr .equip-title {
+	width: 100%;
+	padding: 10px 0 10px 10px;
+	font-size: 20px;
+	background: none;
+	color: #333;
+	text-align: left;
+}
+
+tfoot {
+	margin-top: 50px;
+}
+
+table tr .btn-area {
+	background: none;
+	text-align: right;
+	border:none;
+}

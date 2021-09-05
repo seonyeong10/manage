@@ -12,6 +12,7 @@ import command.MemberCommand;
 import service.member.MemberAddServcie;
 
 @Controller
+@RequestMapping("employee")
 public class MemberController {
 //	@Autowired
 //	MemberJoinService memberJoinService;

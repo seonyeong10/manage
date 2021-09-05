@@ -11,6 +11,7 @@ import service.manufacture.AddManufactureService;
 import service.manufacture.ManufactureListService;
 
 @Controller
+@RequestMapping("manufacture")
 public class ManufactureController {
 	@Autowired
 	AddManufactureService addManufactureService;
@@ -21,7 +22,7 @@ public class ManufactureController {
 	 * 제조사 등록 페이지 이동
 	 * @return
 	 */
-	@RequestMapping(value = "openManufactureForm", method = RequestMethod.GET)
+	@RequestMapping(value = "add", method = RequestMethod.GET)
 	public String openManufactureForm() {
 		return "manufacture/manufactureForm";
 	}
@@ -47,7 +48,7 @@ public class ManufactureController {
 	 * 제조사 목록 조회
 	 * @return
 	 */
-	@RequestMapping(value = "getManufactureList", method = RequestMethod.GET)
+	@RequestMapping(method = RequestMethod.GET)
 	public String getManufactureList(Model model) {
 		manufactureListService.getManufactureList(model);
 		return "manufacture/manufactureList";

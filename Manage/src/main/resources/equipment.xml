@@ -9,5 +9,6 @@
 	<bean id="equipmentController" class="controller.equipment.EquipmentController" />
 	<bean id="addEquipmentService" class="service.equipment.AddEquipmentService" />
 	<bean id="equipmentListService" class="service.equipment.EquipmentListService" />
+	<bean id="equipmentInfoService" class="service.equipment.EquipmentInfoService" />
 	<bean id="equipmentRepository" class="repository.equipment.EquipmentRepository" />
 </beans>

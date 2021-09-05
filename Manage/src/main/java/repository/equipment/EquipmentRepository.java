@@ -25,4 +25,49 @@ public class EquipmentRepository {
 		statement = namespace + ".selectEquipments";
 		return sqlSession.selectList(statement, param);
 	}
+
+	public List<Map<String, Object>> getInfo(Map<String, Object> param) {
+		statement = namespace + ".getInfo";
+		return sqlSession.selectList(statement, param);
+	}
+
+	public int updatePhone(Map<String, Object> param) {
+		statement = namespace + ".updatePhone";
+		return sqlSession.update(statement, param);
+	}
+
+	public int updateMonitor(Map<String, Object> param) {
+		statement = namespace + ".updateMonitor";
+		return sqlSession.update(statement, param);
+	}
+
+	public int updatePC(Map<String, Object> param) {
+		statement = namespace + ".updatePC";
+		return sqlSession.update(statement, param);
+	}
+
+	public int delPhone(Map<String, Object> param) {
+		statement = namespace + ".delPhone";
+		return sqlSession.update(statement, param);
+	}
+
+	public int delMonitor(Map<String, Object> param) {
+		statement = namespace + ".delMonitor";
+		return sqlSession.update(statement, param);
+	}
+
+	public int delPC(Map<String, Object> param) {
+		statement = namespace + ".delPC";
+		return sqlSession.update(statement, param);
+	}
+
+	/**
+	 * 성능 비교page 사원 목록 조회
+	 * @param param 
+	 * @return
+	 */
+	public List<Map<String, Object>> selectEmps(Map<String, Object> param) {
+		statement = namespace + ".selectEmps";
+		return sqlSession.selectList(statement, param);
+	}
 }

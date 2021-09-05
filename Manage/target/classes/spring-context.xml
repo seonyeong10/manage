@@ -22,6 +22,10 @@
 		<mvc:jsp prefix="/WEB-INF/view/"/> 
 		<mvc:jsp suffix=".jsp"/> 
 	</mvc:view-resolvers>
+	
+	<!-- css -->
+	<mvc:resources location="/resources/" mapping="/resources/**" />
+	
 	<!-- 의존객체 자동주입 -->
 	<context:annotation-config />
 	<!-- 에러메세지 -->
