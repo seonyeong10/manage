@@ -1,5 +1,13 @@
 package controller.member;
 
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.json.simple.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -9,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import command.MemberCommand;
+import repository.member.MemberRepository;
 import service.member.MemberAddServcie;
 
 @Controller
@@ -19,6 +28,9 @@ public class MemberController {
 	
 	@Autowired
 	MemberAddServcie memberAddServcie;
+	
+	@Autowired
+	MemberRepository repository;
 
 	@RequestMapping(value="add", method=RequestMethod.GET) // 반복 주소의 하위 주소
 	public String addMember(Model model) {
@@ -31,6 +43,31 @@ public class MemberController {
 //		System.out.println("실행");
 		memberAddServcie.insertMem(memberCommand);
 		return "member/memberWelcome";
+	}
+	
+	/**
+	 * 사번 중복 검사
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "isDuplicate", method = RequestMethod.POST)
+	public void isDuplicate(
+			@RequestParam(value = "code", defaultValue = "") String code,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) throws Exception {
+//		System.out.println(1);
+		
+		JSONObject obj = new JSONObject();
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		int cnt = repository.getEmpCnt(param);
+		
+		obj.put("message", "success");
+		obj.put("cnt", cnt);
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
 	}
 
 //	@RequestMapping(value = "regist", method = RequestMethod.POST)

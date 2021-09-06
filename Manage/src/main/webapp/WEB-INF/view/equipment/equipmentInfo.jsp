@@ -64,8 +64,8 @@
 						<td><input type="text" name="mo_shape" value="" /></td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<button onclick="updateMonitor();">수정</button>
+						<td colspan="2" class="btn-area">
+							<button onclick="updateMonitor();" class="btn submit">수정</button>
 						</td>
 					</tr>
 				</table>
@@ -99,8 +99,8 @@
 						<td><input type="text" name="pc_capacity" value="" /></td>
 					</tr>
 					<tr>
-						<td colspan="2">
-							<button onclick="updatePC();">수정</button>
+						<td colspan="2" class="btn-area">
+							<button onclick="updatePC();" class="btn submit">수정</button>
 						</td>
 					</tr>
 				</table>

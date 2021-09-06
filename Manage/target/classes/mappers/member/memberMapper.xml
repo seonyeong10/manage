@@ -10,4 +10,9 @@
 	insert into member (<include refid="baseColumn" />)
 	values(#{code}, #{m_name}, #{m_depart}, #{m_job}, #{m_age}, #{m_phone}, #{m_email}, #{m_address}, #{m_gender})
 </insert>
+
+<select id="getEmpCnt" parameterType="pmap" resultType="int">
+	select count(*) from member
+	where code = #{code}
+</select>
 </mapper>

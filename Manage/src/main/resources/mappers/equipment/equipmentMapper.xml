@@ -5,10 +5,26 @@
 <sql id="phone">
 	code, p_name, m_code, p_ap, p_os, p_cpu, p_ram, p_capacity, p_battery
 </sql>
+<sql id="pc">
+	code, pc_name, m_code, pc_division, pc_os, pc_cpu, pc_ram, pc_capacity, pc_gpu
+</sql>
+<sql id="monitor">
+	code, mo_name, m_code, mo_pannel, mo_Hz, mo_resolution, mo_speed, mo_shape
+</sql>
 
 <insert id="insertPhone" parameterType="pmap">
 	insert into phone (<include refid="phone" />)
 	values(#{code}, #{p_name}, #{m_code}, #{p_ap}, #{p_os}, #{p_cpu}, #{p_ram}, #{p_capacity}, #{p_battery})
+</insert>
+
+<insert id="insertMonitor" parameterType="pmap">
+	insert into monitor (<include refid="monitor" />)
+	values(#{code}, #{mo_name}, #{m_code}, #{mo_pannel}, #{mo_Hz}, #{mo_resolution}, #{mo_speed}, #{mo_shape})
+</insert>
+
+<insert id="insertPC" parameterType="pmap">
+	insert into pc (<include refid="pc" />)
+	values(#{code}, #{pc_name}, #{m_code}, #{pc_division}, #{pc_os}, #{pc_cpu}, #{pc_ram}, #{pc_capacity}, #{pc_gpu})
 </insert>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
@@ -25,6 +41,7 @@
 	<if test="ma_name != null">and ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%'</if>
 	<if test="name != null">and name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' </if>
 	<if test="gubun != null">and gubun like '%' || upper(#{gubun}) || '%' or gubun like '%' || lower(#{gubun}) || '%' </if>
+	<if test="code != null">and e.code = #{code}</if>
 </select>
 
 <select id="getInfo" parameterType="pmap" resultType="pmap">
@@ -33,42 +50,50 @@
 	and e.code = mem.code and e.m_code = ma.ma_code
 	<if test="code != null">and e.code = #{code}</if>
 	<if test="m_code != null">and e.m_code = #{m_code}</if>
+	<if test="gubun != null">and gubun = #{gubun} </if>
 </select>
 
 <update id="updatePhone" parameterType="pmap">
 	update phone
 	set
+		<if test="p_name != null">
+			p_name = #{p_name},
+		</if>
 		p_ap = #{p_ap},
 		p_os = #{p_os},
 		p_cpu = #{p_cpu},
 		p_ram = #{p_ram},
 		p_capacity = #{p_capacity},
-		p_battery = #{p_battery},
-		p_name = #{p_name}
+		p_battery = #{p_battery}
 	where code = #{code}
 </update>
 
 <update id="updatePC" parameterType="pmap">
-	update phone
+	update pc
 	set
+		<if test="pc_name != null">
+			pc_name = #{p_name},
+		</if>
 		pc_gpu = #{p_gpu},
 		pc_os = #{p_os},
 		pc_cpu = #{p_cpu},
 		pc_ram = #{p_ram},
-		pc_capacity = #{p_capacity},
-		pc_name = #{p_name}
+		pc_capacity = #{p_capacity}
+		
 	where code = #{code}
 </update>
 
 <update id="updateMonitor" parameterType="pmap">
-	update phone
+	update monitor
 	set
+		<if test="mo_name != null">
+			mo_name = #{mo_name},
+		</if>
 		mo_pannel = #{mo_pannel},
 		mo_hz = #{mo_hz},
 		mo_resolution = #{mo_resolution},
 		mo_speed = #{mo_speed},
-		mo_shape = #{mo_shape},
-		mo_name = #{mo_name}
+		mo_shape = #{mo_shape}
 	where code = #{code}
 </update>
 

@@ -19,7 +19,7 @@
 		<div id="right">
 			<div class="section-title">장비 조회</div>
 			<form action="#" method="post" id="frm">
-				<input type="hidden" name="m_code" id="m_code" />
+				<input type="hidden" name="table" id="gubun" />
 				<input type="hidden" name="code" id="code" />
 				<table border=1 id="equipment">
 					<tr class="sch-box">
@@ -87,7 +87,8 @@
 			newRow.insertCell(0).innerHTML = "${item.ROWNUM}";
 			newRow.insertCell(1).innerText = "${item.GUBUN}";
 			// 			newRow.insertCell(2).innerText = "${item.EMP}";
-			newRow.insertCell(2).innerHTML = "<a href='#' onclick='getInfo(${item.M_CODE},${item.CODE});'>${item.EMP}</a>";
+// 			newRow.insertCell(2).innerHTML = "<a href='#' onclick='getInfo(${item.GUBUN},${item.CODE});'>${item.EMP}</a>";
+			newRow.insertCell(2).innerHTML = "<a href='/equipment/getEquipmentInfo?gubun=${item.GUBUN}&code=${item.CODE}'>${item.EMP}</a>";
 			newRow.insertCell(3).innerText = "${item.NAME}";
 			newRow.insertCell(4).innerText = "${item.MANUFACTURE}";
 			newRow.insertCell(5).innerText = "${item.CPU}";
@@ -99,13 +100,13 @@
 			</c:forEach>
 		}
 
-		function getInfo(manufacture, emp) {
-			document.getElementById('m_code').value = manufacture;
-			document.getElementById('code').value = emp;
+// 		function getInfo(gubun, emp) {
+// 			document.getElementById('table').value = gubun;
+// 			document.getElementById('code').value = emp;
 
-			document.getElementById('frm').action = "equipment/getEquipmentInfo";
-			document.getElementById('frm').submit();
-		}
+// 			document.getElementById('frm').action = "equipment/getEquipmentInfo";
+// 			document.getElementById('frm').submit();
+// 		}
 
 		window.onload = getEquipmentList();
 	</script>

@@ -8,7 +8,7 @@
 					사원 관리 <span class="drop">▼</span>
 				</div>
 				<ul>
-					<li><a href="add">사원 등록</a></li>
+					<li><a href="/employee/add">사원 등록</a></li>
 					<li><a href="#">사원 조회</a></li>
 				</ul>
 			</div>

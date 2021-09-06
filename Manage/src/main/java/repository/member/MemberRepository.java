@@ -1,5 +1,7 @@
 package repository.member;
 
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -17,5 +19,10 @@ public class MemberRepository {
 	public Integer insertMember(MemberDTO dto) {
 		statement = namespace + ".insertMemeber";	
 		return sqlSession.update(statement, dto);
+	}
+
+	public int getEmpCnt(Map<String, Object> param) {
+		statement = namespace + ".getEmpCnt";	
+		return sqlSession.selectOne(statement, param);
 	}
 } 

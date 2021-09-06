@@ -70,4 +70,14 @@ public class EquipmentRepository {
 		statement = namespace + ".selectEmps";
 		return sqlSession.selectList(statement, param);
 	}
+
+	public int insertMonitor(Map<String, Object> param) {
+		statement = namespace + ".insertMonitor";
+		return sqlSession.update(statement, param);
+	}
+
+	public int insertPC(Map<String, Object> param) {
+		statement = namespace + ".insertPC";
+		return sqlSession.update(statement, param);
+	}
 }

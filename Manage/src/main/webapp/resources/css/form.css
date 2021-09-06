@@ -57,3 +57,12 @@ table tr .btn-area {
 	text-align: right;
 	border:none;
 }
+
+tr td .not-duplicate {
+	width: 90%;
+}
+
+#ph-err, #email-err {
+	font-size: 11px;
+	color: red;
+}
