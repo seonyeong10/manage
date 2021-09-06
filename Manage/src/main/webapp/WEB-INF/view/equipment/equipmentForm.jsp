@@ -10,6 +10,7 @@
 	type="text/css" />
 <link href="<c:url value="/resources/css/form.css"/>" rel="stylesheet"
 	type="text/css" />
+<script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
 	<%@ include file="../include/top.jsp" %>
@@ -18,13 +19,13 @@
 		<div id="right">
 			<div class="section-title">장비 등록</div>
 			<form action="insertEquipment" method="post" name="frm"
-				modelAttribute="equipmentCommand">
+				modelAttribute="equipmentCommand" onsubmit="return checkParam();">
 				<table>
 					<tr>
 						<td>구분</td>
 						<td>
 							<select name="gubun" onchange="getColumn();" id="gubun">
-								<option value="000">항목을 선택해주세요.</option>
+								<option value="">항목을 선택해주세요.</option>
 								<option value="100">PC</option>
 								<option value="300">모니터</option>
 								<option value="400">핸드폰</option>
@@ -33,8 +34,12 @@
 						</td>
 					</tr>
 					<tr>
-						<td>사번</td>
-						<td><input type="text" name="code" /></td>
+						<td>소유자</td>
+						<td>
+							<select name="code" id="emp">
+								<option value="">사원을 선택하세요.</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td>제품명</td>
@@ -42,7 +47,11 @@
 					</tr>
 					<tr>
 						<td>제조사</td>
-						<td><input type="text" name="m_code" /></td>
+						<td>
+							<select name="m_code" id="man">
+								<option value="">제조사를 선택하세요.</option>
+							</select>
+						</td>
 					</tr>
 				</table>
 				<table>
@@ -149,6 +158,19 @@
 	</div>
 
 	<script type="text/javascript">
+	var param = document.getElementsByTagName('input');
+	var select = document.getElementsByTagName('select');
+	
+		// 폼 전송
+		function checkParam() {
+			if(param[name='gubun'].value == '' || param[name='gubun'].value == null){
+				alert('항목을 선택하세요.');
+				param[name='gubun'].focus();
+				return false;
+			}
+		}
+		
+		// 장비 정보 입력 폼 선택
 		function getColumn() {
 			var gubun = document.getElementById('gubun').options[document
 					.getElementById('gubun').selectedIndex].value;
@@ -165,6 +187,39 @@
 
 			load(); // 화면 초기화
 			category.style.display = 'block';
+			
+			getManufactures(gubun);
+		
+		}
+		
+		// 제조사 리스트
+		function getManufactures(gubun) {
+			target = document.getElementById('man');
+			
+			// option 초기화
+			$('#man').children('option:not(:first)').remove();
+			
+			// 선택한 구분 항목을 제조하는 제조사 출력
+			$.ajax({
+				type : "post"
+				,url : "/equipment/getManufactures"
+				,data : {"ma_kinds" : gubun}
+				,dataType : "json"
+				,error : function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success : function(responseText, statusText, xhr) {
+					var msg = responseText.message;
+					var man = responseText.man;
+					for(var i=0 ; i < man.length ; i++) {
+						var option = document.createElement('option');
+						option.innerText = man[i].MA_NAME;
+						option.value =  man[i].MA_CODE;
+						target.append(option);
+					}
+				}
+			});
+			
 		}
 
 		function goMain() {
@@ -177,6 +232,17 @@
 			document.getElementById('phone-ability').style.display = 'none';
 			document.getElementById('pc-ability').style.display = 'none';
 			document.getElementById('monitor-ability').style.display = 'none';
+			
+			// 사원 리스트
+			var target = document.getElementById('emp');
+			
+			<c:forEach items="${emp }" var="emp" varStatus="s">
+				var option = document.createElement('option');
+				option.innerText = "${emp.M_NAME}(${emp.M_DEPART})";
+				option.value = "${emp.CODE}";
+				target.append(option);
+			</c:forEach>
+			
 		}
 	</script>
 </body>

@@ -62,7 +62,19 @@ public class EquipmentController {
 	 * 장비 등록 페이지 오픈
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String openEquipmentForm(Model model) {
+	public String openEquipmentForm(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		// 사원
+		List<Map<String, Object>> empList = repository.selectEmps(param);
+		
+		model.addAttribute("emp", empList);
+		
 		return "equipment/equipmentForm";
 	}
 
@@ -343,17 +355,30 @@ public class EquipmentController {
 			gubun = "monitor";
 		}
 
-		// JSON 객체
-//		JSONObject obj = new JSONObject();
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		
-//		// 성능정보 조회
-//		
-//		obj.put("message", "success");
-//		
-//		response.setContentType("text/plain; charset=UTF-8");
-//		response.getWriter().write(obj.toString());
-		
 		return "redirect:/equipment/compare?gubun=" + gubun + "&code1=" + code1 + "&code2=" + code2;
+	}
+	
+	@RequestMapping(value = "getManufactures", method = RequestMethod.POST)
+	public void getManufactures(
+			@RequestParam(value = "ma_kinds", defaultValue = "") Integer ma_kinds,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("ma_kinds", ma_kinds);
+		
+		// 제조사
+		List<Map<String, Object>> manuList = repository.selectManufactures(param);
+		
+		obj.put("message", "success");
+		obj.put("man", manuList);
+		
+//		model.addAttribute("man", manuList);
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
 	}
 }

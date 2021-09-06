@@ -80,4 +80,9 @@ public class EquipmentRepository {
 		statement = namespace + ".insertPC";
 		return sqlSession.update(statement, param);
 	}
+
+	public List<Map<String, Object>> selectManufactures(Map<String, Object> param) {
+		statement = namespace + ".selectManufactures";
+		return sqlSession.selectList(statement, param);
+	}
 }

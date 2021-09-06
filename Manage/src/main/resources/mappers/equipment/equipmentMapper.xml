@@ -40,8 +40,7 @@
 	<if test="m_name != null">and m_name like '%' || upper(#{m_name}) || '%' or m_name like '%' || lower(#{m_name}) || '%'</if>
 	<if test="ma_name != null">and ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%'</if>
 	<if test="name != null">and name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' </if>
-	<if test="gubun != null">and gubun like '%' || upper(#{gubun}) || '%' or gubun like '%' || lower(#{gubun}) || '%' </if>
-	<if test="code != null">and e.code = #{code}</if>
+	<if test="gubun != null">and gubun = #{gubun}</if>
 </select>
 
 <select id="getInfo" parameterType="pmap" resultType="pmap">
@@ -116,4 +115,10 @@
  	select code, m_name, m_depart
  	from member
 </select>
+
+<select id="selectManufactures" parameterType="pmap" resultType="pmap">
+	select * from manufacture
+	where ma_kinds = #{ma_kinds}
+</select>
+
 </mapper>
