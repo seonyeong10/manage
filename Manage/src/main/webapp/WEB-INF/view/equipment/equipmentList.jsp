@@ -36,7 +36,7 @@
 					<tr class="sch-box">
 						<td colspan="10">
 							<select name="schThem">
-								<option>전체</option>
+<!-- 								<option>전체</option> -->
 								<option value="m_name">사용자</option>
 								<option value="ma_name">제조자</option>
 								<option value="name">제품명</option>

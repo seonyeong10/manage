@@ -46,10 +46,9 @@ public class EquipmentController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String openEquipmentList(@RequestParam(value = "gubun", required = false, defaultValue = "") String gubun,
-			@RequestParam(value = "schThem", required = false, defaultValue = "") String schThem,
-			@RequestParam(value = "schVal", required = false, defaultValue = "") String schVal, Model model) {
-//		System.out.printf("검색구분: %s, 검색어: %s%n", schThem, schVal);
+	public String openEquipmentList(@RequestParam(value = "gubun", required = false) String gubun,
+			@RequestParam(value = "schThem", required = false) String schThem,
+			@RequestParam(value = "schVal", required = false) String schVal, Model model) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gubun", gubun);
 		param.put(schThem, schVal);
@@ -57,7 +56,7 @@ public class EquipmentController {
 		equipmentListService.selectEquipments(param, model);
 		return "equipment/equipmentList";
 	}
-
+	
 	/**
 	 * 장비 등록 페이지 오픈
 	 */

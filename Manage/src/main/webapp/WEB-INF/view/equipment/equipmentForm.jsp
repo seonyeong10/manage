@@ -25,7 +25,7 @@
 						<td>구분</td>
 						<td>
 							<select name="gubun" onchange="getColumn();" id="gubun">
-								<option value="">항목을 선택해주세요.</option>
+								<option value="">항목을 선택하세요.</option>
 								<option value="100">PC</option>
 								<option value="300">모니터</option>
 								<option value="400">핸드폰</option>
@@ -43,7 +43,7 @@
 					</tr>
 					<tr>
 						<td>제품명</td>
-						<td><input type="text" name="name" /></td>
+						<td><input type="text" name="name" required="required"/></td>
 					</tr>
 					<tr>
 						<td>제조사</td>
@@ -60,7 +60,7 @@
 					<tfoot>
 						<tr>
 							<td colspan="2" class="btn-area">
-								<input type="submit" value="등록" class="btn submit"/>
+								<input type="submit" value="등록" class="btn submit" />
 								<button onclick="goMain();" class="btn">취소</button>
 							</td>
 						</tr>
@@ -80,19 +80,19 @@
 						</tr>
 						<tr>
 							<td>CPU</td>
-							<td><input type="text" name="p_cpu" /></td>
+							<td><input type="text" name="p_cpu"/></td>
 						</tr>
 						<tr>
 							<td>RAM</td>
-							<td><input type="text" name="p_ram" /></td>
+							<td><input type="text" name="p_ram" pattern="[0-9]+" ></td>
 						</tr>
 						<tr>
 							<td>저장공간</td>
-							<td><input type="text" name="p_capacity" /></td>
+							<td><input type="text" name="p_capacity" pattern="[0-9]+" /></td>
 						</tr>
 						<tr>
 							<td>배터리</td>
-							<td><input type="text" name="p_battery" /></td>
+							<td><input type="text" name="p_battery" pattern="[0-9]+" /></td>
 						</tr>
 					</tbody>
 					<tbody id="pc-ability">
@@ -101,7 +101,13 @@
 						</tr>
 						<tr>
 							<td>pc_division</td>
-							<td><input type="text" name="pc_division" /></td>
+							<td>
+								<select name="pc_division">
+									<option value="">PC 구분을 선택하세요.</option>
+									<option value="100">데스크탑</option>
+									<option value="200">노트북</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<td>운영체제</td>
@@ -113,7 +119,7 @@
 						</tr>
 						<tr>
 							<td>RAM</td>
-							<td><input type="text" name="pc_ram" /></td>
+							<td><input type="text" name="pc_ram" pattern="[0-9]+" /></td>
 						</tr>
 						<tr>
 							<td>GPU</td>
@@ -121,7 +127,7 @@
 						</tr>
 						<tr>
 							<td>저장공간</td>
-							<td><input type="text" name="pc_capacity" /></td>
+							<td><input type="text" name="pc_capacity" pattern="[0-9]+" /></td>
 
 						</tr>
 					</tbody>
@@ -131,11 +137,11 @@
 						</tr>
 						<tr>
 							<td>패널</td>
-							<td><input type="text" name="mo_pannel" /></td>
+							<td><input type="text" name="mo_pannel"/></td>
 						</tr>
 						<tr>
 							<td>화면 주사율(Hz)</td>
-							<td><input type="text" name="mo_Hz" /></td>
+							<td><input type="text" name="mo_Hz" pattern="[0-9]+" /></td>
 						</tr>
 						<tr>
 							<td>해상도(픽셀)</td>
@@ -143,11 +149,17 @@
 						</tr>
 						<tr>
 							<td>응답속도(ms)</td>
-							<td><input type="text" name="mo_speed" /></td>
+							<td><input type="text" name="mo_speed" pattern="[0-9]+" /></td>
 						</tr>
 						<tr>
 							<td>형태</td>
-							<td><input type="text" name="mo_shape" /></td>
+							<td>
+								<select name="mo_shape">
+									<option value="">형태를 선택하세요.</option>
+									<option value="100">커브</option>
+									<option value="200">와이드</option>
+								</select>
+							</td>
 						</tr>
 					</tbody>
 
@@ -163,15 +175,115 @@
 	
 		// 폼 전송
 		function checkParam() {
-			if(param[name='gubun'].value == '' || param[name='gubun'].value == null){
+			var gubun = select[name='gubun'].value;
+			if(gubun == '' || gubun == null){
 				alert('항목을 선택하세요.');
-				param[name='gubun'].focus();
+				select[name='gubun'].focus();
+				return false;
+			}
+			
+			// 테이블 별 파라미터 형식 확인
+			if(gubun === '100') {
+				// pc
+				checkPcParam();
+				
+			} else if(gubun === '300') {
+				// 모니터
+				checkMonitorParam();
+				
+			} else if(gubun === '400') {
+				// 핸드폰
+				checkPhoneParam();
+			}
+			
+			return false;
+		}
+		
+		function checkPhoneParam() {
+			console.log(param[name='p_ap'].value);
+			if(param[name='p_ap'].value == '' || param[name='p_ap'].value == null){
+				alert('AP를 입력하세요.');
+				param[name='p_ap'].focus();
+				return false;
+			} else if(param[name='p_os'].value == '' || param[name='p_os'].value == null){
+				alert('OS를 입력하세요.');
+				param[name='p_os'].focus();
+				return false;
+			} else if(param[name='p_cpu'].value == '' || param[name='p_cpu'].value == null){
+				alert('CPU를 입력하세요.');
+				param[name='p_cpu'].focus();
+				return false;
+			} else if(param[name='p_ram'].value == '' || param[name='p_ram'].value == null){
+				alert('RAM을 입력하세요.');
+				param[name='p_ram'].focus();
+				return false;
+			} else if(param[name='p_capacity'].value == '' || param[name='p_capacity'].value == null){
+				alert('저장공간을 입력하세요.');
+				param[name='p_capacity'].focus();
+				return false;
+			} else if(param[name='p_battery'].value == '' || param[name='p_battery'].value == null){
+				alert('배터리 용량을 입력하세요.');
+				param[name='p_battery'].focus();
+				return false;
+			} 
+		}
+		
+		function checkMonitorParam() {
+			if(param[name='mo_pannel'].value == '' || param[name='mo_pannel'].value == null){
+				alert('PANNEL을 입력하세요.');
+				param[name='mo_pannel'].focus();
+				return false;
+			} else if(param[name='mo_Hz'].value == '' || param[name='mo_Hz'].value == null){
+				alert('주사율을 입력하세요.');
+				param[name='mo_Hz'].focus();
+				return false;
+			} else if(param[name='mo_resolution'].value == '' || param[name='mo_resolution'].value == null){
+				alert('해상도를 입력하세요.');
+				param[name='mo_resolution'].focus();
+				return false;
+			} else if(param[name='mo_speed'].value == '' || param[name='mo_speed'].value == null){
+				alert('응답속도를 입력하세요.');
+				param[name='mo_speed'].focus();
+				return false;
+			} else if(select[name='mo_shape'].value == '' || select[name='mo_shape'].value == null){
+				alert('형태 입력하세요.');
+				select[name='mo_shape'].focus();
+				return false;
+			} 
+		}
+		
+		function checkPcParam() {
+			if(select[name='pc_division'].value == '' || select[name='pc_division'].value == null){
+				alert('PC구분을 선택하세요.');
+				select[name='pc_division'].focus();
+				return false;
+			} else if(param[name='pc_os'].value == '' || param[name='pc_os'].value == null){
+				alert('OS를 입력하세요.');
+				param[name='pc_os'].focus();
+				return false;
+			} else if(param[name='pc_cpu'].value == '' || param[name='pc_cpu'].value == null){
+				alert('CPU를 입력하세요.');
+				param[name='pc_cpu'].focus();
+				return false;
+			} else if(param[name='pc_ram'].value == '' || param[name='pc_ram'].value == null){
+				alert('RAM을 입력하세요.');
+				param[name='pc_ram'].focus();
+				return false;
+			} else if(param[name='pc_gpu'].value == '' || param[name='pc_gpu'].value == null){
+				alert('GPU를 입력하세요.');
+				param[name='pc_gpu'].focus();
+				return false;
+			} else if(param[name='pc_capacity'].value == '' || param[name='pc_capacity'].value == null){
+				alert('저장공간을 입력하세요.');
+				param[name='pc_capacity'].focus();
 				return false;
 			}
 		}
 		
+		
 		// 장비 정보 입력 폼 선택
 		function getColumn() {
+			
 			var gubun = document.getElementById('gubun').options[document
 					.getElementById('gubun').selectedIndex].value;
 			var category = null;
@@ -179,10 +291,13 @@
 			// gubun에 따라 tBody 변경
 			if (gubun === '100') {
 				category = document.getElementById('pc-ability');
+				
 			} else if (gubun === '300') {
 				category = document.getElementById('monitor-ability');
+				
 			} else if (gubun === '400') {
 				category = document.getElementById('phone-ability');
+				
 			}
 
 			load(); // 화면 초기화
@@ -234,6 +349,8 @@
 			document.getElementById('monitor-ability').style.display = 'none';
 			
 			// 사원 리스트
+			// option 초기화
+			$('#emp').children('option:not(:first)').remove();
 			var target = document.getElementById('emp');
 			
 			<c:forEach items="${emp }" var="emp" varStatus="s">
