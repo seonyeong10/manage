@@ -18,8 +18,8 @@
 		<%@ include file="../include/left.jsp"%>
 
 		<div id="right">
-			<div class="section-title">${title }</div>
 			<form action="insertManufacture" method="post" name="frm" id="frm">
+			<div class="section-title">${title }</div>
 				<table>
 					<tr>
 						<td>제조물품</td>

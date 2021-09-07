@@ -17,9 +17,9 @@
 	<div id="content">
 	<%@ include file="../include/left.jsp" %>
 		<div id="right">
-			<div class="section-title">장비 등록</div>
 			<form action="insertEquipment" method="post" name="frm"
 				modelAttribute="equipmentCommand" onsubmit="return checkParam();">
+			<div class="section-title">장비 등록</div>
 				<table>
 					<tr>
 						<td>구분</td>

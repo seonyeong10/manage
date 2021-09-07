@@ -17,10 +17,11 @@
 	<div id="content">
 		<%@ include file="../include/left.jsp"%>
 		<div id="right">
-			<div class="section-title">사원 목록</div>
 			
-			<div style="width:930px; overflow: auto;">
-			<table border=1 id="employee" style="width: 1000px;">
+			<div style="width:930px; overflow: auto; position:absolute; left:50%; transform:translateX(-50%);">
+			<div class="section-title">사원 목록</div>
+			<div>
+			<table border=1 id="employee" >
 				<thead>
 					<tr class="table-top">
 						<td>사번</td>

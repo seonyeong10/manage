@@ -17,8 +17,8 @@
 		<%@ include file="../include/left.jsp"%>
 
 		<div id="right">
-			<div class="section-title">사원 상세정보</div>
 			<form id="frm" method="post" onsubmit="return checkParam();" action="/employee/update">
+			<div class="section-title">사원 상세정보</div>
 				<input type="hidden" name="phPattern" value="true"/>
 				<input type="hidden" name="emailPattern" value="true"/>
 				<div style="width: 930px; overflow:auto;">

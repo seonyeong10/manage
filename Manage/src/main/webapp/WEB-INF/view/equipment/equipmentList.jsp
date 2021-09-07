@@ -18,11 +18,13 @@
 		<%@ include file="../include/left.jsp"%>
 
 		<div id="right" >
-			<div class="section-title">장비 조회</div>
 			<form action="#" method="post" id="frm" >
+			<div class="section-title">장비 조회</div>
 				<input type="hidden" name="table" id="gubun" />
 				<input type="hidden" name="code" id="code" />
 				
+			
+			<div style="width: 1500px; overflow: auto; position:absolute; left:50%; transform:translateX(-50%);">
 			<div class="sch-box">
 				<div>
 					<span>종류</span>
@@ -51,8 +53,6 @@
 				</div>
 			</div>
 			<br />
-			
-			<div style="width: 930px; overflow: auto;" >
 				<table border=1 id="equipment"  style="width: 1800px">
 <!-- 					<tr class="sch-box"> -->
 <!-- 						<td colspan="10"> -->

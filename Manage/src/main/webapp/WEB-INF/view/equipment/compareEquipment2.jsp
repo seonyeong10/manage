@@ -50,6 +50,114 @@
 							</td>
 						</tr>
 					</thead>
+<!-- 					<tfoot> -->
+<!-- 						<tr class="btn-area"> -->
+<!-- 							<td colspan="3"> -->
+<!-- 								<button onclick="changeEquipment();">장비 교체</button> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
+<!-- 					</tfoot> -->
+<!-- 					<tbody id="phone-ability"> -->
+<!-- <!-- 						<tr> --> -->
+<!-- <!-- 							<td colspan="2" class="equip-title">핸드폰</td> --> -->
+<!-- <!-- 						</tr> --> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="p_ap1" readonly="readonly" /></td> -->
+<!-- 							<td class="col">AP칩셋</td> -->
+<!-- 							<td><input type="text" name="p_ap2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="p_os1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">운영체제</td> -->
+<!-- 							<td><input type="text" name="p_os2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="p_cpu1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">CPU</td> -->
+<!-- 							<td><input type="text" name="p_cpu2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="p_ram1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">RAM</td> -->
+<!-- 							<td><input type="text" name="p_ram2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="p_capacity1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">저장공간(GB)</td> -->
+<!-- 							<td><input type="text" name="p_capacity2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="p_battery1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">배터리(mAh)</td> -->
+<!-- 							<td><input type="text" name="p_battery2" readonly="readonly" /></td> -->
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
+<!-- 					<tbody id="pc-ability"> -->
+<!-- <!-- 						<tr> --> -->
+<!-- <!-- 							<td colspan="2" class="equip-title">PC</td> --> -->
+<!-- <!-- 						</tr> --> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="pc_division1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">종류</td> -->
+<!-- 							<td><input type="text" name="pc_division2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="pc_os1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">운영체제</td> -->
+<!-- 							<td><input type="text" name="pc_os2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="pc_cpu1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">CPU</td> -->
+<!-- 							<td><input type="text" name="pc_cpu2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="pc_ram1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">RAM</td> -->
+<!-- 							<td><input type="text" name="pc_ram2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="pc_gpu1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">GPU</td> -->
+<!-- 							<td><input type="text" name="pc_gpu2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="pc_capacity1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">저장공간(GB)</td> -->
+<!-- 							<td><input type="text" name="pc_capacity2" readonly="readonly"/></td> -->
+
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
+<!-- 					<tbody id="monitor-ability"> -->
+<!-- <!-- 						<tr> --> -->
+<!-- <!-- 							<td colspan="2" class="equip-title">모니터</td> --> -->
+<!-- <!-- 						</tr> --> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="mo_pannel1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">패널</td> -->
+<!-- 							<td><input type="text" name="mo_pannel2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="mo_Hz1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">화면 주사율(Hz)</td> -->
+<!-- 							<td><input type="text" name="mo_Hz2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="mo_resolution1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">해상도(픽셀)</td> -->
+<!-- 							<td><input type="text" name="mo_resolution2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="mo_speed1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">응답속도(ms)</td> -->
+<!-- 							<td><input type="text" name="mo_speed2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td><input type="text" name="mo_shape1" readonly="readonly"/></td> -->
+<!-- 							<td class="col">형태</td> -->
+<!-- 							<td><input type="text" name="mo_shape2" readonly="readonly"/></td> -->
+<!-- 						</tr> -->
+<!-- 					</tbody> -->
 				</table>
 				<table id="phone-ability">
 					<tr>

@@ -17,8 +17,8 @@
 		<%@ include file="../include/left.jsp"%>
 
 		<div id="right">
-			<div class="section-title">장비 상세정보</div>
 			<form id="frm" method="post">
+			<div class="section-title">장비 상세정보</div>
 				<input type="hidden" name="code" value="${item.CODE }" /> <input
 					type="hidden" name="m_code" value="${item.M_CODE }" />
 				<table>
