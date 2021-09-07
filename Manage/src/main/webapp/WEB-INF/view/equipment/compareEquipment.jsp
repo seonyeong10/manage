@@ -60,34 +60,34 @@
 <!-- 							<td colspan="2" class="equip-title">핸드폰</td> -->
 <!-- 						</tr> -->
 						<tr>
-							<td><input type="text" name="p_ap1" /></td>
+							<td><input type="text" name="p_ap1" readonly="readonly" /></td>
 							<td>AP칩셋</td>
-							<td><input type="text" name="p_ap2" /></td>
+							<td><input type="text" name="p_ap2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_os1" /></td>
+							<td><input type="text" name="p_os1" readonly="readonly"/></td>
 							<td>운영체제</td>
-							<td><input type="text" name="p_os2" /></td>
+							<td><input type="text" name="p_os2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_cpu1" /></td>
+							<td><input type="text" name="p_cpu1" readonly="readonly"/></td>
 							<td>CPU</td>
-							<td><input type="text" name="p_cpu2" /></td>
+							<td><input type="text" name="p_cpu2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_ram1" /></td>
+							<td><input type="text" name="p_ram1" readonly="readonly"/></td>
 							<td>RAM</td>
-							<td><input type="text" name="p_ram2" /></td>
+							<td><input type="text" name="p_ram2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_capacity1" /></td>
+							<td><input type="text" name="p_capacity1" readonly="readonly"/></td>
 							<td>저장공간</td>
-							<td><input type="text" name="p_capacity2" /></td>
+							<td><input type="text" name="p_capacity2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_battery1" /></td>
+							<td><input type="text" name="p_battery1" readonly="readonly"/></td>
 							<td>배터리</td>
-							<td><input type="text" name="p_battery2" /></td>
+							<td><input type="text" name="p_battery2" readonly="readonly" /></td>
 						</tr>
 					</tbody>
 					<tbody id="pc-ability">
@@ -95,34 +95,34 @@
 <!-- 							<td colspan="2" class="equip-title">PC</td> -->
 <!-- 						</tr> -->
 						<tr>
-							<td><input type="text" name="pc_division1"/></td>
+							<td><input type="text" name="pc_division1" readonly="readonly"/></td>
 							<td>pc_division</td>
-							<td><input type="text" name="pc_division2" /></td>
+							<td><input type="text" name="pc_division2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_os1" /></td>
+							<td><input type="text" name="pc_os1" readonly="readonly"/></td>
 							<td>운영체제</td>
-							<td><input type="text" name="pc_os2" /></td>
+							<td><input type="text" name="pc_os2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_cpu1" /></td>
+							<td><input type="text" name="pc_cpu1" readonly="readonly"/></td>
 							<td>CPU</td>
-							<td><input type="text" name="pc_cpu2" /></td>
+							<td><input type="text" name="pc_cpu2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_ram1" /></td>
+							<td><input type="text" name="pc_ram1" readonly="readonly"/></td>
 							<td>RAM</td>
-							<td><input type="text" name="pc_ram2" /></td>
+							<td><input type="text" name="pc_ram2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_gpu1" /></td>
+							<td><input type="text" name="pc_gpu1" readonly="readonly"/></td>
 							<td>GPU</td>
-							<td><input type="text" name="pc_gpu2" /></td>
+							<td><input type="text" name="pc_gpu2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_capacity1" /></td>
+							<td><input type="text" name="pc_capacity1" readonly="readonly"/></td>
 							<td>저장공간</td>
-							<td><input type="text" name="pc_capacity2" /></td>
+							<td><input type="text" name="pc_capacity2" readonly="readonly"/></td>
 
 						</tr>
 					</tbody>
@@ -131,29 +131,29 @@
 <!-- 							<td colspan="2" class="equip-title">모니터</td> -->
 <!-- 						</tr> -->
 						<tr>
-							<td><input type="text" name="mo_pannel1" /></td>
+							<td><input type="text" name="mo_pannel1" readonly="readonly"/></td>
 							<td>패널</td>
-							<td><input type="text" name="mo_pannel2" /></td>
+							<td><input type="text" name="mo_pannel2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_Hz1" /></td>
+							<td><input type="text" name="mo_Hz1" readonly="readonly"/></td>
 							<td>화면 주사율(Hz)</td>
-							<td><input type="text" name="mo_Hz2" /></td>
+							<td><input type="text" name="mo_Hz2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_resolution1" /></td>
+							<td><input type="text" name="mo_resolution1" readonly="readonly"/></td>
 							<td>해상도(픽셀)</td>
-							<td><input type="text" name="mo_resolution2" /></td>
+							<td><input type="text" name="mo_resolution2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_speed1" /></td>
+							<td><input type="text" name="mo_speed1" readonly="readonly"/></td>
 							<td>응답속도(ms)</td>
-							<td><input type="text" name="mo_speed2" /></td>
+							<td><input type="text" name="mo_speed2" readonly="readonly"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_shape1" /></td>
+							<td><input type="text" name="mo_shape1" readonly="readonly"/></td>
 							<td>형태</td>
-							<td><input type="text" name="mo_shape2" /></td>
+							<td><input type="text" name="mo_shape2" readonly="readonly"/></td>
 						</tr>
 					</tbody>
 				</table>

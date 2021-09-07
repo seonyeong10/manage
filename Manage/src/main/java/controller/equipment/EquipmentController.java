@@ -48,10 +48,18 @@ public class EquipmentController {
 	@RequestMapping(method = RequestMethod.GET)
 	public String openEquipmentList(@RequestParam(value = "gubun", required = false) String gubun,
 			@RequestParam(value = "schThem", required = false) String schThem,
-			@RequestParam(value = "schVal", required = false) String schVal, Model model) {
+			@RequestParam(value = "schVal", required = false, defaultValue = "") String schVal, 
+			@RequestParam(value = "ability", required = false) String ability,
+			@RequestParam(value = "aVal", required = false, defaultValue = "") String aVal, 
+			Model model) {
+		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gubun", gubun);
+		
+		if(schVal.equals("")) schVal = null;
+		if(aVal.equals("")) aVal = null;
 		param.put(schThem, schVal);
+		param.put(ability, aVal);
 
 		equipmentListService.selectEquipments(param, model);
 		return "equipment/equipmentList";
@@ -94,8 +102,14 @@ public class EquipmentController {
 	 * 장비 상세정보
 	 */
 	@RequestMapping(value = "getEquipmentInfo")
-	public String getEquipmentInfo(@RequestParam(value = "code") String code,
-			@RequestParam(value = "gubun") String gubun, Model model) {
+	public String getEquipmentInfo(
+			@RequestParam(value = "code") String code,
+			@RequestParam(value = "gubun") String gubun, 
+			Model model) {
+		
+		if(gubun.equals("phone")) gubun = "핸드폰";
+		else if(gubun.equals("monitor")) gubun = "모니터";
+		
 		equipmentInfoService.getInfo(code, gubun, model);
 		return "equipment/equipmentInfo";
 	}
@@ -123,7 +137,7 @@ public class EquipmentController {
 
 		repository.updatePhone(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&m_code=" + m_code;
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=phone";
 	}
 
 	@RequestMapping(value = "updatePC", method = RequestMethod.POST)
@@ -147,7 +161,7 @@ public class EquipmentController {
 
 		repository.updatePC(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&m_code=" + m_code;
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=pc";
 	}
 
 	@RequestMapping(value = "updateMonitor", method = RequestMethod.POST)
@@ -171,7 +185,7 @@ public class EquipmentController {
 
 		repository.updateMonitor(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&m_code=" + m_code;
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&m_code=monitor";
 	}
 
 	/**
@@ -297,7 +311,7 @@ public class EquipmentController {
 
 		// 1번 장비 정보 저장
 		param.put("p_ap", p_ap1);
-		param.put("p_os", p_ap1);
+		param.put("p_os", p_os1);
 		param.put("p_cpu", p_cpu1);
 		param.put("p_ram", p_ram1);
 		param.put("p_battery", p_battery1);
@@ -317,7 +331,7 @@ public class EquipmentController {
 		
 		// 2번 장비 정보
 		param2.put("p_ap", p_ap2);
-		param2.put("p_os", p_ap2);
+		param2.put("p_os", p_os2);
 		param2.put("p_cpu", p_cpu2);
 		param2.put("p_ram", p_ram2);
 		param2.put("p_battery", p_battery2);

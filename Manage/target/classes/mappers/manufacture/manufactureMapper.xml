@@ -14,5 +14,26 @@
 <select id="selectManufactureList" parameterType="pmap" resultType="pmap">
 	select <include refid="baseColumn" />
 	from manufacture
+	where 1=1
+	<if test="ma_code != null and ma_code != '' ">
+		and ma_code = #{ma_code}
+	</if>
 </select>
+
+<select id="getMaCode" parameterType="pmap" resultType="pmap">
+	select max(ma_code) as max_code from manufacture
+	where ma_kinds = #{ma_kinds}
+</select>
+
+<update id="modifyManu" parameterType="pmap">
+	update manufacture
+	set ma_name = #{ma_name}
+	where ma_code = #{ma_code}
+</update>
+
+<delete id="deleteManu" parameterType="pmap">
+	delete from manufacture
+	where ma_code = #{ma_code}
+</delete>
+
 </mapper>

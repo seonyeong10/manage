@@ -196,7 +196,6 @@
 				checkPhoneParam();
 			}
 			
-			return false;
 		}
 		
 		function checkPhoneParam() {

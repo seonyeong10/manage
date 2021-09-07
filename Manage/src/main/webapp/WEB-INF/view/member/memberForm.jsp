@@ -90,7 +90,7 @@
 					<tr >
 						<th colspan="2" class="btn-area"><input type="submit" value="등록"  class="btn submit"/> <input
 							type="button" value="홈으로"
-							onclick="javascript: location.href='main';" class="btn"/></th>
+							onclick="javascript: location.href='/';" class="btn"/></th>
 					</tr>
 				</table>
 			</form>
@@ -185,8 +185,6 @@
 				alert('이메일 형식이 올바르지 않습니다.');
 				return false;
 			}
-			
-			return false;
 			
 		}
 		

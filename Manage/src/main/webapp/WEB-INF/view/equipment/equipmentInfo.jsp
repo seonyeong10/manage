@@ -72,7 +72,13 @@
 				<table id="pc">
 					<tr>
 						<td>종류</td>
-						<td><input type="text" name="pc_division" value="" /></td>
+						<td>
+							<select name="pc_division">
+								<option value="">PC 구분을 선택하세요.</option>
+								<option value="100">데스크탑</option>
+								<option value="200">노트북</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td>제품명</td>
@@ -150,29 +156,13 @@
 	window.onload = getInfo();
 
 	function getInfo() {
-		// 		const table = document.getElementById('equipment');
-		// 		// 소유자, 제품명, 성능정보
-		// 		if("${item.GUBUN} === '모니터'") {
-		// 			// 사원 명, 제품명, 제조사, 구분, 패널,hz, 해상도, speed, shape
-
-		// 		<c:forEach items="${item }" var="item" >
-		// 			var newRow = table.insertRow();
-		// 			if ("${item.key}" === 'M_NAME' || "${item.key}" === 'NAME'
-		// 					|| "${item.key}" === 'MA_NAME'
-		// 					|| "${item.key}" === 'PANNEL' || "${item.key}" === 'HZ'
-		// 					|| "${item.key}" === 'RESOLUTION'
-		// 					|| "${item.key}" === 'SPEED' || "${item.key}" === 'SHAPE') {
-		// 				newRow.insertCell(0).innerText = "${item.key}";
-		// 				newRow.insertCell(1).innerText = "${item.value}";
-		// 			}
-		// 		</c:forEach>
-
-		// 		}
+		
 		document.getElementById('monitor').style.display = 'none';
 		document.getElementById('pc').style.display = 'none';
 		document.getElementById('phone').style.display = 'none';
 
 		var tag = document.getElementsByTagName('input');
+		var select = document.getElementsByTagName('select');
 		if ("${item.GUBUN}" === '모니터') {
 			document.getElementById('monitor').style.display = 'block';
 			tag.gubun.value = '${item.GUBUN}';
@@ -196,6 +186,7 @@
 			tag.pc_gpu.value = '${item.GPU}';
 			tag.pc_capacity.value = '${item.CAPACITY}';
 			tag.owner.value = '${item.M_NAME}';
+			select.pc_division.value = '${item.DIVISION}';
 
 		} else if ("${item.GUBUN}" === '핸드폰') {
 			document.getElementById('phone').style.display = 'block';
@@ -210,7 +201,7 @@
 			tag.p_battery.value = '${item.BATTERY}';
 			tag.owner.value = '${item.M_NAME}';
 		}
-
+		
 	}
 
 	// 장비 정보 수정

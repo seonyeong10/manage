@@ -21,11 +21,11 @@ public class EquipmentListService {
 		
 		model.addAttribute("list", equipmentList);
 		
-//		System.out.println("param: " + param.entrySet());
-//		
-//		for (int i = 0; i < equipmentList.size(); i++) {
-//			System.out.println(equipmentList.get(i).entrySet());
-//		}
+		System.out.println("param: " + param.entrySet());
+		
+		for (int i = 0; i < equipmentList.size(); i++) {
+			System.out.println(equipmentList.get(i).entrySet());
+		}
 	}
 
 }

@@ -2,6 +2,7 @@ package controller.member;
 
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -69,7 +70,92 @@ public class MemberController {
 		response.setContentType("text/plain; charset=UTF-8");
 		response.getWriter().write(obj.toString());
 	}
+	
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String getMemberList(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		List<Map<String, Object>> empList = repository.getEmployeeList(param);
+		
+		model.addAttribute("empList", empList);
+		
+		return "member/memberList";
+	}
+	
+	@RequestMapping(value = "info", method = RequestMethod.GET)
+	public String getMemberInfo(
+			@RequestParam(value = "code") String code,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		
+		List<Map<String, Object>> empList = repository.getEmployeeList(param);
+		
+		model.addAttribute("empList", empList.get(0));
+		
+		return "member/memberInfo";
+	}
+	
+	/**
+	 * 사원정보 수정
+	 */
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public String updateMemeber(
+			@RequestParam(value = "code") String code,
+			@RequestParam(value = "m_name") String m_name,
+			@RequestParam(value = "m_depart") String m_depart,
+			@RequestParam(value = "m_job") String m_job,
+			@RequestParam(value = "m_age") String m_age,
+			@RequestParam(value = "m_phone") String m_phone,
+			@RequestParam(value = "m_email") String m_email,
+			@RequestParam(value = "m_address") String m_address,
+			@RequestParam(value = "m_gender") String m_gender,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		param.put("m_name", m_name);
+		param.put("m_depart", m_depart);
+		param.put("m_job", m_job);
+		param.put("m_age", m_age);
+		param.put("m_phone", m_phone);
+		param.put("m_email", m_email);
+		param.put("m_address", m_address);
+		param.put("m_gender", m_gender);
+		
+		repository.updateEmployee(param);
+		
+		return "redirect:/employee/info?code=" + code;
+	}
 
+	/**
+	 * 사원정보 삭제
+	 */
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public String delEmployee(
+			@RequestParam(value = "code") String code,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		
+		repository.delEmployee(param);
+		return "redirect:/employee/list";
+	}
 //	@RequestMapping(value = "regist", method = RequestMethod.POST)
 //	public String member(Model model) {
 //		/**

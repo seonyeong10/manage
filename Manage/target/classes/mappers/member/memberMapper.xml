@@ -15,4 +15,33 @@
 	select count(*) from member
 	where code = #{code}
 </select>
+
+<select id="getEmployeeList" parameterType="pmap" resultType="pmap">
+	select * from member
+	where 1=1
+	<if test="code != null and code != '' ">
+		and code = #{code}
+	</if>
+	order by code
+</select>
+
+<update id="updateEmployee" parameterType="pmap">
+	update member
+	set
+		m_name = #{m_name}
+		,m_depart = #{m_depart}
+		,m_job = #{m_job}
+		,m_age = #{m_age}
+		,m_phone = #{m_phone}
+		,m_email = #{m_email}
+		,m_address = #{m_address}
+		,m_gender = #{m_gender}
+	where code = #{code}
+</update>
+
+<delete id="delEmployee"  parameterType="pmap">
+	delete from member
+	where code = #{code}
+</delete>
+
 </mapper>

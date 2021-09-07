@@ -18,29 +18,14 @@
 			<%@ include file="include/left.jsp"%>
 
 			<div id="right">
-				<table>
-					<tr>
-						<td>아이디</td>
-						<td><form:input path="loginId" /> <form:errors
-								path="loginId" /></td>
-						<td rowspan="2"><input type="image" src="" id="img" /></td>
-					</tr>
-					<tr>
-						<td>비밀번호</td>
-						<td><input type="password" name="loginPw" /> <form:errors
-								path="loginPw" /></td>
-					</tr>
-					<tr>
-						<td colspan="3">아이디찾기 / 비밀번호 찾기 / <a href="#">회원가입</a></td>
-					</tr>
-				</table>
-				내정보 | 로그아웃 | 회원리스트 | 공지사항 | 자료실 | 상품목록 | 설문조사 | 설문지 등록 | ajaxTest
-				<%-- </c:if > --%>
-				<%-- <c:if test="${!empty authInfo}"> --%>
-				<br /> <a href="add">사원등록</a> | <br /> <a
-					href="openManufactureForm">제조사 등록</a> | <a
-					href="getManufactureList">제조사 조회</a> <br /> <a href="equipment">장비등록</a>
-				<%-- </c:if > --%>
+				<p>자원 관리 프로그램</p>
+				<ol>
+					<li>사원을 등록한다</li>
+					<li>제조사를 등록한다</li>
+					<li>장비 관리에서 이용중인 장비를 등록한다.</li>
+					<li>장비 조회에서 등록된 장비 조회와 상세 정보를 확인할 수 있다.</li>
+					<li>성능비교에서 선택한 두 사람의 장비를 비교하고 서로 교환할 수 있다.</li>
+				</ol>
 			</div>
 		</div>
 	</body>
