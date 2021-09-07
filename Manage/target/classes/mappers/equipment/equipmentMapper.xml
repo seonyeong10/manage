@@ -36,18 +36,18 @@
 	<if test="m_name != null and m_name != '' ">and m_name like '%' || upper(#{m_name}) || '%' or m_name like '%' || lower(#{m_name}) || '%'</if>
 	<if test="ma_name != null and ma_name != '' ">and ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%'</if>
 	<if test="name != null and name != '' ">and name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' </if>
-	<if test="ap != null and ap != '' ">and ap like '%' || upper(#{ap}) || '%' or ap like '%' || lower(#{ap}) || '%' </if>
-	<if test="os != null and os != '' ">and os like '%' || upper(#{os}) || '%' or os like '%' || lower(#{os}) || '%' </if>
-	<if test="cpu != null and cpu != '' ">and cpu like '%' || upper(#{cpu}) || '%' or cpu like '%' || lower(#{cpu}) || '%' </if>
+	<if test="ap != null and ap != '' ">and ap like '%' || upper(#{ap}) || '%' or ap like '%' || lower(#{ap}) || '%'  or ap like '%' || initcap(#{ap}) || '%'</if>
+	<if test="os != null and os != '' ">and os like '%' || upper(#{os}) || '%' or os like '%' || lower(#{os}) || '%' or os like '%' || initcap(#{os}) || '%'</if>
+	<if test="cpu != null and cpu != '' ">and cpu like '%' || upper(#{cpu}) || '%' or cpu like '%' || lower(#{cpu}) || '%'  or cpu like '%' || initcap(#{cpu}) || '%'</if>
 	<if test="ram != null and ram != '' ">and ram = #{ram} </if>
 	<if test="capacity != null and capacity != '' ">and capacity = #{capacity} </if>
 	<if test="battery != null and battery != '' ">and battery = #{battery} </if>
-	<if test="gpu != null and gpu != '' ">and gpu like '%' || upper(#{gpu}) || '%' or gpu like '%' || lower(#{gpu}) || '%' </if>
+	<if test="gpu != null and gpu != '' ">and gpu like '%' || upper(#{gpu}) || '%' or gpu like '%' || lower(#{gpu}) || '%' OR gpu like '%' || INITCAP(#{gpu}) || '%'</if>
 	<if test="pannel != null and pannel != '' ">and pannel like '%' || upper(#{pannel}) || '%' or pannel like '%' || lower(#{pannel}) || '%' </if>
 	<if test="hz != null and hz != '' ">and hz = #{hz} </if>
 	<if test="resolution != null and resolution != '' ">and resolution like '%' || upper(#{resolution}) || '%' or resolution like '%' || lower(#{resolution}) || '%' </if>
 	<if test="speed != null and speed != '' ">and speed = #{speed} </if>
-	<if test="gubun != null">and gubun = upper(#{gubun})</if>
+	<if test="gubun != null and gubun != '' ">and gubun = upper(#{gubun})</if>
 </select>
 
 <select id="getInfo" parameterType="pmap" resultType="pmap">

@@ -2,6 +2,6 @@
 	pageEncoding="UTF-8"%>
 <div id="top">
 	<ul>
-		<li>로그아웃</li>
+		<li>장비 성능관리 프로그램</li>
 	</ul>
 </div>

@@ -53,7 +53,17 @@
 					</tr>
 					<tr>
 						<td>해상도</td>
-						<td><input type="text" name="mo_resolution" value="" /></td>
+						<td>
+							<select name="mo_resolution">
+								<option value="">해상도를 선택하세요.</option>
+								<option value="HD(1280 x 720)">HD(1280 x 720)</option>
+								<option value="1680 x 1050">1680 x 1050</option>
+								<option value="FHD(1920 x 1080)">FHD(1920 x 1080)</option>
+								<option value="QHD/WQHD(2560 x 1440)">QHD/WQHD(2560 x 1440)</option>
+								<option value="4K UHD(3840 x 2160)">4K UHD(3840 x 2160)</option>
+								<option value="8K UHD(7680 x 4320)">8K UHD(7680 x 4320)</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td>응답속도(ms)</td>
@@ -93,7 +103,7 @@
 						<td><input type="text" name="pc_cpu" value="" /></td>
 					</tr>
 					<tr>
-						<td>RAM</td>
+						<td>RAM(GB)</td>
 						<td><input type="text" name="pc_ram" value="" /></td>
 					</tr>
 					<tr>
@@ -101,7 +111,7 @@
 						<td><input type="text" name="pc_gpu" value="" /></td>
 					</tr>
 					<tr>
-						<td>저장공간</td>
+						<td>저장공간(GB)</td>
 						<td><input type="text" name="pc_capacity" value="" /></td>
 					</tr>
 					<tr>
@@ -128,15 +138,15 @@
 						<td><input type="text" name="p_cpu" value="" /></td>
 					</tr>
 					<tr>
-						<td>RAM</td>
+						<td>RAM(GB)</td>
 						<td><input type="text" name="p_ram" value="" /></td>
 					</tr>
 					<tr>
-						<td>저장공간</td>
+						<td>저장공간(GB)</td>
 						<td><input type="text" name="p_capacity" value="" /></td>
 					</tr>
 					<tr>
-						<td>배터리</td>
+						<td>배터리(mAh)</td>
 						<td><input type="text" name="p_battery" value="" /></td>
 					</tr>
 					<tr>
@@ -171,7 +181,7 @@
 			tag.manufacture.value = '${item.MA_NAME}';
 			tag.mo_pannel.value = '${item.PANNEL}';
 			tag.mo_hz.value = '${item.HZ}';
-			tag.mo_resolution.value = '${item.RESOLUTION}';
+			select.mo_resolution.value = '${item.RESOLUTION}';
 			tag.mo_speed.value = '${item.SPEED}';
 			tag.mo_shape.value = '${item.SHAPE}';
 

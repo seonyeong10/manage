@@ -43,7 +43,7 @@ public class MemberController {
 	public String insertMember(MemberCommand memberCommand, Model model) {
 //		System.out.println("실행");
 		memberAddServcie.insertMem(memberCommand);
-		return "member/memberWelcome";
+		return "redirect:/employee/list";
 	}
 	
 	/**

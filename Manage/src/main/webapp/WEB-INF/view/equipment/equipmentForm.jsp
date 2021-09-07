@@ -145,7 +145,17 @@
 						</tr>
 						<tr>
 							<td>해상도(픽셀)</td>
-							<td><input type="text" name="mo_resolution" /></td>
+							<td>
+								<select name="mo_resolution">
+									<option value="">해상도를 선택하세요.</option>
+									<option value="HD(1280 x 720)">HD(1280 x 720)</option>
+									<option value="1680 x 1050">1680 x 1050</option>
+									<option value="FHD(1920 x 1080)">FHD(1920 x 1080)</option>
+									<option value="QHD/WQHD(2560 x 1440)">QHD/WQHD(2560 x 1440)</option>
+									<option value="4K UHD(3840 x 2160)">4K UHD(3840 x 2160)</option>
+									<option value="8K UHD(7680 x 4320)">8K UHD(7680 x 4320)</option>
+								</select>
+							</td>
 						</tr>
 						<tr>
 							<td>응답속도(ms)</td>
@@ -236,9 +246,9 @@
 				alert('주사율을 입력하세요.');
 				param[name='mo_Hz'].focus();
 				return false;
-			} else if(param[name='mo_resolution'].value == '' || param[name='mo_resolution'].value == null){
+			} else if(select[name='mo_resolution'].value == '' || select[name='mo_resolution'].value == null){
 				alert('해상도를 입력하세요.');
-				param[name='mo_resolution'].focus();
+				select[name='mo_resolution'].focus();
 				return false;
 			} else if(param[name='mo_speed'].value == '' || param[name='mo_speed'].value == null){
 				alert('응답속도를 입력하세요.');

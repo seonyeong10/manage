@@ -23,39 +23,68 @@
 				<input type="hidden" name="table" id="gubun" />
 				<input type="hidden" name="code" id="code" />
 				
+			<div class="sch-box">
+				<div>
+					<span>종류</span>
+					<input type="radio" name="gubun" value="모니터" id="g-monitor" onclick="activeBox(this.value);"/>
+					<label for="g-monitor">모니터	</label>
+					<input type="radio" name="gubun" value="pc" id="g-pc" onclick="activeBox(this.value);"/>
+					<label for="g-pc">PC</label>
+					<input type="radio" name="gubun" value="핸드폰" id="g-phone" onclick="activeBox(this.value);"/>
+					<label for="g-phone">핸드폰</label>
+				</div>
+				<br />
+				<div>
+					<select name="ability" id="sch-ability"></select>
+					<input type="text" name="aVal" placeholder="검색어를 입력하세요."/>
+				</div>
+				<br />
+				<div>
+					<select name="schThem">
+						<option value="m_name">사용자</option>
+						<option value="ma_name">제조자</option>
+						<option value="name">제품명</option>
+						<option value="os">운영체제</option>
+					</select>
+					<input type="text" name="schVal" placeholder="검색어를 입력하세요."/>
+					<button onclick="schEquipment();" class="btn">검색</button>
+				</div>
+			</div>
+			<br />
+			
 			<div style="width: 930px; overflow: auto;" >
 				<table border=1 id="equipment"  style="width: 1800px">
-					<tr class="sch-box">
-						<td colspan="10">
-							<span>종류</span>
-							<input type="radio" name="gubun" value="모니터" id="g-monitor" onclick="activeBox(this.value);"/>
-							<label for="g-monitor">모니터	</label>
-							<input type="radio" name="gubun" value="pc" id="g-pc" onclick="activeBox(this.value);"/>
-							<label for="g-pc">PC</label>
-							<input type="radio" name="gubun" value="핸드폰" id="g-phone" onclick="activeBox(this.value);"/>
-							<label for="g-phone">핸드폰</label>
-						</td>
-					</tr>
-					<tr class="sch-box">
-						<td colspan="10">
-							<select name="ability" id="sch-ability">
-							</select>
-							<input type="text" name="aVal" placeholder="검색어를 입력하세요."/>
+<!-- 					<tr class="sch-box"> -->
+<!-- 						<td colspan="10"> -->
+<!-- 							<span>종류</span> -->
+<!-- 							<input type="radio" name="gubun" value="모니터" id="g-monitor" onclick="activeBox(this.value);"/> -->
+<!-- 							<label for="g-monitor">모니터	</label> -->
+<!-- 							<input type="radio" name="gubun" value="pc" id="g-pc" onclick="activeBox(this.value);"/> -->
+<!-- 							<label for="g-pc">PC</label> -->
+<!-- 							<input type="radio" name="gubun" value="핸드폰" id="g-phone" onclick="activeBox(this.value);"/> -->
+<!-- 							<label for="g-phone">핸드폰</label> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr class="sch-box"> -->
+<!-- 						<td colspan="10"> -->
+<!-- 							<select name="ability" id="sch-ability"> -->
+<!-- 							</select> -->
+<!-- 							<input type="text" name="aVal" placeholder="검색어를 입력하세요."/> -->
+<!-- <!-- 							<button onclick="schEquipment();" class="btn">검색</button> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
+<!-- 					<tr class="sch-box"> -->
+<!-- 						<td colspan="10"> -->
+<!-- 							<select name="schThem"> -->
+<!-- 								<option value="m_name">사용자</option> -->
+<!-- 								<option value="ma_name">제조자</option> -->
+<!-- 								<option value="name">제품명</option> -->
+<!-- 								<option value="os">운영체제</option> -->
+<!-- 							</select> -->
+<!-- 							<input type="text" name="schVal" placeholder="검색어를 입력하세요."/> -->
 <!-- 							<button onclick="schEquipment();" class="btn">검색</button> -->
-						</td>
-					</tr>
-					<tr class="sch-box">
-						<td colspan="10">
-							<select name="schThem">
-								<option value="m_name">사용자</option>
-								<option value="ma_name">제조자</option>
-								<option value="name">제품명</option>
-								<option value="os">운영체제</option>
-							</select>
-							<input type="text" name="schVal" placeholder="검색어를 입력하세요."/>
-							<button onclick="schEquipment();" class="btn">검색</button>
-						</td>
-					</tr>
+<!-- 						</td> -->
+<!-- 					</tr> -->
 					<tr class="table-top">
 						<td>번호</td>
 						<td>구분</td>

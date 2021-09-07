@@ -185,7 +185,7 @@ public class EquipmentController {
 
 		repository.updateMonitor(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&m_code=monitor";
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=monitor";
 	}
 
 	/**
