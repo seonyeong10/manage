@@ -71,6 +71,9 @@ public class MemberController {
 		response.getWriter().write(obj.toString());
 	}
 	
+	/**
+	 * 사원 목록 조회
+	 */
 	@RequestMapping(value = "list", method = RequestMethod.GET)
 	public String getMemberList(
 			HttpServletRequest request,

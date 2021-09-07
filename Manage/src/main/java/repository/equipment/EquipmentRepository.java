@@ -16,21 +16,33 @@ public class EquipmentRepository {
 	private final String namespace = "mapper.equipment.equipmentMapper"; // 사용하는 mapper 파일
 	private String statement;
 
+	/**
+	 * 장비등록 - 핸드폰
+	 */
 	public int insertPhone(Map<String, Object> param) {
 		statement = namespace + ".insertPhone";
 		return sqlSession.update(statement, param);
 	}
 
+	/**
+	 * 목록 조회
+	 */
 	public List<Map<String, Object>> selectEquipments(Map<String, Object> param) {
 		statement = namespace + ".selectEquipments";
 		return sqlSession.selectList(statement, param);
 	}
 
+	/**
+	 * 장비 상세 정보
+	 */
 	public List<Map<String, Object>> getInfo(Map<String, Object> param) {
 		statement = namespace + ".getInfo";
 		return sqlSession.selectList(statement, param);
 	}
 
+	/**
+	 * 장비 정보 수정
+	 */
 	public int updatePhone(Map<String, Object> param) {
 		statement = namespace + ".updatePhone";
 		return sqlSession.update(statement, param);
@@ -46,6 +58,9 @@ public class EquipmentRepository {
 		return sqlSession.update(statement, param);
 	}
 
+	/**
+	 * 장비 삭제
+	 */
 	public int delPhone(Map<String, Object> param) {
 		statement = namespace + ".delPhone";
 		return sqlSession.update(statement, param);
