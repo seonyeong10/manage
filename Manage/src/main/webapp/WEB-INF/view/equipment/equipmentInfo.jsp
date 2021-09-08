@@ -19,8 +19,8 @@
 		<div id="right">
 			<form id="frm" method="post">
 			<div class="section-title">장비 상세정보</div>
-				<input type="hidden" name="code" value="${item.CODE }" /> <input
-					type="hidden" name="m_code" value="${item.M_CODE }" />
+				<input type="hidden" name="code" value="${item.CODE }" />
+				<input type="hidden" name="id" value="${item.ID }" />
 				<table>
 					<tr>
 						<td>구분</td>

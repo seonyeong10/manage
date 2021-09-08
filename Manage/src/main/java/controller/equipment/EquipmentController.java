@@ -104,19 +104,16 @@ public class EquipmentController {
 	@RequestMapping(value = "getEquipmentInfo")
 	public String getEquipmentInfo(
 			@RequestParam(value = "code") String code,
-			@RequestParam(value = "gubun") String gubun, 
+			@RequestParam(value = "id") String id, 
 			Model model) {
 		
-		if(gubun.equals("phone")) gubun = "핸드폰";
-		else if(gubun.equals("monitor")) gubun = "모니터";
-		
-		equipmentInfoService.getInfo(code, gubun, model);
+		equipmentInfoService.getInfo(code, id, model);
 		return "equipment/equipmentInfo";
 	}
 
 	@RequestMapping(value = "updatePhone", method = RequestMethod.POST)
 	public String updatePhone(@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "m_code", defaultValue = "") String m_code,
+			@RequestParam(value = "id", defaultValue = "") String id,
 			@RequestParam(value = "p_name", defaultValue = "") String p_name,
 			@RequestParam(value = "p_ap", defaultValue = "") String p_ap,
 			@RequestParam(value = "p_os", defaultValue = "") String p_os,
@@ -134,15 +131,16 @@ public class EquipmentController {
 		param.put("p_capacity", p_capacity);
 		param.put("p_battery", p_battery);
 		param.put("code", code);
+		param.put("id", id);
 
 		repository.updatePhone(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=phone";
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
 	}
 
 	@RequestMapping(value = "updatePC", method = RequestMethod.POST)
 	public String updatePC(@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "m_code", defaultValue = "") String m_code,
+			@RequestParam(value = "id", defaultValue = "") String id,
 			@RequestParam(value = "pc_name", defaultValue = "") String p_name,
 			@RequestParam(value = "pc_gpu", defaultValue = "") String p_gpu,
 			@RequestParam(value = "pc_os", defaultValue = "") String p_os,
@@ -158,15 +156,16 @@ public class EquipmentController {
 		param.put("pc_ram", p_ram);
 		param.put("pc_capacity", p_capacity);
 		param.put("code", code);
+		param.put("id", id);
 		
 		repository.updatePC(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=pc";
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
 	}
 
 	@RequestMapping(value = "updateMonitor", method = RequestMethod.POST)
 	public String updateMonitor(@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "m_code", defaultValue = "") String m_code,
+			@RequestParam(value = "id", defaultValue = "") String id,
 			@RequestParam(value = "mo_name", defaultValue = "") String mo_name,
 			@RequestParam(value = "mo_pannel", defaultValue = "") String mo_pannel,
 			@RequestParam(value = "mo_hz", defaultValue = "") String mo_hz,
@@ -182,10 +181,11 @@ public class EquipmentController {
 		param.put("mo_speed", mo_speed);
 		param.put("mo_shape", mo_shape);
 		param.put("code", code);
+		param.put("id", id);
 
 		repository.updateMonitor(param);
 
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=monitor";
+		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
 	}
 
 	/**
@@ -223,7 +223,7 @@ public class EquipmentController {
 	 * @throws Exception 
 	 */
 	@RequestMapping(value = "compare")
-	public String compareEquipment(@RequestParam(value = "gubun", defaultValue = "") String gubun,
+	public String compareEquipment(@RequestParam(value = "id", defaultValue = "") String id,
 			@RequestParam(value = "code1", defaultValue = "") String code1,
 			@RequestParam(value = "code2", defaultValue = "") String code2,
 			HttpServletRequest request,
@@ -235,7 +235,7 @@ public class EquipmentController {
 		Map<String, Object> param = new HashMap<String, Object>();
 
 		Map<String, Object> selected = new HashMap<String, Object>();
-		selected.put("gubun", gubun);
+		selected.put("id", id);
 		selected.put("code1", code1);
 		selected.put("code2", code2);
 
@@ -243,7 +243,7 @@ public class EquipmentController {
 		List<Map<String, Object>> empList = repository.selectEmps(param);
 
 		// 사원별 장비 성능 정보
-		param.put("gubun", gubun);
+		param.put("id", id);
 		param.put("code", code1);
 		List<Map<String, Object>> equip1 = repository.getInfo(param);
 

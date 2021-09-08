@@ -15,15 +15,16 @@ public class EquipmentInfoService {
 	@Autowired
 	EquipmentRepository repository;
 
-	public void getInfo(String code, String gubun, Model model) {
+	public void getInfo(String code, String id, Model model) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("code", code);
-		param.put("gubun", gubun);
+		param.put("id", id);
 		
 		List<Map<String, Object>> equip = repository.getInfo(param);
 		System.out.println(param.entrySet());
 		System.out.println(equip.size());
 		
+		System.out.println(param.entrySet());
 		model.addAttribute("item", equip.get(0));
 	}
 

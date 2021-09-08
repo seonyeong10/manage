@@ -18,6 +18,7 @@
 	<if test="ma_code != null and ma_code != '' ">
 		and ma_code = #{ma_code}
 	</if>
+	ORDER BY MA_CODE
 </select>
 
 <select id="getMaCode" parameterType="pmap" resultType="pmap">

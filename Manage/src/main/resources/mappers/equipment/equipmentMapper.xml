@@ -3,32 +3,32 @@
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="mapper.equipment.equipmentMapper">
 <sql id="phone">
-	code, p_name, m_code, p_ap, p_os, p_cpu, p_ram, p_capacity, p_battery
+	code, p_name, m_code, p_ap, p_os, p_cpu, p_ram, p_capacity, p_battery, P_ID
 </sql>
 <sql id="pc">
-	code, pc_name, m_code, pc_division, pc_os, pc_cpu, pc_ram, pc_capacity, pc_gpu
+	code, pc_name, m_code, pc_division, pc_os, pc_cpu, pc_ram, pc_capacity, pc_gpu, PC_ID
 </sql>
 <sql id="monitor">
-	code, mo_name, m_code, mo_pannel, mo_Hz, mo_resolution, mo_speed, mo_shape
+	code, mo_name, m_code, mo_pannel, mo_Hz, mo_resolution, mo_speed, mo_shape, MO_ID
 </sql>
 
 <insert id="insertPhone" parameterType="pmap">
 	insert into phone (<include refid="phone" />)
-	values(#{code}, #{p_name}, #{m_code}, #{p_ap}, #{p_os}, #{p_cpu}, #{p_ram}, #{p_capacity}, #{p_battery})
+	values(#{code}, #{p_name}, #{m_code}, #{p_ap}, #{p_os}, #{p_cpu}, #{p_ram}, #{p_capacity}, #{p_battery}, 'PH' || PHONE_SEQ.NEXTVAL)
 </insert>
 
 <insert id="insertMonitor" parameterType="pmap">
 	insert into monitor (<include refid="monitor" />)
-	values(#{code}, #{mo_name}, #{m_code}, #{mo_pannel}, #{mo_Hz}, #{mo_resolution}, #{mo_speed}, #{mo_shape})
+	values(#{code}, #{mo_name}, #{m_code}, #{mo_pannel}, #{mo_Hz}, #{mo_resolution}, #{mo_speed}, #{mo_shape}, 'MO' || MONITOR_SEQ.NEXTVAL)
 </insert>
 
 <insert id="insertPC" parameterType="pmap">
 	insert into pc (<include refid="pc" />)
-	values(#{code}, #{pc_name}, #{m_code}, #{pc_division}, #{pc_os}, #{pc_cpu}, #{pc_ram}, #{pc_capacity}, #{pc_gpu})
+	values(#{code}, #{pc_name}, #{m_code}, #{pc_division}, #{pc_os}, #{pc_cpu}, #{pc_ram}, #{pc_capacity}, #{pc_gpu}, 'PC' || PC_SEQ.NEXTVAL)
 </insert>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
-	select ROWNUM, GUBUN, e.code, m_name as emp, name, ap, cpu, os, ram, capacity, battery, gpu, pannel, hz, resolution, speed, shape, m_code, ma_name as manufacture
+	select ROWNUM, GUBUN, e.code, m_name as emp, name, ap, cpu, os, ram, capacity, battery, gpu, pannel, hz, resolution, speed, shape, m_code, ma_name as manufacture, id
 	from equipmentView e
 	left outer join member mem on mem.code = e.code
 	left outer join manufacture ma on ma.ma_code = e.m_code
@@ -56,7 +56,7 @@
 	and e.code = mem.code and e.m_code = ma.ma_code
 	<if test="code != null">and e.code = #{code}</if>
 	<if test="m_code != null">and e.m_code = #{m_code}</if>
-	<if test="gubun != null">and gubun = upper(#{gubun}) </if>
+	<if test="id != null">and id = upper(#{id}) </if>
 </select>
 
 <update id="updatePhone" parameterType="pmap">
@@ -71,7 +71,7 @@
 		p_ram = #{p_ram},
 		p_capacity = #{p_capacity},
 		p_battery = #{p_battery}
-	where code = #{code}
+	where code = #{code} and p_id = #{id}
 </update>
 
 <update id="updatePC" parameterType="pmap">
@@ -86,7 +86,7 @@
 		pc_ram = #{pc_ram},
 		pc_capacity = #{pc_capacity}
 		
-	where code = #{code}
+	where code = #{code} and pc_id = #{id}
 </update>
 
 <update id="updateMonitor" parameterType="pmap">
@@ -100,7 +100,7 @@
 		mo_resolution = #{mo_resolution},
 		mo_speed = #{mo_speed},
 		mo_shape = #{mo_shape}
-	where code = #{code}
+	where code = #{code} and mo_id = #{id}
 </update>
 
 <delete id="delPhone" parameterType="pmap">
