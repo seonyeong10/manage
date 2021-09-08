@@ -56,7 +56,7 @@
 	and e.code = mem.code and e.m_code = ma.ma_code
 	<if test="code != null">and e.code = #{code}</if>
 	<if test="m_code != null">and e.m_code = #{m_code}</if>
-	<if test="gubun != null">and gubun = #{gubun} </if>
+	<if test="gubun != null">and gubun = upper(#{gubun}) </if>
 </select>
 
 <update id="updatePhone" parameterType="pmap">
@@ -78,13 +78,13 @@
 	update pc
 	set
 		<if test="pc_name != null">
-			pc_name = #{p_name},
+			pc_name = #{pc_name},
 		</if>
-		pc_gpu = #{p_gpu},
-		pc_os = #{p_os},
-		pc_cpu = #{p_cpu},
-		pc_ram = #{p_ram},
-		pc_capacity = #{p_capacity}
+		pc_gpu = #{pc_gpu},
+		pc_os = #{pc_os},
+		pc_cpu = #{pc_cpu},
+		pc_ram = #{pc_ram},
+		pc_capacity = #{pc_capacity}
 		
 	where code = #{code}
 </update>

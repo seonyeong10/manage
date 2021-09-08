@@ -158,7 +158,7 @@ public class EquipmentController {
 		param.put("pc_ram", p_ram);
 		param.put("pc_capacity", p_capacity);
 		param.put("code", code);
-
+		
 		repository.updatePC(param);
 
 		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&gubun=pc";
@@ -194,17 +194,24 @@ public class EquipmentController {
 	 * @return
 	 */
 	@RequestMapping(value = "delEquipment", method = RequestMethod.POST)
-	public String delEquipment(@RequestParam(value = "code") String code, @RequestParam(value = "m_code") String m_code,
-			@RequestParam(value = "gubun", defaultValue = "") String gubun, Model model) {
+	public String delEquipment(
+			@RequestParam(value = "code") String code, @RequestParam(value = "m_code") String m_code,
+			@RequestParam(value = "gubun", defaultValue = "") String gubun, 
+			Model model
+			) {
 
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("code", code);
 		param.put("m_code", m_code);
+		
 
 		if (gubun.equals("모니터"))
 			repository.delMonitor(param);
-		else if (gubun.equals("pc"))
+		else if (gubun.equals("PC")) {
+			
 			repository.delPC(param);
+			System.out.println("pc 삭제");
+		}
 		else if (gubun.equals("핸드폰"))
 			repository.delPhone(param);
 

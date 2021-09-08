@@ -24,7 +24,7 @@
 				<input type="hidden" name="code" id="code" />
 				
 			
-			<div style="width: 1500px; overflow: auto; position:absolute; left:50%; transform:translateX(-50%);">
+			<div style="overflow: auto; position:absolute; transform:translateX(-50%);">
 			<div class="sch-box">
 				<div>
 					<span>종류</span>
@@ -54,55 +54,24 @@
 			</div>
 			<br />
 				<table border=1 id="equipment"  style="width: 1800px">
-<!-- 					<tr class="sch-box"> -->
-<!-- 						<td colspan="10"> -->
-<!-- 							<span>종류</span> -->
-<!-- 							<input type="radio" name="gubun" value="모니터" id="g-monitor" onclick="activeBox(this.value);"/> -->
-<!-- 							<label for="g-monitor">모니터	</label> -->
-<!-- 							<input type="radio" name="gubun" value="pc" id="g-pc" onclick="activeBox(this.value);"/> -->
-<!-- 							<label for="g-pc">PC</label> -->
-<!-- 							<input type="radio" name="gubun" value="핸드폰" id="g-phone" onclick="activeBox(this.value);"/> -->
-<!-- 							<label for="g-phone">핸드폰</label> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr class="sch-box"> -->
-<!-- 						<td colspan="10"> -->
-<!-- 							<select name="ability" id="sch-ability"> -->
-<!-- 							</select> -->
-<!-- 							<input type="text" name="aVal" placeholder="검색어를 입력하세요."/> -->
-<!-- <!-- 							<button onclick="schEquipment();" class="btn">검색</button> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
-<!-- 					<tr class="sch-box"> -->
-<!-- 						<td colspan="10"> -->
-<!-- 							<select name="schThem"> -->
-<!-- 								<option value="m_name">사용자</option> -->
-<!-- 								<option value="ma_name">제조자</option> -->
-<!-- 								<option value="name">제품명</option> -->
-<!-- 								<option value="os">운영체제</option> -->
-<!-- 							</select> -->
-<!-- 							<input type="text" name="schVal" placeholder="검색어를 입력하세요."/> -->
-<!-- 							<button onclick="schEquipment();" class="btn">검색</button> -->
-<!-- 						</td> -->
-<!-- 					</tr> -->
 					<tr class="table-top">
-						<td>번호</td>
-						<td>구분</td>
-						<td>소유자</td>
-						<td>제품명</td>
-						<td>제조사</td>
-						<td>AP</td>
-						<td>CPU</td>
-						<td>운영체제</td>
-						<td>RAM</td>
-						<td>저장공간</td>
-						<td>배터리</td>
-						<td>GPU</td>
-						<td>패널</td>
-						<td>주사율</td>
-						<td>해상도</td>
-						<td>응답속도</td>
-						<td>모양</td>
+						<td width="50px">번호</td>
+						<td width="100px">구분</td>
+						<td width="100px">소유자</td>
+						<td width="150px">제품명</td>
+						<td width="100px">제조사</td>
+						<td width="200px">AP</td>
+						<td width="200px">CPU</td>
+						<td width="200px">운영체제</td>
+						<td width="50px">RAM</td>
+						<td width="50px">저장공간</td>
+						<td width="50px">배터리</td>
+						<td width="200px">GPU</td>
+						<td width="50px">패널</td>
+						<td width="50px">주사율</td>
+						<td width="100px">해상도</td>
+						<td width="50px">응답속도</td>
+						<td width="50px">모양</td>
 					</tr>
 				</table>
 			</div>
@@ -189,7 +158,18 @@
 			newRow.insertCell(13).innerText = "${item.HZ}";
 			newRow.insertCell(14).innerText = "${item.RESOLUTION}";
 			newRow.insertCell(15).innerText = "${item.SPEED}";
-			newRow.insertCell(16).innerText = "${item.SHAPE}";
+			
+			var shapeCode =  "${item.SHAPE}";
+			var shape = null;
+			if(shapeCode === '100') {
+				newRow.insertCell(16).innerText = "커브";
+			} else if(shapeCode === '200') {
+				newRow.insertCell(16).innerText = "와이드";
+			} else if(shapeCode === '300') {
+				newRow.insertCell(16).innerText = "평면";
+			}
+			
+// 			newRow.insertCell(16).innerText = "${item.SHAPE}";
 
 			</c:forEach>
 		}

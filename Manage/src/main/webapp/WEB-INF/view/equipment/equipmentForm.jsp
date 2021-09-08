@@ -168,6 +168,7 @@
 									<option value="">형태를 선택하세요.</option>
 									<option value="100">커브</option>
 									<option value="200">와이드</option>
+									<option value="300">평면</option>
 								</select>
 							</td>
 						</tr>

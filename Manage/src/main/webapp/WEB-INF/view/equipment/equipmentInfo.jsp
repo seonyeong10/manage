@@ -71,11 +71,19 @@
 					</tr>
 					<tr>
 						<td>형태</td>
-						<td><input type="text" name="mo_shape" value="" /></td>
+						<td>
+							<select name="mo_shape">
+									<option value="">형태를 선택하세요.</option>
+									<option value="100">커브</option>
+									<option value="200">와이드</option>
+									<option value="300">평면</option>
+							</select>
+						</td>
 					</tr>
 					<tr>
 						<td colspan="2" class="btn-area">
 							<button onclick="updateMonitor();" class="btn submit">수정</button>
+							<button onclick="delEquipment();" class="btn">삭제</button>
 						</td>
 					</tr>
 				</table>
@@ -117,6 +125,7 @@
 					<tr>
 						<td colspan="2" class="btn-area">
 							<button onclick="updatePC();" class="btn submit">수정</button>
+							<button onclick="delEquipment();" class="btn">삭제</button>
 						</td>
 					</tr>
 				</table>
@@ -183,7 +192,7 @@
 			tag.mo_hz.value = '${item.HZ}';
 			select.mo_resolution.value = '${item.RESOLUTION}';
 			tag.mo_speed.value = '${item.SPEED}';
-			tag.mo_shape.value = '${item.SHAPE}';
+			select.mo_shape.value = '${item.SHAPE}';
 
 		} else if ("${item.GUBUN}" === 'PC') {
 			document.getElementById('pc').style.display = 'block';
