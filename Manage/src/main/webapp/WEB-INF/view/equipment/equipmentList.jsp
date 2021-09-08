@@ -28,11 +28,11 @@
 			<div class="sch-box">
 				<div>
 					<span>종류</span>
-					<input type="radio" name="gubun" value="모니터" id="g-monitor" onclick="activeBox(this.value);"/>
+					<input type="radio" name="gubun" value="MONITOR" id="g-monitor" onclick="activeBox(this.value);"/>
 					<label for="g-monitor">모니터	</label>
-					<input type="radio" name="gubun" value="pc" id="g-pc" onclick="activeBox(this.value);"/>
+					<input type="radio" name="gubun" value="PC" id="g-pc" onclick="activeBox(this.value);"/>
 					<label for="g-pc">PC</label>
-					<input type="radio" name="gubun" value="핸드폰" id="g-phone" onclick="activeBox(this.value);"/>
+					<input type="radio" name="gubun" value="PHONE" id="g-phone" onclick="activeBox(this.value);"/>
 					<label for="g-phone">핸드폰</label>
 				</div>
 				<br />
@@ -94,7 +94,7 @@
 			
 			$('#sch-ability').children('option').remove();
 			
-			if(gubun === '모니터') {
+			if(gubun === 'MONITOR') {
 				for(const [key, value] of monitors) {
 					var option = document.createElement('option');
 					option.innerText = key;
@@ -102,7 +102,7 @@
 					target.append(option);
 				}
 				
-			} else if(gubun === 'pc') {
+			} else if(gubun === 'PC') {
 				for(const [key, value] of pcs) {
 					var option = document.createElement('option');
 					option.innerText = key;
@@ -110,7 +110,7 @@
 					target.append(option);
 				}				
 				
-			} else if(gubun === '핸드폰') {
+			} else if(gubun === 'PHONE') {
 				for(const [key, value] of phones) {
 					var option = document.createElement('option');
 					option.innerText = key;
@@ -140,6 +140,9 @@
 			<c:forEach items="${list }" var="item">
 
 			var newRow = table.insertRow();
+			var gubun = "${item.GUBUN}"
+			if(gubun === 'MONITOR') gubun = "모니터";
+			else if(gubun === 'PHONE') gubun = "핸드폰";
 
 			// 			newRow.insertCell(0).innerHTML = "<input type='checkbox'/>";
 			newRow.insertCell(0).innerHTML = "${item.ROWNUM}";

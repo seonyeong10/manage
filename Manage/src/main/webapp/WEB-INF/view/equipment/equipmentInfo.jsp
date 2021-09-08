@@ -182,7 +182,7 @@
 
 		var tag = document.getElementsByTagName('input');
 		var select = document.getElementsByTagName('select');
-		if ("${item.GUBUN}" === '모니터') {
+		if ("${item.GUBUN}" === 'MONITOR') {
 			document.getElementById('monitor').style.display = 'block';
 			tag.gubun.value = '${item.GUBUN}';
 			tag.owner.value = '${item.M_NAME}';
@@ -207,7 +207,7 @@
 			tag.owner.value = '${item.M_NAME}';
 			select.pc_division.value = '${item.DIVISION}';
 
-		} else if ("${item.GUBUN}" === '핸드폰') {
+		} else if ("${item.GUBUN}" === 'PHONE') {
 			document.getElementById('phone').style.display = 'block';
 			tag.gubun.value = '${item.GUBUN}';
 			tag.p_name.value = '${item.NAME}';

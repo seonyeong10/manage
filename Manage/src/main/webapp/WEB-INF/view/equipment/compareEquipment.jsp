@@ -32,14 +32,14 @@
 								<td>
 								<select name="gubun" onchange="showEquipment();" id="gubun">
 									<option value="">항목을 선택하세요.</option>
-									<option value="pc"
-										<c:if test="${selected.gubun eq 'pc' }">selected</c:if>
+									<option value="PC"
+										<c:if test="${selected.gubun eq 'PC' }">selected</c:if>
 									>PC</option>
-									<option value="핸드폰"
-										<c:if test="${selected.gubun eq '핸드폰' }">selected</c:if>
+									<option value="PHONE"
+										<c:if test="${selected.gubun eq 'PHONE' }">selected</c:if>
 									>핸드폰</option>
-									<option value="모니터"
-										<c:if test="${selected.gubun eq '모니터' }">selected</c:if>
+									<option value="MONITOR"
+										<c:if test="${selected.gubun eq 'MONITOR' }">selected</c:if>
 									>모니터</option>
 								</select>
 							</td>
@@ -196,14 +196,14 @@
 			console.log(table);
 			console.log('${equip1}');
 			console.log('${equip2}');
-			if(table === '핸드폰') document.getElementById('phone-ability').style.display = 'block';
-			else if(table === '모니터') document.getElementById('monitor-ability').style.display = 'block';
-			else if(table === 'pc') document.getElementById('pc-ability').style.display = 'block';
+			if(table === 'PHONE') document.getElementById('phone-ability').style.display = 'block';
+			else if(table === 'MONITOR') document.getElementById('monitor-ability').style.display = 'block';
+			else if(table === 'PC') document.getElementById('pc-ability').style.display = 'block';
 			
 			
 			var input = document.getElementsByTagName('input');
 			// 데이터 로드
-			if(table === 'pc') {
+			if(table === 'PC') {
 				input[name='pc_division1'].value='${equip1.DIVISION}';
 				input[name='pc_os1'].value='${equip1.OS}';
 				input[name='pc_cpu1'].value='${equip1.CPU}';
@@ -218,7 +218,7 @@
 				input[name='pc_gpu2'].value='${equip2.GPU}';
 				input[name='pc_capacity2'].value='${equip2.CAPACITY}';
 				
-			} else if(table === '핸드폰') {
+			} else if(table === 'PHONE') {
 				input[name='p_ap1'].value='${equip1.AP}';
 				input[name='p_os1'].value='${equip1.OS}';
 				input[name='p_cpu1'].value='${equip1.CPU}';
@@ -233,7 +233,7 @@
 				input[name='p_battery2'].value='${equip2.BATTERY}';
 				input[name='p_capacity2'].value='${equip2.CAPACITY}';
 				
-			} else if(table === '모니터') {
+			} else if(table === 'MONITOR') {
 				input[name='mo_pannel1'].value='${equip1.PANNEL}';
 				input[name='mo_Hz1'].value='${equip1.HZ}';
 				input[name='mo_resolution1'].value='${equip1.RESOLUTION}';
@@ -263,11 +263,11 @@
 
 			hideTable();
 
-			if (selected === 'pc') {
+			if (selected === 'PC') {
 				document.getElementById('pc-ability').style.display = 'block';
-			} else if (selected === '핸드폰') {
+			} else if (selected === 'PHONE') {
 				document.getElementById('phone-ability').style.display = 'block';
-			} else if (selected === '모니터') {
+			} else if (selected === 'MONITOR') {
 				document.getElementById('monitor-ability').style.display = 'block';
 			}
 		}

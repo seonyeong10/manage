@@ -205,14 +205,14 @@ public class EquipmentController {
 		param.put("m_code", m_code);
 		
 
-		if (gubun.equals("모니터"))
+		if (gubun.equals("MONITOR"))
 			repository.delMonitor(param);
 		else if (gubun.equals("PC")) {
 			
 			repository.delPC(param);
 			System.out.println("pc 삭제");
 		}
-		else if (gubun.equals("핸드폰"))
+		else if (gubun.equals("PHONE"))
 			repository.delPhone(param);
 
 		return "redirect:/equipment";
@@ -229,8 +229,8 @@ public class EquipmentController {
 			HttpServletRequest request,
 			Model model) throws Exception {
 		
-		if(gubun.equals("phone")) gubun = "핸드폰";
-		else if(gubun.equals("monitor")) gubun = "모니터";
+//		if(gubun.equals("phone")) gubun = "핸드폰";
+//		else if(gubun.equals("monitor")) gubun = "모니터";
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 
@@ -249,11 +249,6 @@ public class EquipmentController {
 
 		param.put("code", code2);
 		List<Map<String, Object>> equip2 = repository.getInfo(param);
-
-//		System.out.println("selected: " + selected.entrySet());
-//		System.out.println(equip1.size());
-//		System.out.println("equip1: " + equip1.get(0).entrySet());
-//		System.out.println("equip2: " + equip2.get(0).entrySet());
 
 		model.addAttribute("emp", empList);
 		model.addAttribute("selected", selected);
@@ -314,7 +309,7 @@ public class EquipmentController {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		Map<String, Object> param2 = new HashMap<String, Object>();
-		String gubun = "";
+//		String gubun = "";
 
 		// 1번 장비 정보 저장
 		param.put("p_ap", p_ap1);
@@ -356,26 +351,26 @@ public class EquipmentController {
 		param2.put("mo_shape", mo_shape2);
 		param2.put("code", code1);
 
-		if (table.equals("pc")) {
+		if (table.equals("PC")) {
 			repository.updatePC(param);
 			repository.updatePC(param2);
 			
-			gubun = "pc";
+//			gubun = "pc";
 			
-		} else if (table.equals("핸드폰")) {
+		} else if (table.equals("PHONE")) {
 			repository.updatePhone(param);
 			repository.updatePhone(param2);
 			
-			gubun = "phone";
+//			gubun = "phone";
 			
-		} else if (table.equals("모니터")) {
+		} else if (table.equals("MONITOR")) {
 			repository.updateMonitor(param);
 			repository.updateMonitor(param2);
 			
-			gubun = "monitor";
+//			gubun = "monitor";
 		}
 
-		return "redirect:/equipment/compare?gubun=" + gubun + "&code1=" + code1 + "&code2=" + code2;
+		return "redirect:/equipment/compare?gubun=" + table + "&code1=" + code1 + "&code2=" + code2;
 	}
 	
 	@RequestMapping(value = "getManufactures", method = RequestMethod.POST)

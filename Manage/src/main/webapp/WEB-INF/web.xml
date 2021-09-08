@@ -35,6 +35,7 @@
   			classpath:spring-mail-config.xml
   			classpath:manufacture.xml
   			classpath:equipment.xml
+  			classpath:device.xml
   		</param-value>
   	</init-param>
   </servlet>

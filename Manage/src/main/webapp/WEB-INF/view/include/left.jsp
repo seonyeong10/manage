@@ -30,7 +30,8 @@
 					장비 관리 <span class="drop">▼</span>
 				</div>
 				<ul>
-					<li><a href="/equipment/add">장비 등록</a></li>
+					<li><a href="/device/add">장비 추가</a></li>
+					<li><a href="/equipment/add">사용자 장비 등록</a></li>
 					<li><a href="/equipment">장비 조회</a></li>
 					<li><a href="/equipment/compare">성능비교</a></li>
 				</ul>
