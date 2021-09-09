@@ -128,4 +128,15 @@
 	where ma_kinds = #{ma_kinds}
 </select>
 
+<select id="getEquipmentList" parameterType="pmap" resultType="pmap">
+	SELECT * FROM EQUIPMENTVIEW
+	<where>
+		<trim prefixOverrides="AND | OR">
+			<if test="code != null and code != '' ">and code = #{code}</if>
+			<if test="gubun != null and gubun != '' ">and gubun = #{gubun}</if>
+			<if test="id != null and id != '' ">and id = #{id}</if>
+		</trim>
+	</where>
+</select>
+
 </mapper>

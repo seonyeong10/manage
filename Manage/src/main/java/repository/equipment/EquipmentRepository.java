@@ -100,4 +100,9 @@ public class EquipmentRepository {
 		statement = namespace + ".selectManufactures";
 		return sqlSession.selectList(statement, param);
 	}
+
+	public List<Map<String, Object>> getEquipmentList(Map<String, Object> param) {
+		statement = namespace + ".getEquipmentList";
+		return sqlSession.selectList(statement, param);
+	}
 }

@@ -233,23 +233,23 @@ public class EquipmentController {
 //		else if(gubun.equals("monitor")) gubun = "모니터";
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-
+		
 		Map<String, Object> selected = new HashMap<String, Object>();
 		selected.put("id", id);
 		selected.put("code1", code1);
 		selected.put("code2", code2);
-
+		
 		// 사원 목록
 		List<Map<String, Object>> empList = repository.selectEmps(param);
-
+		
 		// 사원별 장비 성능 정보
 		param.put("id", id);
 		param.put("code", code1);
 		List<Map<String, Object>> equip1 = repository.getInfo(param);
-
+		
 		param.put("code", code2);
 		List<Map<String, Object>> equip2 = repository.getInfo(param);
-
+		
 		model.addAttribute("emp", empList);
 		model.addAttribute("selected", selected);
 		
@@ -259,10 +259,69 @@ public class EquipmentController {
 		if(equip2.size()>0) {
 			model.addAttribute("equip2", equip2.get(0));
 		}
-
+		
 		return "equipment/compareEquipment";
 	}
+	
+	/**
+	 * 장치 목록 가져오기
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "compare/getEquipmentList", method = RequestMethod.POST)
+	public void getEquipmentList(
+			@RequestParam(value = "code") String code		// 사원번호
+			,@RequestParam(value = "gubun") String gubun	// 장치 종류(PC, Phone, Monitor)
+			,HttpServletRequest request
+			,HttpServletResponse response
+			,Model model
+			) throws Exception {
+		
+		JSONObject obj = new JSONObject();
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		param.put("gubun", gubun);
+		
+		List<Map<String, Object>> equipmentList = repository.getEquipmentList(param);
+		
+		obj.put("message", "success");
+		obj.put("equip", equipmentList);
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
+	/**
+	 * 장치 성능정보 조회
+	 * @throws Exception 
+	 */
+	@RequestMapping(value = "compare/getAbility", method = RequestMethod.POST)
+	public void getAbility(
+			@RequestParam(value = "code") String code		// 사원번호
+			,@RequestParam(value = "id") String id	// 장치 ID
+			,HttpServletRequest request
+			,HttpServletResponse response
+			,Model model
+			) throws Exception {
+		
+		JSONObject obj = new JSONObject();
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		param.put("id", id);
+		
+		List<Map<String, Object>> ability = repository.getEquipmentList(param);
+		
+		obj.put("message", "success");
+		obj.put("ability", ability.get(0));
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
 
+	/**
+	 * 장치 교체
+	 */
 	@RequestMapping(value = "changeEquipment", method = RequestMethod.POST)
 	public String changeEquipment(@RequestParam(value = "code1", defaultValue = "") String code1,
 			@RequestParam(value = "code2", defaultValue = "") String code2,

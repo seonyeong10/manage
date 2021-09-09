@@ -21,31 +21,45 @@
 			<form action="#" method="post" id="frm">
 				<div class="section-title">장비 성능 비교</div>
 				<div>
+					
 					<table>
 						<thead>
 							<tr>
-								<td><select name="code1" class="emp"
-									onchange="getEquipment();">
+								<td>
+									<select name="gubun" onchange="showEquipment();" id="gubun">
+										<option value="">항목을 선택하세요.</option>
+										<option value="PC"
+											<c:if test="${selected.gubun eq 'PC' }">selected</c:if>
+										>PC</option>
+										<option value="PHONE"
+											<c:if test="${selected.gubun eq 'PHONE' }">selected</c:if>
+										>핸드폰</option>
+										<option value="MONITOR"
+											<c:if test="${selected.gubun eq 'MONITOR' }">selected</c:if>
+										>모니터</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<select name="code1" class="emp" onchange="getEquipment('1');">
 										<option value="">사원을 선택하세요.</option>
-								</select>
+									</select>
+									<br/>
+									<select name="device1" class="device" onchange="getDevice('1');">
+										<option>장비를 선택하세요.</option>
+									</select>
 								</td>
 								<td>
-								<select name="gubun" onchange="showEquipment();" id="gubun">
-									<option value="">항목을 선택하세요.</option>
-									<option value="PC"
-										<c:if test="${selected.gubun eq 'PC' }">selected</c:if>
-									>PC</option>
-									<option value="PHONE"
-										<c:if test="${selected.gubun eq 'PHONE' }">selected</c:if>
-									>핸드폰</option>
-									<option value="MONITOR"
-										<c:if test="${selected.gubun eq 'MONITOR' }">selected</c:if>
-									>모니터</option>
-								</select>
-							</td>
+								
+								</td>
 							<td>
-								<select name="code2" class="emp" onchange="getEquipment();">
+								<select name="code2" class="emp" onchange="getEquipment('2');">
 									<option value="">사원을 선택하세요.</option>
+								</select>
+								<br/>
+								<select name="device2" class="device" onchange="getDevice('2');">
+									<option>장비를 선택하세요.</option>
 								</select>
 							</td>
 						</tr>
@@ -53,94 +67,94 @@
 				</table>
 				<table id="phone-ability">
 					<tr>
-							<td><input type="text" name="p_ap1" readonly="readonly" /></td>
+							<td><input type="text" name="p_ap1" readonly="readonly" class="ph1"/></td>
 							<td class="col">AP칩셋</td>
-							<td><input type="text" name="p_ap2" readonly="readonly"/></td>
+							<td><input type="text" name="p_ap2" readonly="readonly" class="ph2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_os1" readonly="readonly"/></td>
+							<td><input type="text" name="p_os1" readonly="readonly" class="ph1"/></td>
 							<td class="col">운영체제</td>
-							<td><input type="text" name="p_os2" readonly="readonly"/></td>
+							<td><input type="text" name="p_os2" readonly="readonly" class="ph2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_cpu1" readonly="readonly"/></td>
+							<td><input type="text" name="p_cpu1" readonly="readonly" class="ph1"/></td>
 							<td class="col">CPU</td>
-							<td><input type="text" name="p_cpu2" readonly="readonly"/></td>
+							<td><input type="text" name="p_cpu2" readonly="readonly" class="ph2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_ram1" readonly="readonly"/></td>
+							<td><input type="text" name="p_ram1" readonly="readonly" class="ph1"/></td>
 							<td class="col">RAM</td>
-							<td><input type="text" name="p_ram2" readonly="readonly"/></td>
+							<td><input type="text" name="p_ram2" readonly="readonly" class="ph2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_capacity1" readonly="readonly"/></td>
+							<td><input type="text" name="p_capacity1" readonly="readonly" class="ph1"/></td>
 							<td class="col">저장공간(GB)</td>
-							<td><input type="text" name="p_capacity2" readonly="readonly"/></td>
+							<td><input type="text" name="p_capacity2" readonly="readonly" class="ph2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="p_battery1" readonly="readonly"/></td>
+							<td><input type="text" name="p_battery1" readonly="readonly" class="ph1"/></td>
 							<td class="col">배터리(mAh)</td>
-							<td><input type="text" name="p_battery2" readonly="readonly" /></td>
+							<td><input type="text" name="p_battery2" readonly="readonly" class="ph2"/></td>
 						</tr>
 				</table>
 				<table id="pc-ability">
 					<tr>
-							<td><input type="text" name="pc_division1" readonly="readonly"/></td>
+							<td><input type="text" name="pc_division1" readonly="readonly" class="pc1"/></td>
 							<td class="col">종류</td>
-							<td><input type="text" name="pc_division2" readonly="readonly"/></td>
+							<td><input type="text" name="pc_division2" readonly="readonly" class="pc2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_os1" readonly="readonly"/></td>
+							<td><input type="text" name="pc_os1" readonly="readonly" class="pc1"/></td>
 							<td class="col">운영체제</td>
-							<td><input type="text" name="pc_os2" readonly="readonly"/></td>
+							<td><input type="text" name="pc_os2" readonly="readonly" class="pc2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_cpu1" readonly="readonly"/></td>
+							<td><input type="text" name="pc_cpu1" readonly="readonly" class="pc1"/></td>
 							<td class="col">CPU</td>
-							<td><input type="text" name="pc_cpu2" readonly="readonly"/></td>
+							<td><input type="text" name="pc_cpu2" readonly="readonly" class="pc2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_ram1" readonly="readonly"/></td>
+							<td><input type="text" name="pc_ram1" readonly="readonly" class="pc1"/></td>
 							<td class="col">RAM</td>
-							<td><input type="text" name="pc_ram2" readonly="readonly"/></td>
+							<td><input type="text" name="pc_ram2" readonly="readonly" class="pc2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_gpu1" readonly="readonly"/></td>
+							<td><input type="text" name="pc_gpu1" readonly="readonly" class="pc1"/></td>
 							<td class="col">GPU</td>
-							<td><input type="text" name="pc_gpu2" readonly="readonly"/></td>
+							<td><input type="text" name="pc_gpu2" readonly="readonly" class="pc2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="pc_capacity1" readonly="readonly"/></td>
+							<td><input type="text" name="pc_capacity1" readonly="readonly" class="pc1"/></td>
 							<td class="col">저장공간(GB)</td>
-							<td><input type="text" name="pc_capacity2" readonly="readonly"/></td>
+							<td><input type="text" name="pc_capacity2" readonly="readonly"/ class="pc2"></td>
 
 						</tr>
 				</table>
 				<table id="monitor-ability">
 					<tr>
-							<td><input type="text" name="mo_pannel1" readonly="readonly"/></td>
+							<td><input type="text" name="mo_pannel1" readonly="readonly" class="mo1"/></td>
 							<td class="col">패널</td>
-							<td><input type="text" name="mo_pannel2" readonly="readonly"/></td>
+							<td><input type="text" name="mo_pannel2" readonly="readonly" class="mo2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_Hz1" readonly="readonly"/></td>
+							<td><input type="text" name="mo_Hz1" readonly="readonly" class="mo1"/></td>
 							<td class="col">화면 주사율(Hz)</td>
-							<td><input type="text" name="mo_Hz2" readonly="readonly"/></td>
+							<td><input type="text" name="mo_Hz2" readonly="readonly" class="mo2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_resolution1" readonly="readonly"/></td>
+							<td><input type="text" name="mo_resolution1" readonly="readonly" class="mo1"/></td>
 							<td class="col">해상도(픽셀)</td>
-							<td><input type="text" name="mo_resolution2" readonly="readonly"/></td>
+							<td><input type="text" name="mo_resolution2" readonly="readonly" class="mo2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_speed1" readonly="readonly"/></td>
+							<td><input type="text" name="mo_speed1" readonly="readonly" class="mo1"/></td>
 							<td class="col">응답속도(ms)</td>
-							<td><input type="text" name="mo_speed2" readonly="readonly"/></td>
+							<td><input type="text" name="mo_speed2" readonly="readonly" class="mo2"/></td>
 						</tr>
 						<tr>
-							<td><input type="text" name="mo_shape1" readonly="readonly"/></td>
+							<td><input type="text" name="mo_shape1" readonly="readonly" class="mo1"/></td>
 							<td class="col">형태</td>
-							<td><input type="text" name="mo_shape2" readonly="readonly"/></td>
+							<td><input type="text" name="mo_shape2" readonly="readonly" class="mo2"/></td>
 						</tr>
 				</table>
 				<table>
@@ -193,9 +207,6 @@
 				</c:forEach>
 
 // 			}
-			console.log(table);
-			console.log('${equip1}');
-			console.log('${equip2}');
 			if(table === 'PHONE') document.getElementById('phone-ability').style.display = 'block';
 			else if(table === 'MONITOR') document.getElementById('monitor-ability').style.display = 'block';
 			else if(table === 'PC') document.getElementById('pc-ability').style.display = 'block';
@@ -271,30 +282,134 @@
 				document.getElementById('monitor-ability').style.display = 'block';
 			}
 		}
+		
+		// 장치 성능정보 가져오기(0909 수정)
+		function getDevice(no) {
+			// 대상
+			var empNo = 'code' + no;
+			var device = 'device' + no;
+			
+			// 사번
+			var select = document.getElementsByTagName('select')[name=empNo];
+			var code = select.options[select.selectedIndex].value;	// 조회할 사원 번호
+			
+			// 장치 id
+			select = document.getElementsByTagName('select')[name=device];
+			var id = select.options[select.selectedIndex].value;
+			
+			$.ajax({
+				type : "post"
+				,url : "/equipment/compare/getAbility"
+				,data : {"code" : code, "id" : id}
+				,dataType : "json"
+				,error : function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success : function(responseText, statusText, xhr) {
+					var msg = responseText.message;		// 전송 성공여부 판단
+					var ability = responseText.ability;	// 성능 정보가 담긴 객체
+					var className = null;				// 정보를 출력할 객체의 class명
+					
+					console.log(ability);
+					
+					if(ability.GUBUN === 'PHONE') {
+						className = document.getElementsByClassName('ph' + no);
+						
+						className[0].value = ability.AP;
+						className[1].value = ability.OS;
+						className[2].value = ability.CPU;
+						className[3].value = ability.RAM;
+						className[4].value = ability.CAPACITY;
+						className[5].value = ability.BATTERY;
+						
+					} else if(ability.GUBUN === 'MONITOR') {
+						className = document.getElementsByClassName('mo' + no);
+						
+						className[0].value = ability.PANNEL;
+						className[1].value = ability.HZ;
+						className[2].value = ability.RESOLUTION;
+						className[3].value = ability.SPEED;
+						className[4].value = ability.SHAPE;
+						
+					} else if(ability.GUBUN === 'PC') {
+						className = document.getElementsByClassName('pc' + no);
+						
+						className[0].value = ability.DIVISION;
+						className[1].value = ability.OS;
+						className[2].value = ability.CPU;
+						className[3].value = ability.RAM;
+						className[4].value = ability.GPU;
+						className[5].value = ability.CAPACITY;
+						
+					}
+				}
+			});
+		}
 
-		// 성능 정보 가져오기
-		function getEquipment() {
+		// 장치 목록 가져오기
+		function getEquipment(no) {
+			// 대상
+			var code = 'code' + no;
+			var device = 'device' + no;
+			
 			// 테이블
 			var gubun = document.getElementById('gubun');
 			var selected = gubun.options[gubun.selectedIndex].value;
-
-			// 사원번호
-			var target = document.getElementsByClassName('emp');
-			var code1 = target[0].options[target[0].selectedIndex].value;
-			var code2 = target[1].options[target[1].selectedIndex].value;
-
-			// 			console.log(code1, code2, selected);
-
-			if (selected === '') {
-				alert('항목을 선택하세요.');
-			} else if (code1 === '' || code2 === '') {
-				alert('사원을 선택하세요.');
-			} else {
-				frm.action = '/equipment/compare';
-				frm.submit();
-			}
+			
+			// 사번
+			var target = document.getElementsByTagName('select')[name=code];
+			var code = target.options[target.selectedIndex].value;
+			
+			$.ajax({
+				type : "post"
+				,url : "/equipment/compare/getEquipmentList"
+				,data : {"code" : code, "gubun" : selected}
+				,dataType : "json"
+				,error : function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success : function(responseText, statusText, xhr) {
+					var msg = responseText.message;
+					var deviceBox = document.getElementsByTagName('select')[name=device];
+					var equipList = responseText.equip;
+					
+					if(msg === 'success') {
+						for(var i=0 ; i < equipList.length ; i++) {
+							var option = document.createElement('option');
+							option.innerText = equipList[i].NAME;
+							option.value = equipList[i].ID;
+							
+							deviceBox.append(option);
+						}
+					}
+				}
+			});
 
 		}
+		
+// 		// 성능 정보 가져오기
+// 		function getEquipment() {
+// 			// 테이블
+// 			var gubun = document.getElementById('gubun');
+// 			var selected = gubun.options[gubun.selectedIndex].value;
+
+// 			// 사원번호
+// 			var target = document.getElementsByClassName('emp');
+// 			var code1 = target[0].options[target[0].selectedIndex].value;
+// 			var code2 = target[1].options[target[1].selectedIndex].value;
+
+// 			// 			console.log(code1, code2, selected);
+
+// 			if (selected === '') {
+// 				alert('항목을 선택하세요.');
+// 			} else if (code1 === '' || code2 === '') {
+// 				alert('사원을 선택하세요.');
+// 			} else {
+// 				frm.action = '/equipment/compare';
+// 				frm.submit();
+// 			}
+
+// 		}
 		
 		// 장비 교체 버튼 클릭
 		function changeEquipment() {
