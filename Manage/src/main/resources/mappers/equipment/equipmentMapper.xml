@@ -73,6 +73,7 @@
 			<if test="code != null"> code = #{code},</if>
 		</trim>
 	where p_id = #{id}
+	<if test="giver != null and giver != '' ">and code = #{giver}</if>
 </update>
 
 <update id="updatePC" parameterType="pmap">
@@ -89,6 +90,7 @@
 			<if test="code != null"> code = #{code},</if>
 		</trim>
 	where pc_id = #{id}
+	<if test="giver != null and giver != '' ">and code = #{giver}</if>
 </update>
 
 <update id="updateMonitor" parameterType="pmap">
@@ -104,6 +106,7 @@
 			<if test="code != null"> code = #{code},</if>
 		</trim>
 	where mo_id = #{id}
+	<if test="giver != null and giver != '' ">and code = #{giver}</if>
 </update>
 
 <delete id="delPhone" parameterType="pmap">

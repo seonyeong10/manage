@@ -18,7 +18,7 @@
 		<%@ include file="../include/left.jsp"%>
 
 		<div id="right">
-			<form action="#" method="post" id="frm">
+			<form action="#" method="post" id="frm"  onsubmit="return false;">
 				<div class="section-title">장비 성능 비교</div>
 				<div>
 					
@@ -51,7 +51,9 @@
 									</select>
 								</td>
 								<td>
-								
+									<button onclick="giveEquipment('1');">→</button>
+									<br />
+									<button onclick="giveEquipment('2');">←</button>
 								</td>
 							<td>
 								<select name="code2" class="emp" onchange="getEquipment('2');">
@@ -226,53 +228,6 @@
 			else if(table === 'MONITOR') document.getElementById('monitor-ability').style.display = 'block';
 			else if(table === 'PC') document.getElementById('pc-ability').style.display = 'block';
 			
-			
-// 			var input = document.getElementsByTagName('input');
-// 			// 데이터 로드
-// 			if(table === 'PC') {
-// 				input[name='pc_division1'].value='${equip1.DIVISION}';
-// 				input[name='pc_os1'].value='${equip1.OS}';
-// 				input[name='pc_cpu1'].value='${equip1.CPU}';
-// 				input[name='pc_ram1'].value='${equip1.RAM}';
-// 				input[name='pc_gpu1'].value='${equip1.GPU}';
-// 				input[name='pc_capacity1'].value='${equip1.CAPACITY}';
-				
-// 				input[name='pc_division2'].value='${equip2.DIVISION}';
-// 				input[name='pc_os2'].value='${equip2.OS}';
-// 				input[name='pc_cpu2'].value='${equip2.CPU}';
-// 				input[name='pc_ram2'].value='${equip2.RAM}';
-// 				input[name='pc_gpu2'].value='${equip2.GPU}';
-// 				input[name='pc_capacity2'].value='${equip2.CAPACITY}';
-				
-// 			} else if(table === 'PHONE') {
-// 				input[name='p_ap1'].value='${equip1.AP}';
-// 				input[name='p_os1'].value='${equip1.OS}';
-// 				input[name='p_cpu1'].value='${equip1.CPU}';
-// 				input[name='p_ram1'].value='${equip1.RAM}';
-// 				input[name='p_battery1'].value='${equip1.BATTERY}';
-// 				input[name='p_capacity1'].value='${equip1.CAPACITY}';
-				
-// 				input[name='p_ap2'].value='${equip2.AP}';
-// 				input[name='p_os2'].value='${equip2.OS}';
-// 				input[name='p_cpu2'].value='${equip2.CPU}';
-// 				input[name='p_ram2'].value='${equip2.RAM}';
-// 				input[name='p_battery2'].value='${equip2.BATTERY}';
-// 				input[name='p_capacity2'].value='${equip2.CAPACITY}';
-				
-// 			} else if(table === 'MONITOR') {
-// 				input[name='mo_pannel1'].value='${equip1.PANNEL}';
-// 				input[name='mo_Hz1'].value='${equip1.HZ}';
-// 				input[name='mo_resolution1'].value='${equip1.RESOLUTION}';
-// 				input[name='mo_speed1'].value='${equip1.SPEED}';
-// 				input[name='mo_shape1'].value='${equip1.SHAPE}';
-				
-// 				input[name='mo_pannel2'].value='${equip2.PANNEL}';
-// 				input[name='mo_Hz2'].value='${equip2.HZ}';
-// 				input[name='mo_resolution2'].value='${equip2.RESOLUTION}';
-// 				input[name='mo_speed2'].value='${equip2.SPEED}';
-// 				input[name='mo_shape2'].value='${equip2.SHAPE}';
-				
-// 			}
 		}
 
 		// 테이블 숨김
@@ -324,8 +279,6 @@
 					var msg = responseText.message;		// 전송 성공여부 판단
 					var ability = responseText.ability;	// 성능 정보가 담긴 객체
 					var className = null;				// 정보를 출력할 객체의 class명
-					
-					console.log(ability);
 					
 					if(ability.GUBUN === 'PHONE') {
 						className = document.getElementsByClassName('ph' + no);
@@ -405,34 +358,40 @@
 
 		}
 		
-// 		// 성능 정보 가져오기
-// 		function getEquipment() {
-// 			// 테이블
-// 			var gubun = document.getElementById('gubun');
-// 			var selected = gubun.options[gubun.selectedIndex].value;
-
-// 			// 사원번호
-// 			var target = document.getElementsByClassName('emp');
-// 			var code1 = target[0].options[target[0].selectedIndex].value;
-// 			var code2 = target[1].options[target[1].selectedIndex].value;
-
-// 			// 			console.log(code1, code2, selected);
-
-// 			if (selected === '') {
-// 				alert('항목을 선택하세요.');
-// 			} else if (code1 === '' || code2 === '') {
-// 				alert('사원을 선택하세요.');
-// 			} else {
-// 				frm.action = '/equipment/compare';
-// 				frm.submit();
-// 			}
-
-// 		}
-		
 		// 장비 교체 버튼 클릭
 		function changeEquipment() {
 			frm.action = '/equipment/changeEquipment';
 			frm.submit();
+		}
+		
+		// 장비 양도 버튼 클릭
+		function giveEquipment(no) {
+			var target = document.getElementsByTagName('select');
+			var table = target[name='gubun'].options[target[name='gubun'].selectedIndex].value;	
+			var giver = target[name='code' + no].options[target[name='code' + no].selectedIndex].value;	// 주는 사람
+			var id = target[name='device' + no].options[target[name='device' + no].selectedIndex].value;;	// 장비 id
+			
+			if(no === '1') no = 2;
+			else no = 1;
+			var receiver = target[name='code' + no].options[target[name='code' + no].selectedIndex].value;	// 받는 사람
+			
+			$.ajax({
+				type: 'post'
+				,url: '/equipment/compare/giveEquipment'
+				,data: {'giver' : giver, 'receiver' : receiver, 'id' : id, 'table' : table}
+				,dataType: 'json'
+				,error: function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success: function(responseText, statusText, xhr) {
+					var msg = responseText.message;
+					
+					if(msg === 'success') {
+						location.reload();
+					}
+				}
+			});
+			
 		}
 	</script>
 	</body>

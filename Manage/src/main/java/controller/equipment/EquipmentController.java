@@ -434,115 +434,6 @@ public class EquipmentController {
 		
 		return "redirect:/equipment";
 	}
-//	@RequestMapping(value = "changeEquipment", method = RequestMethod.POST)
-//	public String changeEquipment(@RequestParam(value = "code1", defaultValue = "") String code1,
-//			@RequestParam(value = "code2", defaultValue = "") String code2,
-//			@RequestParam(value = "gubun", defaultValue = "") String table,
-//			@RequestParam(value = "device1", defaultValue = "") String id1,
-//			@RequestParam(value = "device2", defaultValue = "") String id2,
-//			@RequestParam(value = "name1", defaultValue = "") String name1,
-//			@RequestParam(value = "name2", defaultValue = "") String name2,
-//			
-//			@RequestParam(value = "p_ap1", defaultValue = "") String p_ap1,
-//			@RequestParam(value = "p_ap2", defaultValue = "") String p_ap2,
-//			@RequestParam(value = "p_os1", defaultValue = "") String p_os1,
-//			@RequestParam(value = "p_os2", defaultValue = "") String p_os2,
-//			@RequestParam(value = "p_cpu1", defaultValue = "") String p_cpu1,
-//			@RequestParam(value = "p_cpu2", defaultValue = "") String p_cpu2,
-//			@RequestParam(value = "p_ram1", defaultValue = "") String p_ram1,
-//			@RequestParam(value = "p_ram2", defaultValue = "") String p_ram2,
-//			@RequestParam(value = "p_capacity1", defaultValue = "") String p_capacity1,
-//			@RequestParam(value = "p_capacity2", defaultValue = "") String p_capacity2,
-//			@RequestParam(value = "p_battery1", defaultValue = "") String p_battery1,
-//			@RequestParam(value = "p_battery2", defaultValue = "") String p_battery2,
-//			
-//			@RequestParam(value = "pc_division1", defaultValue = "") String pc_division1,
-//			@RequestParam(value = "pc_division2", defaultValue = "") String pc_division2,
-//			@RequestParam(value = "pc_os1", defaultValue = "") String pc_os1,
-//			@RequestParam(value = "pc_os2", defaultValue = "") String pc_os2,
-//			@RequestParam(value = "pc_cpu1", defaultValue = "") String pc_cpu1,
-//			@RequestParam(value = "pc_cpu2", defaultValue = "") String pc_cpu2,
-//			@RequestParam(value = "pc_ram1", defaultValue = "") String pc_ram1,
-//			@RequestParam(value = "pc_ram2", defaultValue = "") String pc_ram2,
-//			@RequestParam(value = "pc_gpu1", defaultValue = "") String pc_gpu1,
-//			@RequestParam(value = "pc_gpu2", defaultValue = "") String pc_gpu2,
-//			@RequestParam(value = "pc_capacity1", defaultValue = "") String pc_capacity1,
-//			@RequestParam(value = "pc_capacity2", defaultValue = "") String pc_capacity2,
-//			
-//			@RequestParam(value = "mo_pannel1", defaultValue = "") String mo_pannel1,
-//			@RequestParam(value = "mo_pannel2", defaultValue = "") String mo_pannel2,
-//			@RequestParam(value = "mo_Hz1", defaultValue = "") String mo_Hz1,
-//			@RequestParam(value = "mo_Hz2", defaultValue = "") String mo_Hz2,
-//			@RequestParam(value = "mo_resolution1", defaultValue = "") String mo_resolution1,
-//			@RequestParam(value = "mo_resolution2", defaultValue = "") String mo_resolution2,
-//			@RequestParam(value = "mo_speed1", defaultValue = "") String mo_speed1,
-//			@RequestParam(value = "mo_speed2", defaultValue = "") String mo_speed2,
-//			@RequestParam(value = "mo_shape1", defaultValue = "") String mo_shape1,
-//			@RequestParam(value = "mo_shape2", defaultValue = "") String mo_shape2,
-//			
-//			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
-//		
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		Map<String, Object> param2 = new HashMap<String, Object>();
-////		String gubun = "";
-//		
-//		// 1번 장비 정보 저장
-//		param.put("p_ap", p_ap1);
-//		param.put("p_os", p_os1);
-//		param.put("p_cpu", p_cpu1);
-//		param.put("p_ram", p_ram1);
-//		param.put("p_battery", p_battery1);
-//		param.put("p_capacity", p_capacity1);
-//		param.put("pc_division", pc_division1);
-//		param.put("pc_os", pc_os1);
-//		param.put("pc_cpu", pc_cpu1);
-//		param.put("pc_ram", pc_ram1);
-//		param.put("pc_gpu", pc_gpu1);
-//		param.put("pc_capacity", pc_capacity1);
-//		param.put("mo_pannel", mo_pannel1);
-//		param.put("mo_hz", mo_Hz1);
-//		param.put("mo_resolution", mo_resolution1);
-//		param.put("mo_speed", mo_speed1);
-//		param.put("mo_shape", mo_shape1);
-//		param.put("code", code2);
-//		param.put("id", id2);
-//		
-//		// 2번 장비 정보
-//		param2.put("p_ap", p_ap2);
-//		param2.put("p_os", p_os2);
-//		param2.put("p_cpu", p_cpu2);
-//		param2.put("p_ram", p_ram2);
-//		param2.put("p_battery", p_battery2);
-//		param2.put("p_capacity", p_capacity2);
-//		param2.put("pc_division", pc_division2);
-//		param2.put("pc_os", pc_os2);
-//		param2.put("pc_cpu", pc_cpu2);
-//		param2.put("pc_ram", pc_ram2);
-//		param2.put("pc_gpu", pc_gpu2);
-//		param2.put("pc_capacity", pc_capacity2);
-//		param2.put("mo_pannel", mo_pannel2);
-//		param2.put("mo_hz", mo_Hz2);
-//		param2.put("mo_resolution", mo_resolution2);
-//		param2.put("mo_speed", mo_speed2);
-//		param2.put("mo_shape", mo_shape2);
-//		param2.put("code", code1);
-//		
-//		if (table.equals("PC")) {
-//			repository.updatePC(param);
-//			repository.updatePC(param2);
-//			
-//		} else if (table.equals("PHONE")) {
-//			repository.updatePhone(param);
-//			repository.updatePhone(param2);
-//			
-//		} else if (table.equals("MONITOR")) {
-//			repository.updateMonitor(param);
-//			repository.updateMonitor(param2);
-//			
-//		}
-//		
-//		return "redirect:/equipment/compare?gubun=" + table + "&code1=" + code1 + "&code2=" + code2;
-//	}
 	
 	@RequestMapping(value = "getManufactures", method = RequestMethod.POST)
 	public void getManufactures(
@@ -562,8 +453,44 @@ public class EquipmentController {
 		obj.put("message", "success");
 		obj.put("man", manuList);
 		
-//		model.addAttribute("man", manuList);
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
+	/**
+	 * 장비 양도
+	 */
+	@RequestMapping(value = "compare/giveEquipment", method = RequestMethod.POST)
+	public void giveEquipment(
+			@RequestParam(value = "giver", defaultValue = "") String giver,
+			@RequestParam(value = "receiver", defaultValue = "") String receiver,
+			@RequestParam(value = "id", defaultValue = "") String id,
+			@RequestParam(value = "table", defaultValue = "") String table,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("giver", giver);
+		param.put("code", receiver);
+		param.put("id", id);
 		
+		if(table.equals("PC")) {
+			repository.updatePC(param);
+			
+		} else if(table.equals("PHONE")) {
+			repository.updatePhone(param);
+			
+		} else if(table.equals("MONITOR")) {
+			repository.updateMonitor(param);
+			
+		}
+				
+				
+		obj.put("message", "success");
+				
 		response.setContentType("text/plain; charset=UTF-8");
 		response.getWriter().write(obj.toString());
 	}
