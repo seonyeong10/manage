@@ -66,7 +66,12 @@
 					</thead>
 				</table>
 				<table id="phone-ability">
-					<tr>
+						<tr>
+							<td><input type="text" name="name1" readonly="readonly" class="ph1"/></td>
+							<td class="col">제품명</td>
+							<td><input type="text" name="name2" readonly="readonly" class="ph2"/></td>
+						</tr>
+						<tr>
 							<td><input type="text" name="p_ap1" readonly="readonly" class="ph1"/></td>
 							<td class="col">AP칩셋</td>
 							<td><input type="text" name="p_ap2" readonly="readonly" class="ph2"/></td>
@@ -98,10 +103,15 @@
 						</tr>
 				</table>
 				<table id="pc-ability">
-					<tr>
+						<tr>
 							<td><input type="text" name="pc_division1" readonly="readonly" class="pc1"/></td>
 							<td class="col">종류</td>
 							<td><input type="text" name="pc_division2" readonly="readonly" class="pc2"/></td>
+						</tr>
+						<tr>
+							<td><input type="text" name="name1" readonly="readonly" class="pc1"/></td>
+							<td class="col">제품명</td>
+							<td><input type="text" name="name2" readonly="readonly" class="pc2"/></td>
 						</tr>
 						<tr>
 							<td><input type="text" name="pc_os1" readonly="readonly" class="pc1"/></td>
@@ -131,7 +141,12 @@
 						</tr>
 				</table>
 				<table id="monitor-ability">
-					<tr>
+						<tr>
+							<td><input type="text" name="name1" readonly="readonly" class="mo1"/></td>
+							<td class="col">제품명</td>
+							<td><input type="text" name="name2" readonly="readonly" class="mo2"/></td>
+						</tr>
+						<tr>
 							<td><input type="text" name="mo_pannel1" readonly="readonly" class="mo1"/></td>
 							<td class="col">패널</td>
 							<td><input type="text" name="mo_pannel2" readonly="readonly" class="mo2"/></td>
@@ -160,7 +175,7 @@
 				<table>
 					<tr class="btn-area">
 							<td colspan="3">
-								<button onclick="changeEquipment();">장비 교체</button>
+								<button onclick="changeEquipment();">장비 교환</button>
 							</td>
 						</tr>
 				</table>
@@ -212,52 +227,52 @@
 			else if(table === 'PC') document.getElementById('pc-ability').style.display = 'block';
 			
 			
-			var input = document.getElementsByTagName('input');
-			// 데이터 로드
-			if(table === 'PC') {
-				input[name='pc_division1'].value='${equip1.DIVISION}';
-				input[name='pc_os1'].value='${equip1.OS}';
-				input[name='pc_cpu1'].value='${equip1.CPU}';
-				input[name='pc_ram1'].value='${equip1.RAM}';
-				input[name='pc_gpu1'].value='${equip1.GPU}';
-				input[name='pc_capacity1'].value='${equip1.CAPACITY}';
+// 			var input = document.getElementsByTagName('input');
+// 			// 데이터 로드
+// 			if(table === 'PC') {
+// 				input[name='pc_division1'].value='${equip1.DIVISION}';
+// 				input[name='pc_os1'].value='${equip1.OS}';
+// 				input[name='pc_cpu1'].value='${equip1.CPU}';
+// 				input[name='pc_ram1'].value='${equip1.RAM}';
+// 				input[name='pc_gpu1'].value='${equip1.GPU}';
+// 				input[name='pc_capacity1'].value='${equip1.CAPACITY}';
 				
-				input[name='pc_division2'].value='${equip2.DIVISION}';
-				input[name='pc_os2'].value='${equip2.OS}';
-				input[name='pc_cpu2'].value='${equip2.CPU}';
-				input[name='pc_ram2'].value='${equip2.RAM}';
-				input[name='pc_gpu2'].value='${equip2.GPU}';
-				input[name='pc_capacity2'].value='${equip2.CAPACITY}';
+// 				input[name='pc_division2'].value='${equip2.DIVISION}';
+// 				input[name='pc_os2'].value='${equip2.OS}';
+// 				input[name='pc_cpu2'].value='${equip2.CPU}';
+// 				input[name='pc_ram2'].value='${equip2.RAM}';
+// 				input[name='pc_gpu2'].value='${equip2.GPU}';
+// 				input[name='pc_capacity2'].value='${equip2.CAPACITY}';
 				
-			} else if(table === 'PHONE') {
-				input[name='p_ap1'].value='${equip1.AP}';
-				input[name='p_os1'].value='${equip1.OS}';
-				input[name='p_cpu1'].value='${equip1.CPU}';
-				input[name='p_ram1'].value='${equip1.RAM}';
-				input[name='p_battery1'].value='${equip1.BATTERY}';
-				input[name='p_capacity1'].value='${equip1.CAPACITY}';
+// 			} else if(table === 'PHONE') {
+// 				input[name='p_ap1'].value='${equip1.AP}';
+// 				input[name='p_os1'].value='${equip1.OS}';
+// 				input[name='p_cpu1'].value='${equip1.CPU}';
+// 				input[name='p_ram1'].value='${equip1.RAM}';
+// 				input[name='p_battery1'].value='${equip1.BATTERY}';
+// 				input[name='p_capacity1'].value='${equip1.CAPACITY}';
 				
-				input[name='p_ap2'].value='${equip2.AP}';
-				input[name='p_os2'].value='${equip2.OS}';
-				input[name='p_cpu2'].value='${equip2.CPU}';
-				input[name='p_ram2'].value='${equip2.RAM}';
-				input[name='p_battery2'].value='${equip2.BATTERY}';
-				input[name='p_capacity2'].value='${equip2.CAPACITY}';
+// 				input[name='p_ap2'].value='${equip2.AP}';
+// 				input[name='p_os2'].value='${equip2.OS}';
+// 				input[name='p_cpu2'].value='${equip2.CPU}';
+// 				input[name='p_ram2'].value='${equip2.RAM}';
+// 				input[name='p_battery2'].value='${equip2.BATTERY}';
+// 				input[name='p_capacity2'].value='${equip2.CAPACITY}';
 				
-			} else if(table === 'MONITOR') {
-				input[name='mo_pannel1'].value='${equip1.PANNEL}';
-				input[name='mo_Hz1'].value='${equip1.HZ}';
-				input[name='mo_resolution1'].value='${equip1.RESOLUTION}';
-				input[name='mo_speed1'].value='${equip1.SPEED}';
-				input[name='mo_shape1'].value='${equip1.SHAPE}';
+// 			} else if(table === 'MONITOR') {
+// 				input[name='mo_pannel1'].value='${equip1.PANNEL}';
+// 				input[name='mo_Hz1'].value='${equip1.HZ}';
+// 				input[name='mo_resolution1'].value='${equip1.RESOLUTION}';
+// 				input[name='mo_speed1'].value='${equip1.SPEED}';
+// 				input[name='mo_shape1'].value='${equip1.SHAPE}';
 				
-				input[name='mo_pannel2'].value='${equip2.PANNEL}';
-				input[name='mo_Hz2'].value='${equip2.HZ}';
-				input[name='mo_resolution2'].value='${equip2.RESOLUTION}';
-				input[name='mo_speed2'].value='${equip2.SPEED}';
-				input[name='mo_shape2'].value='${equip2.SHAPE}';
+// 				input[name='mo_pannel2'].value='${equip2.PANNEL}';
+// 				input[name='mo_Hz2'].value='${equip2.HZ}';
+// 				input[name='mo_resolution2'].value='${equip2.RESOLUTION}';
+// 				input[name='mo_speed2'].value='${equip2.SPEED}';
+// 				input[name='mo_shape2'].value='${equip2.SHAPE}';
 				
-			}
+// 			}
 		}
 
 		// 테이블 숨김
@@ -315,31 +330,34 @@
 					if(ability.GUBUN === 'PHONE') {
 						className = document.getElementsByClassName('ph' + no);
 						
-						className[0].value = ability.AP;
-						className[1].value = ability.OS;
-						className[2].value = ability.CPU;
-						className[3].value = ability.RAM;
-						className[4].value = ability.CAPACITY;
-						className[5].value = ability.BATTERY;
+						className[0].value = ability.NAME;
+						className[1].value = ability.AP;
+						className[2].value = ability.OS;
+						className[3].value = ability.CPU;
+						className[4].value = ability.RAM;
+						className[5].value = ability.CAPACITY;
+						className[6].value = ability.BATTERY;
 						
 					} else if(ability.GUBUN === 'MONITOR') {
 						className = document.getElementsByClassName('mo' + no);
 						
-						className[0].value = ability.PANNEL;
-						className[1].value = ability.HZ;
-						className[2].value = ability.RESOLUTION;
-						className[3].value = ability.SPEED;
-						className[4].value = ability.SHAPE;
+						className[0].value = ability.NAME;
+						className[1].value = ability.PANNEL;
+						className[2].value = ability.HZ;
+						className[3].value = ability.RESOLUTION;
+						className[4].value = ability.SPEED;
+						className[5].value = ability.SHAPE;
 						
 					} else if(ability.GUBUN === 'PC') {
 						className = document.getElementsByClassName('pc' + no);
 						
 						className[0].value = ability.DIVISION;
-						className[1].value = ability.OS;
-						className[2].value = ability.CPU;
-						className[3].value = ability.RAM;
-						className[4].value = ability.GPU;
-						className[5].value = ability.CAPACITY;
+						className[1].value = ability.NAME;
+						className[2].value = ability.OS;
+						className[3].value = ability.CPU;
+						className[4].value = ability.RAM;
+						className[5].value = ability.GPU;
+						className[6].value = ability.CAPACITY;
 						
 					}
 				}

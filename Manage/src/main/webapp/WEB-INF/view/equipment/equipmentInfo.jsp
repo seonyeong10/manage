@@ -182,6 +182,7 @@
 
 		var tag = document.getElementsByTagName('input');
 		var select = document.getElementsByTagName('select');
+		
 		if ("${item.GUBUN}" === 'MONITOR') {
 			document.getElementById('monitor').style.display = 'block';
 			tag.gubun.value = '${item.GUBUN}';

@@ -105,4 +105,5 @@ public class EquipmentRepository {
 		statement = namespace + ".getEquipmentList";
 		return sqlSession.selectList(statement, param);
 	}
+
 }

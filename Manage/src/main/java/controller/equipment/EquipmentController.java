@@ -93,8 +93,75 @@ public class EquipmentController {
 	 * @return
 	 */
 	@RequestMapping(value = "insertEquipment", method = RequestMethod.POST)
-	public String insertEquipment(EquipmentCommand command, Model model) {
-		addEquipmentService.insertEquipment(command, model);
+	public String insertEquipment(
+			@RequestParam(value = "code") String code
+			,@RequestParam(value = "name") String name
+			,@RequestParam(value = "m_code") String m_code
+			,@RequestParam(value = "pc_division") String pc_division
+			,@RequestParam(value = "pc_os") String pc_os
+			,@RequestParam(value = "pc_cpu") String pc_cpu
+			,@RequestParam(value = "pc_ram") String pc_ram
+			,@RequestParam(value = "pc_gpu") String pc_gpu
+			,@RequestParam(value = "pc_capacity") String pc_capacity
+			,@RequestParam(value = "mo_pannel") String mo_pannel
+			,@RequestParam(value = "mo_Hz") String mo_Hz
+			,@RequestParam(value = "mo_resolution") String mo_resolution
+			,@RequestParam(value = "mo_speed") String mo_speed
+			,@RequestParam(value = "mo_shape") String mo_shape
+			,@RequestParam(value = "p_ap") String p_ap
+			,@RequestParam(value = "p_os") String p_os
+			,@RequestParam(value = "p_cpu") String p_cpu
+			,@RequestParam(value = "p_ram") String p_ram
+			,@RequestParam(value = "p_capacity") String p_capacity
+			,@RequestParam(value = "p_battery") String p_battery
+			,EquipmentCommand com 
+			,Model model) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		int result = 0;
+		
+		param.put("code", com.getCode());
+		param.put("m_code", m_code);
+		
+		if(com.getGubun().equals("100")) {
+			// PC
+			param.put("pc_name", name);
+			param.put("pc_division", pc_division);
+			param.put("pc_os", pc_os);
+			param.put("pc_cpu", pc_cpu);
+			param.put("pc_ram", pc_ram);
+			param.put("pc_gpu", pc_gpu);
+			param.put("pc_capacity", pc_capacity);
+			
+			result = repository.insertPC(param);
+			
+		} else if(com.getGubun().equals("300")) {
+			// 모니터
+			param.put("mo_name", name);
+			param.put("m_code", m_code);
+			param.put("mo_pannel", mo_pannel);
+			param.put("mo_Hz", mo_Hz);
+			param.put("mo_resolution", mo_resolution);
+			param.put("mo_speed", mo_speed);
+			param.put("mo_shape", mo_shape);
+			
+			result = repository.insertMonitor(param);
+			
+		} if(com.getGubun().equals("400")) {
+			// 핸드폰
+			param.put("p_name", name);
+			param.put("m_code", m_code);
+			param.put("p_ap", p_ap);
+			param.put("p_os", p_os);
+			param.put("p_cpu", p_cpu);
+			param.put("p_ram", p_ram);
+			param.put("p_capacity", p_capacity);
+			param.put("p_battery",p_battery);
+			
+			
+			result = repository.insertPhone(param);
+			
+		}
+//		addEquipmentService.insertEquipment(command, model);
 		return "redirect:/equipment";
 	}
 
@@ -130,7 +197,6 @@ public class EquipmentController {
 		param.put("p_ram", p_ram);
 		param.put("p_capacity", p_capacity);
 		param.put("p_battery", p_battery);
-		param.put("code", code);
 		param.put("id", id);
 
 		repository.updatePhone(param);
@@ -146,17 +212,28 @@ public class EquipmentController {
 			@RequestParam(value = "pc_os", defaultValue = "") String p_os,
 			@RequestParam(value = "pc_cpu", defaultValue = "") String p_cpu,
 			@RequestParam(value = "pc_ram", defaultValue = "") String p_ram,
-			@RequestParam(value = "pc_capacity", defaultValue = "") String p_capacity, Model model) {
+			@RequestParam(value = "pc_capacity", defaultValue = "") String p_capacity, 
+			@RequestParam(value = "pc_division", defaultValue = "") String pc_division, 
+			Model model) {
 
 		Map<String, Object> param = new HashMap<String, Object>();
+		String division = null;
+		
 		param.put("pc_name", p_name);
 		param.put("pc_gpu", p_gpu);
 		param.put("pc_os", p_os);
 		param.put("pc_cpu", p_cpu);
 		param.put("pc_ram", p_ram);
 		param.put("pc_capacity", p_capacity);
-		param.put("code", code);
 		param.put("id", id);
+		
+		if(pc_division.equals("100")) {
+			division = "DESKTOP";
+		} else if(pc_division.equals("200")) {
+			division = "NOTEBOOK";
+		}
+		
+		param.put("pc_division", division);
 		
 		repository.updatePC(param);
 
@@ -174,13 +251,19 @@ public class EquipmentController {
 			@RequestParam(value = "mo_shape", defaultValue = "") String mo_shape, Model model) {
 
 		Map<String, Object> param = new HashMap<String, Object>();
+		
+		String shape = null;
+		
 		param.put("mo_name", mo_name);
 		param.put("mo_pannel", mo_pannel);
 		param.put("mo_hz", mo_hz);
 		param.put("mo_resolution", mo_resolution);
 		param.put("mo_speed", mo_speed);
-		param.put("mo_shape", mo_shape);
-		param.put("code", code);
+		
+		if(shape.equals("100")) shape = "커브드";
+		else if(shape.equals("200")) shape = "와이드";
+		else if(shape.equals("300")) shape = "평면";
+		param.put("mo_shape", shape);
 		param.put("id", id);
 
 		repository.updateMonitor(param);
@@ -195,22 +278,19 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value = "delEquipment", method = RequestMethod.POST)
 	public String delEquipment(
-			@RequestParam(value = "code") String code, @RequestParam(value = "m_code") String m_code,
+			@RequestParam(value = "id") String id,
 			@RequestParam(value = "gubun", defaultValue = "") String gubun, 
 			Model model
 			) {
 
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("code", code);
-		param.put("m_code", m_code);
+		param.put("id", id);
 		
 
 		if (gubun.equals("MONITOR"))
 			repository.delMonitor(param);
 		else if (gubun.equals("PC")) {
-			
 			repository.delPC(param);
-			System.out.println("pc 삭제");
 		}
 		else if (gubun.equals("PHONE"))
 			repository.delPhone(param);
@@ -323,114 +403,146 @@ public class EquipmentController {
 	 * 장치 교체
 	 */
 	@RequestMapping(value = "changeEquipment", method = RequestMethod.POST)
-	public String changeEquipment(@RequestParam(value = "code1", defaultValue = "") String code1,
-			@RequestParam(value = "code2", defaultValue = "") String code2,
+	public String changeEquipment(
 			@RequestParam(value = "gubun", defaultValue = "") String table,
-
-			@RequestParam(value = "p_ap1", defaultValue = "") String p_ap1,
-			@RequestParam(value = "p_ap2", defaultValue = "") String p_ap2,
-			@RequestParam(value = "p_os1", defaultValue = "") String p_os1,
-			@RequestParam(value = "p_os2", defaultValue = "") String p_os2,
-			@RequestParam(value = "p_cpu1", defaultValue = "") String p_cpu1,
-			@RequestParam(value = "p_cpu2", defaultValue = "") String p_cpu2,
-			@RequestParam(value = "p_ram1", defaultValue = "") String p_ram1,
-			@RequestParam(value = "p_ram2", defaultValue = "") String p_ram2,
-			@RequestParam(value = "p_capacity1", defaultValue = "") String p_capacity1,
-			@RequestParam(value = "p_capacity2", defaultValue = "") String p_capacity2,
-			@RequestParam(value = "p_battery1", defaultValue = "") String p_battery1,
-			@RequestParam(value = "p_battery2", defaultValue = "") String p_battery2,
-
-			@RequestParam(value = "pc_division1", defaultValue = "") String pc_division1,
-			@RequestParam(value = "pc_division2", defaultValue = "") String pc_division2,
-			@RequestParam(value = "pc_os1", defaultValue = "") String pc_os1,
-			@RequestParam(value = "pc_os2", defaultValue = "") String pc_os2,
-			@RequestParam(value = "pc_cpu1", defaultValue = "") String pc_cpu1,
-			@RequestParam(value = "pc_cpu2", defaultValue = "") String pc_cpu2,
-			@RequestParam(value = "pc_ram1", defaultValue = "") String pc_ram1,
-			@RequestParam(value = "pc_ram2", defaultValue = "") String pc_ram2,
-			@RequestParam(value = "pc_gpu1", defaultValue = "") String pc_gpu1,
-			@RequestParam(value = "pc_gpu2", defaultValue = "") String pc_gpu2,
-			@RequestParam(value = "pc_capacity1", defaultValue = "") String pc_capacity1,
-			@RequestParam(value = "pc_capacity2", defaultValue = "") String pc_capacity2,
-
-			@RequestParam(value = "mo_pannel1", defaultValue = "") String mo_pannel1,
-			@RequestParam(value = "mo_pannel2", defaultValue = "") String mo_pannel2,
-			@RequestParam(value = "mo_Hz1", defaultValue = "") String mo_Hz1,
-			@RequestParam(value = "mo_Hz2", defaultValue = "") String mo_Hz2,
-			@RequestParam(value = "mo_resolution1", defaultValue = "") String mo_resolution1,
-			@RequestParam(value = "mo_resolution2", defaultValue = "") String mo_resolution2,
-			@RequestParam(value = "mo_speed1", defaultValue = "") String mo_speed1,
-			@RequestParam(value = "mo_speed2", defaultValue = "") String mo_speed2,
-			@RequestParam(value = "mo_shape1", defaultValue = "") String mo_shape1,
-			@RequestParam(value = "mo_shape2", defaultValue = "") String mo_shape2,
-
-			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+			@RequestParam(value = "code1", defaultValue = "") String code1,
+			@RequestParam(value = "code2", defaultValue = "") String code2,
+			@RequestParam(value = "device1", defaultValue = "") String id1,
+			@RequestParam(value = "device2", defaultValue = "") String id2,
+			HttpServletRequest request
+			,HttpServletResponse response
+			,Model model) throws Exception {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		Map<String, Object> param2 = new HashMap<String, Object>();
-//		String gubun = "";
-
-		// 1번 장비 정보 저장
-		param.put("p_ap", p_ap1);
-		param.put("p_os", p_os1);
-		param.put("p_cpu", p_cpu1);
-		param.put("p_ram", p_ram1);
-		param.put("p_battery", p_battery1);
-		param.put("p_capacity", p_capacity1);
-		param.put("pc_division", pc_division1);
-		param.put("pc_os", pc_os1);
-		param.put("pc_cpu", pc_cpu1);
-		param.put("pc_ram", pc_ram1);
-		param.put("pc_gpu", pc_gpu1);
-		param.put("pc_capacity", pc_capacity1);
-		param.put("mo_pannel", mo_pannel1);
-		param.put("mo_hz", mo_Hz1);
-		param.put("mo_resolution", mo_resolution1);
-		param.put("mo_speed", mo_speed1);
-		param.put("mo_shape", mo_shape1);
-		param.put("code", code2);
 		
-		// 2번 장비 정보
-		param2.put("p_ap", p_ap2);
-		param2.put("p_os", p_os2);
-		param2.put("p_cpu", p_cpu2);
-		param2.put("p_ram", p_ram2);
-		param2.put("p_battery", p_battery2);
-		param2.put("p_capacity", p_capacity2);
-		param2.put("pc_division", pc_division2);
-		param2.put("pc_os", pc_os2);
-		param2.put("pc_cpu", pc_cpu2);
-		param2.put("pc_ram", pc_ram2);
-		param2.put("pc_gpu", pc_gpu2);
-		param2.put("pc_capacity", pc_capacity2);
-		param2.put("mo_pannel", mo_pannel2);
-		param2.put("mo_hz", mo_Hz2);
-		param2.put("mo_resolution", mo_resolution2);
-		param2.put("mo_speed", mo_speed2);
-		param2.put("mo_shape", mo_shape2);
+		param.put("code", code2);
+		param.put("id", id1);
 		param2.put("code", code1);
-
-		if (table.equals("PC")) {
+		param2.put("id", id2);
+		
+		if(table.equals("PC")) {
 			repository.updatePC(param);
 			repository.updatePC(param2);
-			
-//			gubun = "pc";
-			
-		} else if (table.equals("PHONE")) {
+		} else if(table.equals("PHONE")) {
 			repository.updatePhone(param);
 			repository.updatePhone(param2);
-			
-//			gubun = "phone";
-			
-		} else if (table.equals("MONITOR")) {
+		} else if(table.equals("MONITOR")) {
 			repository.updateMonitor(param);
 			repository.updateMonitor(param2);
-			
-//			gubun = "monitor";
 		}
-
-		return "redirect:/equipment/compare?gubun=" + table + "&code1=" + code1 + "&code2=" + code2;
+		
+		return "redirect:/equipment";
 	}
+//	@RequestMapping(value = "changeEquipment", method = RequestMethod.POST)
+//	public String changeEquipment(@RequestParam(value = "code1", defaultValue = "") String code1,
+//			@RequestParam(value = "code2", defaultValue = "") String code2,
+//			@RequestParam(value = "gubun", defaultValue = "") String table,
+//			@RequestParam(value = "device1", defaultValue = "") String id1,
+//			@RequestParam(value = "device2", defaultValue = "") String id2,
+//			@RequestParam(value = "name1", defaultValue = "") String name1,
+//			@RequestParam(value = "name2", defaultValue = "") String name2,
+//			
+//			@RequestParam(value = "p_ap1", defaultValue = "") String p_ap1,
+//			@RequestParam(value = "p_ap2", defaultValue = "") String p_ap2,
+//			@RequestParam(value = "p_os1", defaultValue = "") String p_os1,
+//			@RequestParam(value = "p_os2", defaultValue = "") String p_os2,
+//			@RequestParam(value = "p_cpu1", defaultValue = "") String p_cpu1,
+//			@RequestParam(value = "p_cpu2", defaultValue = "") String p_cpu2,
+//			@RequestParam(value = "p_ram1", defaultValue = "") String p_ram1,
+//			@RequestParam(value = "p_ram2", defaultValue = "") String p_ram2,
+//			@RequestParam(value = "p_capacity1", defaultValue = "") String p_capacity1,
+//			@RequestParam(value = "p_capacity2", defaultValue = "") String p_capacity2,
+//			@RequestParam(value = "p_battery1", defaultValue = "") String p_battery1,
+//			@RequestParam(value = "p_battery2", defaultValue = "") String p_battery2,
+//			
+//			@RequestParam(value = "pc_division1", defaultValue = "") String pc_division1,
+//			@RequestParam(value = "pc_division2", defaultValue = "") String pc_division2,
+//			@RequestParam(value = "pc_os1", defaultValue = "") String pc_os1,
+//			@RequestParam(value = "pc_os2", defaultValue = "") String pc_os2,
+//			@RequestParam(value = "pc_cpu1", defaultValue = "") String pc_cpu1,
+//			@RequestParam(value = "pc_cpu2", defaultValue = "") String pc_cpu2,
+//			@RequestParam(value = "pc_ram1", defaultValue = "") String pc_ram1,
+//			@RequestParam(value = "pc_ram2", defaultValue = "") String pc_ram2,
+//			@RequestParam(value = "pc_gpu1", defaultValue = "") String pc_gpu1,
+//			@RequestParam(value = "pc_gpu2", defaultValue = "") String pc_gpu2,
+//			@RequestParam(value = "pc_capacity1", defaultValue = "") String pc_capacity1,
+//			@RequestParam(value = "pc_capacity2", defaultValue = "") String pc_capacity2,
+//			
+//			@RequestParam(value = "mo_pannel1", defaultValue = "") String mo_pannel1,
+//			@RequestParam(value = "mo_pannel2", defaultValue = "") String mo_pannel2,
+//			@RequestParam(value = "mo_Hz1", defaultValue = "") String mo_Hz1,
+//			@RequestParam(value = "mo_Hz2", defaultValue = "") String mo_Hz2,
+//			@RequestParam(value = "mo_resolution1", defaultValue = "") String mo_resolution1,
+//			@RequestParam(value = "mo_resolution2", defaultValue = "") String mo_resolution2,
+//			@RequestParam(value = "mo_speed1", defaultValue = "") String mo_speed1,
+//			@RequestParam(value = "mo_speed2", defaultValue = "") String mo_speed2,
+//			@RequestParam(value = "mo_shape1", defaultValue = "") String mo_shape1,
+//			@RequestParam(value = "mo_shape2", defaultValue = "") String mo_shape2,
+//			
+//			HttpServletRequest request, HttpServletResponse response, Model model) throws Exception {
+//		
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		Map<String, Object> param2 = new HashMap<String, Object>();
+////		String gubun = "";
+//		
+//		// 1번 장비 정보 저장
+//		param.put("p_ap", p_ap1);
+//		param.put("p_os", p_os1);
+//		param.put("p_cpu", p_cpu1);
+//		param.put("p_ram", p_ram1);
+//		param.put("p_battery", p_battery1);
+//		param.put("p_capacity", p_capacity1);
+//		param.put("pc_division", pc_division1);
+//		param.put("pc_os", pc_os1);
+//		param.put("pc_cpu", pc_cpu1);
+//		param.put("pc_ram", pc_ram1);
+//		param.put("pc_gpu", pc_gpu1);
+//		param.put("pc_capacity", pc_capacity1);
+//		param.put("mo_pannel", mo_pannel1);
+//		param.put("mo_hz", mo_Hz1);
+//		param.put("mo_resolution", mo_resolution1);
+//		param.put("mo_speed", mo_speed1);
+//		param.put("mo_shape", mo_shape1);
+//		param.put("code", code2);
+//		param.put("id", id2);
+//		
+//		// 2번 장비 정보
+//		param2.put("p_ap", p_ap2);
+//		param2.put("p_os", p_os2);
+//		param2.put("p_cpu", p_cpu2);
+//		param2.put("p_ram", p_ram2);
+//		param2.put("p_battery", p_battery2);
+//		param2.put("p_capacity", p_capacity2);
+//		param2.put("pc_division", pc_division2);
+//		param2.put("pc_os", pc_os2);
+//		param2.put("pc_cpu", pc_cpu2);
+//		param2.put("pc_ram", pc_ram2);
+//		param2.put("pc_gpu", pc_gpu2);
+//		param2.put("pc_capacity", pc_capacity2);
+//		param2.put("mo_pannel", mo_pannel2);
+//		param2.put("mo_hz", mo_Hz2);
+//		param2.put("mo_resolution", mo_resolution2);
+//		param2.put("mo_speed", mo_speed2);
+//		param2.put("mo_shape", mo_shape2);
+//		param2.put("code", code1);
+//		
+//		if (table.equals("PC")) {
+//			repository.updatePC(param);
+//			repository.updatePC(param2);
+//			
+//		} else if (table.equals("PHONE")) {
+//			repository.updatePhone(param);
+//			repository.updatePhone(param2);
+//			
+//		} else if (table.equals("MONITOR")) {
+//			repository.updateMonitor(param);
+//			repository.updateMonitor(param2);
+//			
+//		}
+//		
+//		return "redirect:/equipment/compare?gubun=" + table + "&code1=" + code1 + "&code2=" + code2;
+//	}
 	
 	@RequestMapping(value = "getManufactures", method = RequestMethod.POST)
 	public void getManufactures(

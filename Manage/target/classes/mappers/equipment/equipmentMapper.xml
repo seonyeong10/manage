@@ -62,45 +62,48 @@
 <update id="updatePhone" parameterType="pmap">
 	update phone
 	set
-		<if test="p_name != null">
-			p_name = #{p_name},
-		</if>
-		p_ap = #{p_ap},
-		p_os = #{p_os},
-		p_cpu = #{p_cpu},
-		p_ram = #{p_ram},
-		p_capacity = #{p_capacity},
-		p_battery = #{p_battery}
-	where code = #{code} and p_id = #{id}
+		<trim suffixOverrides=",">
+			<if test="p_name != null"> p_name = #{p_name},</if>
+			<if test="p_ap != null"> p_ap = #{p_ap},</if>
+			<if test="p_os != null"> p_os = #{p_os},</if>
+			<if test="p_cpu != null"> p_cpu = #{p_cpu},</if>
+			<if test="p_ram != null"> p_ram = #{p_ram},</if>
+			<if test="p_capacity != null"> p_capacity = #{p_capacity},</if>
+			<if test="p_battery != null"> p_battery = #{p_battery},</if>
+			<if test="code != null"> code = #{code},</if>
+		</trim>
+	where p_id = #{id}
 </update>
 
 <update id="updatePC" parameterType="pmap">
 	update pc
 	set
-		<if test="pc_name != null">
-			pc_name = #{pc_name},
-		</if>
-		pc_gpu = #{pc_gpu},
-		pc_os = #{pc_os},
-		pc_cpu = #{pc_cpu},
-		pc_ram = #{pc_ram},
-		pc_capacity = #{pc_capacity}
-		
-	where code = #{code} and pc_id = #{id}
+		<trim suffixOverrides=",">
+			<if test="pc_name != null">pc_name = #{pc_name},</if>
+			<if test="pc_gpu != null"> pc_gpu = #{pc_gpu},</if>
+			<if test="pc_os != null"> pc_os = #{pc_os},</if>
+			<if test="pc_cpu != null"> pc_cpu = #{pc_cpu},</if>
+			<if test="pc_ram != null"> pc_ram = #{pc_ram},</if>
+			<if test="p_ram != null"> p_ram = #{p_ram},</if>
+			<if test="pc_capacity != null"> pc_capacity = #{pc_capacity},</if>
+			<if test="code != null"> code = #{code},</if>
+		</trim>
+	where pc_id = #{id}
 </update>
 
 <update id="updateMonitor" parameterType="pmap">
 	update monitor
 	set
-		<if test="mo_name != null">
-			mo_name = #{mo_name},
-		</if>
-		mo_pannel = #{mo_pannel},
-		mo_hz = #{mo_hz},
-		mo_resolution = #{mo_resolution},
-		mo_speed = #{mo_speed},
-		mo_shape = #{mo_shape}
-	where code = #{code} and mo_id = #{id}
+		<trim suffixOverrides=",">
+			<if test="mo_name != null">mo_name = #{mo_name},</if>
+			<if test="mo_pannel != null">mo_pannel = #{mo_pannel},</if>
+			<if test="mo_hz != null"> mo_hz = #{mo_hz},</if>
+			<if test="mo_resolution != null"> mo_resolution = #{mo_resolution},</if>
+			<if test="mo_speed != null"> mo_speed = #{mo_speed},</if>
+			<if test="mo_shape != null"> mo_shape = #{mo_shape},</if>
+			<if test="code != null"> code = #{code},</if>
+		</trim>
+	where mo_id = #{id}
 </update>
 
 <delete id="delPhone" parameterType="pmap">

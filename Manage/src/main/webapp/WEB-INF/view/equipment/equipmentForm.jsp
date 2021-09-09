@@ -104,8 +104,8 @@
 							<td>
 								<select name="pc_division">
 									<option value="">PC 구분을 선택하세요.</option>
-									<option value="DESKTOP">데스크탑</option>
-									<option value="NOTEBOOK">노트북</option>
+									<option value="100">데스크탑</option>
+									<option value="200">노트북</option>
 								</select>
 							</td>
 						</tr>
@@ -166,9 +166,9 @@
 							<td>
 								<select name="mo_shape">
 									<option value="">형태를 선택하세요.</option>
-									<option value="커브드">커브드</option>
-									<option value="아이드">와이드</option>
-									<option value="평면">평면</option>
+									<option value="100">커브드</option>
+									<option value="200">와이드</option>
+									<option value="300">평면</option>
 								</select>
 							</td>
 						</tr>
