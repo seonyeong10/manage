@@ -7,4 +7,5 @@
       http://www.springframework.org/schema/beans/spring-beans.xsd
       ">
 	<bean id="DeviceController" class="controller.device.DeviceController" />
+	<bean id="DeviceRepository" class="repository.device.DeviceRepository" />
 </beans>

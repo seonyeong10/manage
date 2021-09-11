@@ -86,83 +86,78 @@ public class EquipmentController {
 	}
 
 	/**
-	 * 장비 등록
+	 * 장비 사용자 등록
 	 * 
 	 * @param command
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping(value = "insertEquipment", method = RequestMethod.POST)
-	public String insertEquipment(
+	@RequestMapping(value = "insert", method = RequestMethod.POST)
+	public String insertOwn(
 			@RequestParam(value = "code") String code
-			,@RequestParam(value = "name") String name
-			,@RequestParam(value = "m_code") String m_code
-			,@RequestParam(value = "pc_division") String pc_division
-			,@RequestParam(value = "pc_os") String pc_os
-			,@RequestParam(value = "pc_cpu") String pc_cpu
-			,@RequestParam(value = "pc_ram") String pc_ram
-			,@RequestParam(value = "pc_gpu") String pc_gpu
-			,@RequestParam(value = "pc_capacity") String pc_capacity
-			,@RequestParam(value = "mo_pannel") String mo_pannel
-			,@RequestParam(value = "mo_Hz") String mo_Hz
-			,@RequestParam(value = "mo_resolution") String mo_resolution
-			,@RequestParam(value = "mo_speed") String mo_speed
-			,@RequestParam(value = "mo_shape") String mo_shape
-			,@RequestParam(value = "p_ap") String p_ap
-			,@RequestParam(value = "p_os") String p_os
-			,@RequestParam(value = "p_cpu") String p_cpu
-			,@RequestParam(value = "p_ram") String p_ram
-			,@RequestParam(value = "p_capacity") String p_capacity
-			,@RequestParam(value = "p_battery") String p_battery
+			,@RequestParam(value = "id") String id
 			,EquipmentCommand com 
 			,Model model) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		int result = 0;
 		
 		param.put("code", com.getCode());
-		param.put("m_code", m_code);
+		param.put("id", id);
 		
-		if(com.getGubun().equals("100")) {
-			// PC
-			param.put("pc_name", name);
-			param.put("pc_division", pc_division);
-			param.put("pc_os", pc_os);
-			param.put("pc_cpu", pc_cpu);
-			param.put("pc_ram", pc_ram);
-			param.put("pc_gpu", pc_gpu);
-			param.put("pc_capacity", pc_capacity);
-			
-			result = repository.insertPC(param);
-			
-		} else if(com.getGubun().equals("300")) {
-			// 모니터
-			param.put("mo_name", name);
-			param.put("m_code", m_code);
-			param.put("mo_pannel", mo_pannel);
-			param.put("mo_Hz", mo_Hz);
-			param.put("mo_resolution", mo_resolution);
-			param.put("mo_speed", mo_speed);
-			param.put("mo_shape", mo_shape);
-			
-			result = repository.insertMonitor(param);
-			
-		} if(com.getGubun().equals("400")) {
-			// 핸드폰
-			param.put("p_name", name);
-			param.put("m_code", m_code);
-			param.put("p_ap", p_ap);
-			param.put("p_os", p_os);
-			param.put("p_cpu", p_cpu);
-			param.put("p_ram", p_ram);
-			param.put("p_capacity", p_capacity);
-			param.put("p_battery",p_battery);
-			
-			
-			result = repository.insertPhone(param);
-			
-		}
-//		addEquipmentService.insertEquipment(command, model);
+		repository.insertOwn(param);
+		
 		return "redirect:/equipment";
+	}
+	
+	/**
+	 * 장비 목록 선택
+	 */
+	@RequestMapping(value = "getDevice", method = RequestMethod.POST)
+	public void getDevice(
+			@RequestParam(value = "gubun") String gubun,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		List<Map<String, Object>> list = null;
+		
+		param.put("gubun", gubun);
+		
+		list = repository.getDeviceList(param);
+		
+		obj.put("message", "success");
+		obj.put("list", list);
+				
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
+	/**
+	 * 장비 상세정보(목록)
+	 */
+	@RequestMapping(value = "getDeviceInfo", method = RequestMethod.POST)
+	public void getDeviceInfo(
+			@RequestParam(value = "id") String id,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		param.put("id", id);
+		
+		List<Map<String, Object>> item = repository.getDeviceList(param);;
+		
+		obj.put("message", "success");
+		obj.put("item", item);
+				
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
 	}
 
 	/**

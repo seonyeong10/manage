@@ -17,19 +17,19 @@
 	<div id="content">
 	<%@ include file="../include/left.jsp" %>
 		<div id="right">
-			<form action="insert" method="post" name="frm" onsubmit="return checkParam();">
+			<form action="#" method="post" name="frm" id='frm' onsubmit="return false;">
+			<input type="hidden" name="id"/>
 			<div class="section-title">장비 등록</div>
 				<table>
 					<tr>
 						<td>구분</td>
 						<td>
-							<select name="gubun" onchange="getColumn();" id="gubun">
-								<option value="">항목을 선택하세요.</option>
+<!-- 							<input type="text" name="gubun" readonly="readonly"/> -->
+							<select name="gubun"  id="gubun" disabled="disabled">
 								<option value="100">PC</option>
 								<option value="300">모니터</option>
 								<option value="400">핸드폰</option>
 							</select>
-						
 						</td>
 					</tr>
 					<tr>
@@ -40,7 +40,6 @@
 						<td>제조사</td>
 						<td>
 							<select name="m_code" id="man">
-								<option value="">제조사를 선택하세요.</option>
 							</select>
 						</td>
 					</tr>
@@ -51,8 +50,8 @@
 					<tfoot>
 						<tr>
 							<td colspan="2" class="btn-area">
-								<input type="submit" value="등록" class="btn submit" />
-								<button onclick="goMain();" class="btn">취소</button>
+								<button class="btn submit" onclick="update();">수정</button>
+								<button onclick="delDevice();" class="btn">삭제</button>
 							</td>
 						</tr>
 					</tfoot>
@@ -157,9 +156,9 @@
 							<td>
 								<select name="mo_shape">
 									<option value="">형태를 선택하세요.</option>
-									<option value="100">커브드</option>
-									<option value="200">와이드</option>
-									<option value="300">평면</option>
+									<option value="커브드">커브드</option>
+									<option value="와이드">와이드</option>
+									<option value="평면">평면</option>
 								</select>
 							</td>
 						</tr>
@@ -282,32 +281,6 @@
 		}
 		
 		
-		// 장비 정보 입력 폼 선택
-		function getColumn() {
-			
-			var gubun = document.getElementById('gubun').options[document
-					.getElementById('gubun').selectedIndex].value;
-			var category = null;
-
-			// gubun에 따라 tBody 변경
-			if (gubun === '100') {
-				category = document.getElementById('pc-ability');
-				
-			} else if (gubun === '300') {
-				category = document.getElementById('monitor-ability');
-				
-			} else if (gubun === '400') {
-				category = document.getElementById('phone-ability');
-				
-			}
-
-			load(); // 화면 초기화
-			category.style.display = 'block';
-			
-			getManufactures(gubun);
-		
-		}
-		
 		// 제조사 리스트
 		function getManufactures(gubun) {
 			target = document.getElementById('man');
@@ -331,8 +304,12 @@
 						var option = document.createElement('option');
 						option.innerText = man[i].MA_NAME;
 						option.value =  man[i].MA_CODE;
+						
+						if('${item.M_CODE}' == man[i].MA_CODE) option.selected = true;
+						
 						target.append(option);
 					}
+					
 				}
 			});
 			
@@ -349,19 +326,109 @@
 			document.getElementById('pc-ability').style.display = 'none';
 			document.getElementById('monitor-ability').style.display = 'none';
 			
-// 			// 사원 리스트
-// 			// option 초기화
-// 			$('#emp').children('option:not(:first)').remove();
-// 			var target = document.getElementById('emp');
+			var input = document.getElementsByTagName('input');
+			var select = document.getElementsByTagName('select');
+			var gubun = null;
 			
-// 			<c:forEach items="${emp }" var="emp" varStatus="s">
-// 				var option = document.createElement('option');
-// 				option.innerText = "${emp.M_NAME}(${emp.M_DEPART})";
-// 				option.value = "${emp.CODE}";
-// 				target.append(option);
-// 			</c:forEach>
+			input.id.value = '${item.ID}';
+			input.name.value = '${item.NAME}';
 			
+			if('${item.GUBUN}' === 'PC') {
+				document.getElementById('pc-ability').style.display = 'block';
+				
+				gubun = 100;
+				
+				select.gubun.value = gubun;
+				select.pc_division.value = '${item.DIVISION}';
+				input.pc_os.value = '${item.OS}';
+				input.pc_cpu.value = '${item.CPU}';
+				input.pc_ram.value = '${item.RAM}';
+				input.pc_gpu.value = '${item.GPU}';
+				input.pc_capacity.value = '${item.CAPACITY}';
+				
+			} else if('${item.GUBUN}' === 'PHONE') {
+				document.getElementById('phone-ability').style.display = 'block';
+				
+				gubun = 400;
+				
+				select.gubun.value = gubun;
+				input.p_ap.value = '${item.AP}';
+				input.p_os.value = '${item.OS}';
+				input.p_cpu.value = '${item.CPU}';
+				input.p_ram.value = '${item.RAM}';
+				input.p_capacity.value = '${item.CAPACITY}';
+				input.p_battery.value = '${item.BATTERY}';
+				
+			} else if('${item.GUBUN}' === 'MONITOR') {
+				document.getElementById('monitor-ability').style.display = 'block';
+				
+				gubun = 300;
+				
+				select.gubun.value = gubun;
+				input.mo_pannel.value = '${item.PANNEL}';
+				input.mo_Hz.value = '${item.HZ}';
+				select.mo_resolution.value = '${item.RESOLUTION}';
+				input.mo_speed.value = '${item.SPEED}';
+				select.mo_shape.value = '${item.SHAPE}';
+				
+			}
+			
+			// 제조사 목록
+			getManufactures(gubun);
+// 			select.m_code.value = '${item.M_CODE}';
 		}
+		
+		
+		// 수정 버튼 클릭 시 
+		function update() {
+			select[name='gubun'].disabled = false;
+			var params = $('#frm').serialize();
+			
+			$.ajax({
+				type : "post"
+				,url : "/device/update"
+				,data : params
+				,dataType : 'json'
+				,error : function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success : function(responseText, statusText, xhr) {
+					var msg = responseText.message;
+					
+					if(msg === 'success') {
+						window.location.reload();
+					} else if(msg === 'err') {
+						alert('[ERROR] 관리자에게 문의하세요.');
+					}
+				}
+			});
+		}
+		
+		// 삭제 버튼 클릭 시 
+		function delDevice() {
+			var params = $('#frm').serialize();
+
+			$.ajax({
+				type : "post"
+				,url : "/device/delete"
+				,data : params
+				,dataType : 'json'
+				,error : function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success : function(responseText, statusText, xhr) {
+					var msg = responseText.message;
+					
+					if(msg === 'success') {
+						alert('삭제 되었습니다.');
+						location.href = '/device/list';
+					} else if(msg === 'err') {
+						alert('[ERROR] 관리자에게 문의하세요.');
+					}
+				}
+			});
+		}
+		
 	</script>
 </body>
 </html>

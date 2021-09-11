@@ -12,26 +12,27 @@
 	code, mo_name, m_code, mo_pannel, mo_Hz, mo_resolution, mo_speed, mo_shape, MO_ID
 </sql>
 
-<insert id="insertPhone" parameterType="pmap">
-	insert into phone (<include refid="phone" />)
-	values(#{code}, #{p_name}, #{m_code}, #{p_ap}, #{p_os}, #{p_cpu}, #{p_ram}, #{p_capacity}, #{p_battery}, 'PH' || PHONE_SEQ.NEXTVAL)
-</insert>
+<select id="getDeviceList" parameterType="pmap" resultType="pmap">
+	SELECT * FROM EQUIPMENTVIEW
+	<where>
+		<trim prefixOverrides="AND | OR">
+			<if test="gubun != null and gubun != '' ">gubun = #{gubun}</if>
+			<if test="id != null and id != '' ">id = #{id}</if>
+		</trim>
+	</where>
+</select>
 
-<insert id="insertMonitor" parameterType="pmap">
-	insert into monitor (<include refid="monitor" />)
-	values(#{code}, #{mo_name}, #{m_code}, #{mo_pannel}, #{mo_Hz}, #{mo_resolution}, #{mo_speed}, #{mo_shape}, 'MO' || MONITOR_SEQ.NEXTVAL)
-</insert>
-
-<insert id="insertPC" parameterType="pmap">
-	insert into pc (<include refid="pc" />)
-	values(#{code}, #{pc_name}, #{m_code}, #{pc_division}, #{pc_os}, #{pc_cpu}, #{pc_ram}, #{pc_capacity}, #{pc_gpu}, 'PC' || PC_SEQ.NEXTVAL)
+<insert id="insertOwn" parameterType="pmap">
+	insert into own (code, id)
+	values(#{code}, #{id})
 </insert>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
-	select ROWNUM, GUBUN, e.code, m_name as emp, name, ap, cpu, os, ram, capacity, battery, gpu, pannel, hz, resolution, speed, shape, m_code, ma_name as manufacture, id
-	from equipmentView e
-	left outer join member mem on mem.code = e.code
-	left outer join manufacture ma on ma.ma_code = e.m_code
+	SELECT ROWNUM, O.CODE, M_NAME, M_DEPART, M_JOB, MA.MA_CODE, MA_NAME, O.ID, GUBUN, DIVISION, NAME, AP, OS, CPU, RAM, CAPACITY, BATTERY, GPU, PANNEL, HZ, RESOLUTION, SPEED, SHAPE
+	FROM OWN O
+	JOIN MEMBER MEM ON O.CODE = MEM.CODE
+	JOIN EQUIPMENTVIEW E ON O.ID = E.ID
+	JOIN MANUFACTURE MA ON E.M_CODE = MA.MA_CODE
 	where 1=1
 	<if test="m_name != null and m_name != '' ">and (m_name like '%' || upper(#{m_name}) || '%' or m_name like '%' || lower(#{m_name}) || '%')</if>
 	<if test="ma_name != null and ma_name != '' ">and (ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%')</if>

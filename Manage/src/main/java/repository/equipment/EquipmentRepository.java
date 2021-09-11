@@ -106,4 +106,21 @@ public class EquipmentRepository {
 		return sqlSession.selectList(statement, param);
 	}
 
+	/**
+	 *  장비 목록 조회
+	 */
+	public List<Map<String, Object>> getDeviceList(Map<String, Object> param) {
+		statement = namespace + ".getDeviceList";
+		return sqlSession.selectList(statement, param);
+	}
+
+	/**
+	 * 장비 소유자 등록
+	 * @param param
+	 */
+	public int insertOwn(Map<String, Object> param) {
+		statement = namespace + ".insertOwn";
+		return sqlSession.update(statement, param);
+	}
+
 }

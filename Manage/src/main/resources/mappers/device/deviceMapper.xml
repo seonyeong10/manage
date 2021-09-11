@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.device.deviceMapper">
+<sql id="phone">
+	p_name, m_code, p_ap, p_os, p_cpu, p_ram, p_capacity, p_battery, P_ID
+</sql>
+<sql id="pc">
+	pc_name, m_code, pc_division, pc_os, pc_cpu, pc_ram, pc_capacity, pc_gpu, PC_ID
+</sql>
+<sql id="monitor">
+	mo_name, m_code, mo_pannel, mo_Hz, mo_resolution, mo_speed, mo_shape, MO_ID
+</sql>
+
+<insert id="insertPhone" parameterType="pmap">
+	insert into phone (<include refid="phone" />)
+	values(#{p_name}, #{m_code}, #{p_ap}, #{p_os}, #{p_cpu}, #{p_ram}, #{p_capacity}, #{p_battery}, 'PH' || PHONE_SEQ.NEXTVAL)
+</insert>
+
+<insert id="insertMonitor" parameterType="pmap">
+	insert into monitor (<include refid="monitor" />)
+	values(#{mo_name}, #{m_code}, #{mo_pannel}, #{mo_Hz}, #{mo_resolution}, #{mo_speed}, #{mo_shape}, 'MO' || MONITOR_SEQ.NEXTVAL)
+</insert>
+
+<insert id="insertPC" parameterType="pmap">
+	insert into pc (<include refid="pc" />)      
+	values(#{pc_name}, #{m_code}, #{pc_division}, #{pc_os}, #{pc_cpu}, #{pc_ram}, #{pc_capacity}, #{pc_gpu}, 'PC' || PC_SEQ.NEXTVAL)
+</insert>
+
+<select id="getDeviceList" parameterType="pmap" resultType="pmap">
+	SELECT ROWNUM, GUBUN, ID, NAME, AP, CPU, OS, RAM, CAPACITY, BATTERY, GPU, DIVISION, PANNEL, HZ, RESOLUTION, SPEED, SHAPE, M_CODE, MA_NAME AS MANUFACTURE
+	FROM EQUIPMENTVIEW E
+	JOIN MANUFACTURE MA ON E.M_CODE = MA.MA_CODE
+	<where>
+		<trim prefixOverrides="AND | OR">
+			<if test="id != null and id != '' ">id = #{id}</if>
+		</trim>
+	</where>
+</select>
+
+<update id="updatePhone" parameterType="pmap">
+	update phone
+	set
+		<trim suffixOverrides=",">
+			<if test="p_name != null"> p_name = #{p_name},</if>
+			<if test="p_ap != null"> p_ap = #{p_ap},</if>
+			<if test="p_os != null"> p_os = #{p_os},</if>
+			<if test="p_cpu != null"> p_cpu = #{p_cpu},</if>
+			<if test="p_ram != null"> p_ram = #{p_ram},</if>
+			<if test="p_capacity != null"> p_capacity = #{p_capacity},</if>
+			<if test="p_battery != null"> p_battery = #{p_battery},</if>
+			<if test="m_code != null"> m_code = #{m_code},</if>
+		</trim>
+	where p_id = #{id}
+</update>
+
+<update id="updatePC" parameterType="pmap">
+	update pc
+	set
+		<trim suffixOverrides=",">
+			<if test="pc_name != null">pc_name = #{pc_name},</if>
+			<if test="pc_gpu != null"> pc_gpu = #{pc_gpu},</if>
+			<if test="pc_os != null"> pc_os = #{pc_os},</if>
+			<if test="pc_cpu != null"> pc_cpu = #{pc_cpu},</if>
+			<if test="pc_ram != null"> pc_ram = #{pc_ram},</if>
+			<if test="p_ram != null"> p_ram = #{p_ram},</if>
+			<if test="pc_capacity != null"> pc_capacity = #{pc_capacity},</if>
+			<if test="m_code != null"> m_code = #{m_code},</if>
+		</trim>
+	where pc_id = #{id}
+</update>
+
+<update id="updateMonitor" parameterType="pmap">
+	update monitor
+	set
+		<trim suffixOverrides=",">
+			<if test="mo_name != null">mo_name = #{mo_name},</if>
+			<if test="mo_pannel != null">mo_pannel = #{mo_pannel},</if>
+			<if test="mo_hz != null"> mo_hz = #{mo_hz},</if>
+			<if test="mo_resolution != null"> mo_resolution = #{mo_resolution},</if>
+			<if test="mo_speed != null"> mo_speed = #{mo_speed},</if>
+			<if test="mo_shape != null"> mo_shape = #{mo_shape},</if>
+			<if test="m_code != null"> m_code = #{m_code},</if>
+		</trim>
+	where mo_id = #{id}
+</update>
+
+<delete id="delPhone" parameterType="pmap">
+	DELETE FROM phone
+	WHERE p_id = #{id}
+</delete>
+
+<delete id="delPC" parameterType="pmap">
+	DELETE FROM pc
+	WHERE pc_id = #{id}
+</delete>
+
+<delete id="delMonitor" parameterType="pmap">
+	DELETE FROM monitor
+	WHERE mo_id = #{id}
+</delete>
+
+</mapper>
