@@ -142,6 +142,28 @@ public class DeviceController {
 	}
 	
 	/**
+	 * 장비 목록 검색
+	 */
+	public String schDeviceList(
+			@RequestParam(value = "gubun") String gubun
+			,@RequestParam(value = "schThem") String schThem
+			,@RequestParam(value = "schVal") String schVal
+			,HttpServletResponse response
+			,HttpServletRequest request
+			,Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("gubun", gubun);
+		param.put("schThem", schThem);
+		param.put("schVal", schVal);
+		
+		List<Map<String, Object>> list = repository.getDeviceList(param);
+		
+		return "device/deviceList";
+	}
+	
+	/**
 	 * 장비 상세정보 조회
 	 * @return
 	 */

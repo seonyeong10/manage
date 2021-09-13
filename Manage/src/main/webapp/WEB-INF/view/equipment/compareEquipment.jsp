@@ -387,6 +387,7 @@
 					var msg = responseText.message;
 					
 					if(msg === 'success') {
+						alert('장비가 양도되었습니다.');
 						location.reload();
 					}
 				}

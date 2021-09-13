@@ -49,6 +49,8 @@
 	<if test="resolution != null and resolution != '' ">and (resolution like '%' || upper(#{resolution}) || '%' or resolution like '%' || lower(#{resolution}) || '%') </if>
 	<if test="speed != null and speed != '' ">and speed = #{speed} </if>
 	<if test="gubun != null and gubun != '' ">and gubun = upper(#{gubun})</if>
+	<if test="code != null and code != '' ">and o.code = #{code} </if>
+	<if test="id != null and id != '' ">and o.id = #{id} </if>
 </select>
 
 <select id="getInfo" parameterType="pmap" resultType="pmap">
@@ -59,71 +61,6 @@
 	<if test="m_code != null">and e.m_code = #{m_code}</if>
 	<if test="id != null">and id = upper(#{id}) </if>
 </select>
-
-<update id="updatePhone" parameterType="pmap">
-	update phone
-	set
-		<trim suffixOverrides=",">
-			<if test="p_name != null"> p_name = #{p_name},</if>
-			<if test="p_ap != null"> p_ap = #{p_ap},</if>
-			<if test="p_os != null"> p_os = #{p_os},</if>
-			<if test="p_cpu != null"> p_cpu = #{p_cpu},</if>
-			<if test="p_ram != null"> p_ram = #{p_ram},</if>
-			<if test="p_capacity != null"> p_capacity = #{p_capacity},</if>
-			<if test="p_battery != null"> p_battery = #{p_battery},</if>
-			<if test="code != null"> code = #{code},</if>
-		</trim>
-	where p_id = #{id}
-	<if test="giver != null and giver != '' ">and code = #{giver}</if>
-</update>
-
-<update id="updatePC" parameterType="pmap">
-	update pc
-	set
-		<trim suffixOverrides=",">
-			<if test="pc_name != null">pc_name = #{pc_name},</if>
-			<if test="pc_gpu != null"> pc_gpu = #{pc_gpu},</if>
-			<if test="pc_os != null"> pc_os = #{pc_os},</if>
-			<if test="pc_cpu != null"> pc_cpu = #{pc_cpu},</if>
-			<if test="pc_ram != null"> pc_ram = #{pc_ram},</if>
-			<if test="p_ram != null"> p_ram = #{p_ram},</if>
-			<if test="pc_capacity != null"> pc_capacity = #{pc_capacity},</if>
-			<if test="code != null"> code = #{code},</if>
-		</trim>
-	where pc_id = #{id}
-	<if test="giver != null and giver != '' ">and code = #{giver}</if>
-</update>
-
-<update id="updateMonitor" parameterType="pmap">
-	update monitor
-	set
-		<trim suffixOverrides=",">
-			<if test="mo_name != null">mo_name = #{mo_name},</if>
-			<if test="mo_pannel != null">mo_pannel = #{mo_pannel},</if>
-			<if test="mo_hz != null"> mo_hz = #{mo_hz},</if>
-			<if test="mo_resolution != null"> mo_resolution = #{mo_resolution},</if>
-			<if test="mo_speed != null"> mo_speed = #{mo_speed},</if>
-			<if test="mo_shape != null"> mo_shape = #{mo_shape},</if>
-			<if test="code != null"> code = #{code},</if>
-		</trim>
-	where mo_id = #{id}
-	<if test="giver != null and giver != '' ">and code = #{giver}</if>
-</update>
-
-<delete id="delPhone" parameterType="pmap">
-	DELETE FROM phone
-	WHERE CODE = #{code} AND M_CODE = #{m_code} 
-</delete>
-
-<delete id="delPC" parameterType="pmap">
-	DELETE FROM pc
-	WHERE CODE = #{code} AND M_CODE = #{m_code} 
-</delete>
-
-<delete id="delMonitor" parameterType="pmap">
-	DELETE FROM monitor
-	WHERE CODE = #{code} AND M_CODE = #{m_code} 
-</delete>
 
 <select id="selectEmps" parameterType="pmap" resultType="pmap">
  	select code, m_name, m_depart
@@ -145,5 +82,16 @@
 		</trim>
 	</where>
 </select>
+
+<update id="updateOwner" parameterType="pmap">
+	UPDATE OWN
+	SET CODE = #{owner}
+	WHERE ID = #{id} AND CODE = #{code}
+</update>
+
+<delete id="deleteOwner" parameterType="pmap">
+	DELETE FROM OWN
+	WHERE ID = #{id} AND CODE = #{code}
+</delete>
 
 </mapper>

@@ -43,20 +43,20 @@ public class EquipmentRepository {
 	/**
 	 * 장비 정보 수정
 	 */
-	public int updatePhone(Map<String, Object> param) {
-		statement = namespace + ".updatePhone";
-		return sqlSession.update(statement, param);
-	}
-
-	public int updateMonitor(Map<String, Object> param) {
-		statement = namespace + ".updateMonitor";
-		return sqlSession.update(statement, param);
-	}
-
-	public int updatePC(Map<String, Object> param) {
-		statement = namespace + ".updatePC";
-		return sqlSession.update(statement, param);
-	}
+//	public int updatePhone(Map<String, Object> param) {
+//		statement = namespace + ".updatePhone";
+//		return sqlSession.update(statement, param);
+//	}
+//
+//	public int updateMonitor(Map<String, Object> param) {
+//		statement = namespace + ".updateMonitor";
+//		return sqlSession.update(statement, param);
+//	}
+//
+//	public int updatePC(Map<String, Object> param) {
+//		statement = namespace + ".updatePC";
+//		return sqlSession.update(statement, param);
+//	}
 
 	/**
 	 * 장비 삭제
@@ -121,6 +121,20 @@ public class EquipmentRepository {
 	public int insertOwn(Map<String, Object> param) {
 		statement = namespace + ".insertOwn";
 		return sqlSession.update(statement, param);
+	}
+	
+	/**
+	 * 장비 소유자 변경
+	 * @param param
+	 */
+	public int updateOwner(Map<String, Object> param) {
+		statement = namespace + ".updateOwner";
+		return sqlSession.update(statement, param);
+	}
+
+	public int deleteOwner(Map<String, Object> param) {
+		statement = namespace + ".deleteOwner";
+		return sqlSession.delete(statement, param);
 	}
 
 }

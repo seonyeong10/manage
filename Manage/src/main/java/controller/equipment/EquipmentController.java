@@ -165,106 +165,170 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value = "getEquipmentInfo")
 	public String getEquipmentInfo(
-			@RequestParam(value = "code") String code,
-			@RequestParam(value = "id") String id, 
+			@RequestParam(value = "code") String code,	// 사번
+			@RequestParam(value = "id") String id, 		// 장치 ID
 			Model model) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("code", code);
+		param.put("id", id);
 		
-		equipmentInfoService.getInfo(code, id, model);
+		List<Map<String, Object>> equip = repository.selectEquipments(param);
+		model.addAttribute("item", equip.get(0));
+		
+		// 사원
+		List<Map<String, Object>> empList = repository.selectEmps(param);
+		model.addAttribute("emp", empList);
+		
 		return "equipment/equipmentInfo";
 	}
-
-	@RequestMapping(value = "updatePhone", method = RequestMethod.POST)
-	public String updatePhone(@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "id", defaultValue = "") String id,
-			@RequestParam(value = "p_name", defaultValue = "") String p_name,
-			@RequestParam(value = "p_ap", defaultValue = "") String p_ap,
-			@RequestParam(value = "p_os", defaultValue = "") String p_os,
-			@RequestParam(value = "p_cpu", defaultValue = "") String p_cpu,
-			@RequestParam(value = "p_ram", defaultValue = "") String p_ram,
-			@RequestParam(value = "p_capacity", defaultValue = "") String p_capacity,
-			@RequestParam(value = "p_battery", defaultValue = "") String p_battery, Model model) {
-
+	
+	/**
+	 * 장비 소유 관계 업데이트
+	 */
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	public void updateOwn(
+			@RequestParam(value = "id") String id,		// 장비 ID
+			@RequestParam(value = "code") String code,	// 장비 상세정보 사번
+			@RequestParam(value = "owner") String owner,	// 장비 소유자
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("p_name", p_name);
-		param.put("p_ap", p_ap);
-		param.put("p_os", p_os);
-		param.put("p_cpu", p_cpu);
-		param.put("p_ram", p_ram);
-		param.put("p_capacity", p_capacity);
-		param.put("p_battery", p_battery);
 		param.put("id", id);
-
-		repository.updatePhone(param);
-
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
+		param.put("code", code);
+		param.put("owner", owner);
+		
+		repository.updateOwner(param);
+		
+		obj.put("message", "success");
+		obj.put("location", "/equipment/getEquipmentInfo?id=" + id + "&code="+ owner);
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
+	/**
+	 * 장비 소유 관계 업데이트
+	 */
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public void deleteOwn(
+			@RequestParam(value = "id") String id,		// 장비 ID
+			@RequestParam(value = "code") String code,	// 장비 상세정보 사번
+			@RequestParam(value = "owner") String owner,	// 장비 소유자
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		param.put("code", code);
+		param.put("owner", owner);
+		
+		repository.deleteOwner(param);
+		
+		obj.put("message", "success");
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
 	}
 
-	@RequestMapping(value = "updatePC", method = RequestMethod.POST)
-	public String updatePC(@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "id", defaultValue = "") String id,
-			@RequestParam(value = "pc_name", defaultValue = "") String p_name,
-			@RequestParam(value = "pc_gpu", defaultValue = "") String p_gpu,
-			@RequestParam(value = "pc_os", defaultValue = "") String p_os,
-			@RequestParam(value = "pc_cpu", defaultValue = "") String p_cpu,
-			@RequestParam(value = "pc_ram", defaultValue = "") String p_ram,
-			@RequestParam(value = "pc_capacity", defaultValue = "") String p_capacity, 
-			@RequestParam(value = "pc_division", defaultValue = "") String pc_division, 
-			Model model) {
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		String division = null;
-		
-		param.put("pc_name", p_name);
-		param.put("pc_gpu", p_gpu);
-		param.put("pc_os", p_os);
-		param.put("pc_cpu", p_cpu);
-		param.put("pc_ram", p_ram);
-		param.put("pc_capacity", p_capacity);
-		param.put("id", id);
-		
-		if(pc_division.equals("100")) {
-			division = "DESKTOP";
-		} else if(pc_division.equals("200")) {
-			division = "NOTEBOOK";
-		}
-		
-		param.put("pc_division", division);
-		
-		repository.updatePC(param);
-
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
-	}
-
-	@RequestMapping(value = "updateMonitor", method = RequestMethod.POST)
-	public String updateMonitor(@RequestParam(value = "code", defaultValue = "") String code,
-			@RequestParam(value = "id", defaultValue = "") String id,
-			@RequestParam(value = "mo_name", defaultValue = "") String mo_name,
-			@RequestParam(value = "mo_pannel", defaultValue = "") String mo_pannel,
-			@RequestParam(value = "mo_hz", defaultValue = "") String mo_hz,
-			@RequestParam(value = "mo_resolution", defaultValue = "") String mo_resolution,
-			@RequestParam(value = "mo_speed", defaultValue = "") String mo_speed,
-			@RequestParam(value = "mo_shape", defaultValue = "") String mo_shape, Model model) {
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		
-		String shape = null;
-		
-		param.put("mo_name", mo_name);
-		param.put("mo_pannel", mo_pannel);
-		param.put("mo_hz", mo_hz);
-		param.put("mo_resolution", mo_resolution);
-		param.put("mo_speed", mo_speed);
-		
-		if(shape.equals("100")) shape = "커브드";
-		else if(shape.equals("200")) shape = "와이드";
-		else if(shape.equals("300")) shape = "평면";
-		param.put("mo_shape", shape);
-		param.put("id", id);
-
-		repository.updateMonitor(param);
-
-		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
-	}
+//	@RequestMapping(value = "updatePhone", method = RequestMethod.POST)
+//	public String updatePhone(@RequestParam(value = "code", defaultValue = "") String code,
+//			@RequestParam(value = "id", defaultValue = "") String id,
+//			@RequestParam(value = "p_name", defaultValue = "") String p_name,
+//			@RequestParam(value = "p_ap", defaultValue = "") String p_ap,
+//			@RequestParam(value = "p_os", defaultValue = "") String p_os,
+//			@RequestParam(value = "p_cpu", defaultValue = "") String p_cpu,
+//			@RequestParam(value = "p_ram", defaultValue = "") String p_ram,
+//			@RequestParam(value = "p_capacity", defaultValue = "") String p_capacity,
+//			@RequestParam(value = "p_battery", defaultValue = "") String p_battery, Model model) {
+//
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		param.put("p_name", p_name);
+//		param.put("p_ap", p_ap);
+//		param.put("p_os", p_os);
+//		param.put("p_cpu", p_cpu);
+//		param.put("p_ram", p_ram);
+//		param.put("p_capacity", p_capacity);
+//		param.put("p_battery", p_battery);
+//		param.put("id", id);
+//
+//		repository.updatePhone(param);
+//
+//		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
+//	}
+//
+//	@RequestMapping(value = "updatePC", method = RequestMethod.POST)
+//	public String updatePC(@RequestParam(value = "code", defaultValue = "") String code,
+//			@RequestParam(value = "id", defaultValue = "") String id,
+//			@RequestParam(value = "pc_name", defaultValue = "") String p_name,
+//			@RequestParam(value = "pc_gpu", defaultValue = "") String p_gpu,
+//			@RequestParam(value = "pc_os", defaultValue = "") String p_os,
+//			@RequestParam(value = "pc_cpu", defaultValue = "") String p_cpu,
+//			@RequestParam(value = "pc_ram", defaultValue = "") String p_ram,
+//			@RequestParam(value = "pc_capacity", defaultValue = "") String p_capacity, 
+//			@RequestParam(value = "pc_division", defaultValue = "") String pc_division, 
+//			Model model) {
+//
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		String division = null;
+//		
+//		param.put("pc_name", p_name);
+//		param.put("pc_gpu", p_gpu);
+//		param.put("pc_os", p_os);
+//		param.put("pc_cpu", p_cpu);
+//		param.put("pc_ram", p_ram);
+//		param.put("pc_capacity", p_capacity);
+//		param.put("id", id);
+//		
+//		if(pc_division.equals("100")) {
+//			division = "DESKTOP";
+//		} else if(pc_division.equals("200")) {
+//			division = "NOTEBOOK";
+//		}
+//		
+//		param.put("pc_division", division);
+//		
+//		repository.updatePC(param);
+//
+//		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
+//	}
+//
+//	@RequestMapping(value = "updateMonitor", method = RequestMethod.POST)
+//	public String updateMonitor(@RequestParam(value = "code", defaultValue = "") String code,
+//			@RequestParam(value = "id", defaultValue = "") String id,
+//			@RequestParam(value = "mo_name", defaultValue = "") String mo_name,
+//			@RequestParam(value = "mo_pannel", defaultValue = "") String mo_pannel,
+//			@RequestParam(value = "mo_hz", defaultValue = "") String mo_hz,
+//			@RequestParam(value = "mo_resolution", defaultValue = "") String mo_resolution,
+//			@RequestParam(value = "mo_speed", defaultValue = "") String mo_speed,
+//			@RequestParam(value = "mo_shape", defaultValue = "") String mo_shape, Model model) {
+//
+//		Map<String, Object> param = new HashMap<String, Object>();
+//		
+//		String shape = null;
+//		
+//		param.put("mo_name", mo_name);
+//		param.put("mo_pannel", mo_pannel);
+//		param.put("mo_hz", mo_hz);
+//		param.put("mo_resolution", mo_resolution);
+//		param.put("mo_speed", mo_speed);
+//		
+//		if(shape.equals("100")) shape = "커브드";
+//		else if(shape.equals("200")) shape = "와이드";
+//		else if(shape.equals("300")) shape = "평면";
+//		param.put("mo_shape", shape);
+//		param.put("id", id);
+//
+//		repository.updateMonitor(param);
+//
+//		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
+//	}
 
 	/**
 	 * 장비 성능정보 삭제
@@ -357,7 +421,8 @@ public class EquipmentController {
 		param.put("code", code);
 		param.put("gubun", gubun);
 		
-		List<Map<String, Object>> equipmentList = repository.getEquipmentList(param);
+		List<Map<String, Object>> equipmentList = repository.selectEquipments(param);
+//		List<Map<String, Object>> equipmentList = repository.getEquipmentList(param);
 		
 		obj.put("message", "success");
 		obj.put("equip", equipmentList);
@@ -385,7 +450,7 @@ public class EquipmentController {
 		param.put("code", code);
 		param.put("id", id);
 		
-		List<Map<String, Object>> ability = repository.getEquipmentList(param);
+		List<Map<String, Object>> ability = repository.selectEquipments(param);
 		
 		obj.put("message", "success");
 		obj.put("ability", ability.get(0));
@@ -399,11 +464,10 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value = "changeEquipment", method = RequestMethod.POST)
 	public String changeEquipment(
-			@RequestParam(value = "gubun", defaultValue = "") String table,
-			@RequestParam(value = "code1", defaultValue = "") String code1,
-			@RequestParam(value = "code2", defaultValue = "") String code2,
-			@RequestParam(value = "device1", defaultValue = "") String id1,
-			@RequestParam(value = "device2", defaultValue = "") String id2,
+			@RequestParam(value = "code1", defaultValue = "") String code1,		// 사원1 사번
+			@RequestParam(value = "code2", defaultValue = "") String code2,		// 사원2 사번
+			@RequestParam(value = "device1", defaultValue = "") String id1,		// 사원1의 장비 ID
+			@RequestParam(value = "device2", defaultValue = "") String id2,		// 사원2의 장비 ID
 			HttpServletRequest request
 			,HttpServletResponse response
 			,Model model) throws Exception {
@@ -411,21 +475,18 @@ public class EquipmentController {
 		Map<String, Object> param = new HashMap<String, Object>();
 		Map<String, Object> param2 = new HashMap<String, Object>();
 		
+		// 사원1에게 사원2의 장비
 		param.put("code", code2);
-		param.put("id", id1);
-		param2.put("code", code1);
-		param2.put("id", id2);
+		param.put("id", id2);
+		param.put("owner", code1);
 		
-		if(table.equals("PC")) {
-			repository.updatePC(param);
-			repository.updatePC(param2);
-		} else if(table.equals("PHONE")) {
-			repository.updatePhone(param);
-			repository.updatePhone(param2);
-		} else if(table.equals("MONITOR")) {
-			repository.updateMonitor(param);
-			repository.updateMonitor(param2);
-		}
+		// 사원2에게 사원1의 장비
+		param2.put("code", code1);
+		param2.put("id", id1);
+		param2.put("owner", code2);
+		
+		repository.updateOwner(param);
+		repository.updateOwner(param2);
 		
 		return "redirect:/equipment";
 	}
@@ -468,21 +529,11 @@ public class EquipmentController {
 		// JSON 객체
 		JSONObject obj = new JSONObject();
 		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("giver", giver);
-		param.put("code", receiver);
+		param.put("code", giver);
+		param.put("owner", receiver);
 		param.put("id", id);
 		
-		if(table.equals("PC")) {
-			repository.updatePC(param);
-			
-		} else if(table.equals("PHONE")) {
-			repository.updatePhone(param);
-			
-		} else if(table.equals("MONITOR")) {
-			repository.updateMonitor(param);
-			
-		}
-				
+		repository.updateOwner(param);
 				
 		obj.put("message", "success");
 				

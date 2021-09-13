@@ -28,23 +28,22 @@
 			<div class="sch-box">
 				<div>
 					<span>종류</span>
-					<input type="radio" name="gubun" value="MONITOR" id="g-monitor" onclick="activeBox(this.value);"/>
+					<input type="radio" name="gubun" value="MONITOR" id="g-monitor"/>
 					<label for="g-monitor">모니터	</label>
-					<input type="radio" name="gubun" value="PC" id="g-pc" onclick="activeBox(this.value);"/>
+					<input type="radio" name="gubun" value="PC" id="g-pc" />
 					<label for="g-pc">PC</label>
-					<input type="radio" name="gubun" value="PHONE" id="g-phone" onclick="activeBox(this.value);"/>
+					<input type="radio" name="gubun" value="PHONE" id="g-phone" />
 					<label for="g-phone">핸드폰</label>
 				</div>
 				<br />
 				<div>
 					<select name="schThem">
-						<option value="m_name">사용자</option>
-						<option value="ma_name">제조자</option>
+						<option value="">검색 항목을 선택하세요.</option>
 						<option value="name">제품명</option>
-						<option value="os">운영체제</option>
+						<option value="ma_name">제조사</option>
 					</select>
 					<input type="text" name="schVal" placeholder="검색어를 입력하세요."/>
-					<button onclick="schEquipment();" class="btn">검색</button>
+					<button onclick="schDevice();" class="btn">검색</button>
 				</div>
 			</div>
 			<br />
@@ -74,51 +73,12 @@
 
 	</div>
 	<script type="text/javascript">
-		function activeBox(gubun) {
-			var target = document.getElementById('sch-ability');
-			let monitors =  new Map([
-					['패널', 'pannel'], ['주사율','hz'], ['해상도','resolution'], ['응답속도','speed']
-					]);
-			let pcs =  new Map([
-					['운영체제', 'os'], ['CPU','cpu'], ['RAM','ram'], ['GPU','gpu'], ['저장공간','capacity']
-					]);
-			let phones =  new Map([
-					['AP','ap'], ['운영체제', 'os'], ['CPU','cpu'], ['RAM','ram'], ['저장공간','capacity'], ['배터리','battery']
-					]);
-			
-			$('#sch-ability').children('option').remove();
-			
-			if(gubun === 'MONITOR') {
-				for(const [key, value] of monitors) {
-					var option = document.createElement('option');
-					option.innerText = key;
-					option.value =  value;
-					target.append(option);
-				}
-				
-			} else if(gubun === 'PC') {
-				for(const [key, value] of pcs) {
-					var option = document.createElement('option');
-					option.innerText = key;
-					option.value =  value;
-					target.append(option);
-				}				
-				
-			} else if(gubun === 'PHONE') {
-				for(const [key, value] of phones) {
-					var option = document.createElement('option');
-					option.innerText = key;
-					option.value =  value;
-					target.append(option);
-				}
-				
-			}
-		}
 		
+		// 검색
 		function schEquipment() {
-// 			document.getElementById('frm').action = "/equipment";
-// 			document.getElementById('frm').method = "get";
-// 			document.getElementById('frm').submit();
+			document.getElementById('frm').action = "/device/schList";
+			document.getElementById('frm').method = "post";
+			document.getElementById('frm').submit();
 		}
 		
 		function goEquipmentAdd() {

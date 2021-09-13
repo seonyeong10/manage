@@ -147,7 +147,7 @@
 			// 			newRow.insertCell(0).innerHTML = "<input type='checkbox'/>";
 			newRow.insertCell(0).innerHTML = "${item.ROWNUM}";
 			newRow.insertCell(1).innerText = "${item.GUBUN}";
-			newRow.insertCell(2).innerHTML = "<a href='/equipment/getEquipmentInfo?id=${item.ID}&code=${item.CODE}'>${item.EMP}</a>";
+			newRow.insertCell(2).innerHTML = "<a href='/equipment/getEquipmentInfo?id=${item.ID}&code=${item.CODE}'>${item.M_NAME}</a>";
 			newRow.insertCell(3).innerText = "${item.NAME}";
 			newRow.insertCell(4).innerText = "${item.MANUFACTURE}";
 			newRow.insertCell(5).innerText = "${item.AP}";
