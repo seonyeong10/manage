@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ include file="../include/include.jsp"%>
 <!DOCTYPE html>
 <html>
@@ -34,15 +34,11 @@
 					<tr>
 						<th>부서</th>
 						<td>
-							<select name="m_depart">
+							<select name="m_depart" id="department">
 								<option value="">부서를 선택하세요.</option>
-								<option value="공공사업팀">공공사업팀</option>
-								<option value="SI사업팀">SI사업팀</option>
-								<option value="전략제안팀">전략제안팀</option>
-								<option value="기술지원팀">기술지원팀</option>
-								<option value="재경팀">재경팀</option>
-								<option value="경영관리팀">경영관리팀</option>
-								<option value="전략구매실">전략구매실</option>
+								<c:forEach items="${deptList }" var="item">
+									<option value="${item.D_ID}">${item.D_NAME } | ${item.D_TIM }</option>
+								</c:forEach>
 							</select>
 						</td>
 					</tr>
@@ -99,6 +95,12 @@
 	<script type="text/javascript">
 	var patternPhone = /01[016789]-[^0][0-9]{2,3}-[0-9]{3,4}/;
 	var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+		window.load = getInfo();
+		
+		// 부서 목록 조회
+		function getInfo() {
+			
+		}
 
 		function isDuplicate() {
 			var code = document.getElementsByTagName('input')[name='code'].value;

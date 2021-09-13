@@ -15,7 +15,8 @@ public class MemberAddServcie {
 	public void insertMem(MemberCommand memberCommand) {
 		int result = 0;	// 초기화
 		
-		MemberDTO dto = new MemberDTO(memberCommand.getCode(), memberCommand.getM_name(), memberCommand.getM_depart(), memberCommand.getM_job(), memberCommand.getM_age(), memberCommand.getM_phone(), memberCommand.getM_email(), memberCommand.getM_address(), memberCommand.getM_gender());
+		MemberDTO dto = new MemberDTO(memberCommand.getCode(), memberCommand.getM_name(), memberCommand.getM_depart(), memberCommand.getM_job(), 
+				memberCommand.getM_age(), memberCommand.getM_phone(), memberCommand.getM_email(), memberCommand.getM_address(), memberCommand.getM_gender());
 		result = repository.insertMember(dto);
 		
 		System.out.println(result);

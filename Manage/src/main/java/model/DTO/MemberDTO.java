@@ -82,6 +82,7 @@ public class MemberDTO {
 	public void setM_address(String m_address) {
 		this.m_address = m_address;
 	}
+	
 
 	public MemberDTO(Integer code, String m_name, String m_depart, String m_job, String m_age, String m_phone,
 			String m_email, String m_address, String m_gender) {

@@ -60,4 +60,14 @@ public class MemberRepository {
 		statement = namespace + ".delEmployee";	
 		return sqlSession.delete(statement, param);
 	}
+
+	/**
+	 * 부서 목록 조회
+	 * @param param
+	 * @return
+	 */
+	public List<Map<String, Object>> getDeptList(Map<String, Object> param) {
+		statement = namespace + ".getDeptList";	
+		return sqlSession.selectList(statement, param);
+	}
 } 

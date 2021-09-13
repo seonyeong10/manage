@@ -56,13 +56,29 @@ select {
 	font-size: 18px;
 	padding: 10px 15px;
 	border: none;
-	border-radius: 50px;
-	background: #0067a3;
+	border-radius: 10px;
+	background: #333;
 	color: #fff;
 	font-weight: 900;
 	
 }
 
-.btn-area td button:hover {
+.btn-area td button:hover, .give:hover {
 	background: #191970;
+}
+
+.give {
+	font-size: 18px;
+	padding: 0px 15px;
+	border: none;
+	border-radius: 10px;
+	background: #333;
+	color: #fff;
+	font-weight: 900;
+	margin-top: 10px;
+	
+}
+
+.give:first-child {
+	margin-top: 0;
 }

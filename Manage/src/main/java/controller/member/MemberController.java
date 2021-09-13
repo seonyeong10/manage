@@ -34,14 +34,23 @@ public class MemberController {
 	MemberRepository repository;
 
 	@RequestMapping(value="add", method=RequestMethod.GET) // 반복 주소의 하위 주소
-	public String addMember(Model model) {
+	public String addMember(
+			HttpServletRequest request
+			,HttpServletResponse response
+			,Model model
+			) {
+		Map<String, Object> param = new HashMap<String, Object>();
+		
+		List<Map<String, Object>> deptList = repository.getDeptList(param);
+		
 		model.addAttribute("memberCommand", new MemberCommand());
+		model.addAttribute("deptList", deptList);
+		
 		return "member/memberForm";
 	}
 	
 	@RequestMapping(value = "addMember", method=RequestMethod.POST)
 	public String insertMember(MemberCommand memberCommand, Model model) {
-//		System.out.println("실행");
 		memberAddServcie.insertMem(memberCommand);
 		return "redirect:/employee/list";
 	}
@@ -83,8 +92,10 @@ public class MemberController {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		List<Map<String, Object>> empList = repository.getEmployeeList(param);
+		List<Map<String, Object>> deptList = repository.getDeptList(param);
 		
 		model.addAttribute("empList", empList);
+		model.addAttribute("deptList", deptList);
 		
 		return "member/memberList";
 	}
@@ -107,8 +118,10 @@ public class MemberController {
 		param.put(schThem, schVal);
 		
 		List<Map<String, Object>> empList = repository.getEmployeeList(param);
+		List<Map<String, Object>> deptList = repository.getDeptList(param);
 		
 		model.addAttribute("empList", empList);
+		model.addAttribute("deptList", deptList);
 		
 		return "member/memberList";
 	}
@@ -129,8 +142,10 @@ public class MemberController {
 		param.put("code", code);
 		
 		List<Map<String, Object>> empList = repository.getEmployeeList(param);
+		List<Map<String, Object>> deptList = repository.getDeptList(param);
 		
 		model.addAttribute("empList", empList.get(0));
+		model.addAttribute("deptList", deptList);
 		
 		return "member/memberInfo";
 	}

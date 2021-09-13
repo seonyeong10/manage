@@ -25,13 +25,9 @@
 				<div class="sch-box">
 					<div>
 						<span>부서</span>
-						<input type="checkbox" name="m_depart" value="공공사업팀"/> 공공사업팀
-						<input type="checkbox" name="m_depart" value="SI사업팀"/> SI사업팀
-						<input type="checkbox" name="m_depart" value="전략제안팀"/> 전략제안팀
-						<input type="checkbox" name="m_depart" value="기술지원팀"/> 기술지원팀
-						<input type="checkbox" name="m_depart" value="재경팀"/> 재경팀
-						<input type="checkbox" name="m_depart" value="경영관리팀"/> 경영관리팀
-						<input type="checkbox" name="m_depart" value="전략구매실"/> 전략구매실
+						<c:forEach items="${deptList }" var="item">
+							<input type="checkbox" name="m_depart" value="${item.D_ID }"/> ${item.D_TIM }
+						</c:forEach>
 					</div>
 					<br />
 					<div>
@@ -84,7 +80,7 @@
 	
 			newRow.insertCell(0).innerHTML = "${item.CODE}";
 			newRow.insertCell(1).innerHTML = "<a href='/employee/info?code=${item.CODE}'>${item.M_NAME}</a>";
-			newRow.insertCell(2).innerText = "${item.M_DEPART}";
+			newRow.insertCell(2).innerText = "${item.D_TIM}";
 			newRow.insertCell(3).innerText = "${item.M_JOB}";
 			newRow.insertCell(4).innerText = "${item.M_AGE}".substr(0,11);
 			newRow.insertCell(5).innerText = "${item.M_PHONE}";

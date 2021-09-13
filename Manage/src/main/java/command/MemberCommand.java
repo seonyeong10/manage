@@ -34,7 +34,7 @@ public class MemberCommand {
 		this.m_address = m_address;
 		this.m_gender = m_gender;
 	}
-
+	
 	public Integer getCode() {
 		return code;
 	}

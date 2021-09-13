@@ -47,10 +47,22 @@ select, input[type=text], .sch-box td span {
 	padding: 10px;
 }
 
-.sch-box td span {width: 130px;}
+.sch-box span {
+	display: inline-block;
+	width: 150px;
+	text-align: center;
+	font-weight: 900;
+	font-size: 18px;
+	background: #eee;
+	padding: 7px 0;
+}
 
 select:focus, input[type=text]:focus {
 	outline: none;
+}
+
+.sch-box input[type=checkbox] {
+	margin-left: 10px;
 }
 
 .sch-box .btn {

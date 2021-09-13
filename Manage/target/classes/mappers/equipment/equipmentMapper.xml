@@ -63,8 +63,10 @@
 </select>
 
 <select id="selectEmps" parameterType="pmap" resultType="pmap">
- 	select code, m_name, m_depart
- 	from member
+ 	SELECT CODE, M_NAME, M_DEPART, D_NAME, D_TIM, M_JOB, M_AGE, M_PHONE, M_EMAIL, M_ADDRESS, M_GENDER 
+	FROM MEMBER mem
+	JOIN DEPARTMENT dep
+	ON mem.m_depart = dep.d_id
 </select>
 
 <select id="selectManufactures" parameterType="pmap" resultType="pmap">

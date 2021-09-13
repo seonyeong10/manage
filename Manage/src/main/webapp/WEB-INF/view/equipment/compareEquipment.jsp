@@ -51,9 +51,9 @@
 									</select>
 								</td>
 								<td>
-									<button onclick="giveEquipment('1');">→</button>
+									<button onclick="giveEquipment('1');" class="give">→</button>
 									<br />
-									<button onclick="giveEquipment('2');">←</button>
+									<button onclick="giveEquipment('2');" class="give">←</button>
 								</td>
 							<td>
 								<select name="code2" class="emp" onchange="getEquipment('2');">
@@ -213,7 +213,7 @@
 				
 				<c:forEach items="${emp }" var="emp" varStatus="s">
 					var option = document.createElement('option');
-					option.innerText = "${emp.M_NAME}(${emp.M_DEPART})";
+					option.innerText = "${emp.M_NAME}(${emp.D_TIM})";
 					option.value = "${emp.CODE}";
 					
 					if('${emp.CODE}' === code2) {

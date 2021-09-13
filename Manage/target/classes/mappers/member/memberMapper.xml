@@ -17,7 +17,10 @@
 </select>
 
 <select id="getEmployeeList" parameterType="pmap" resultType="pmap">
-	SELECT * FROM member
+	SELECT CODE, M_NAME, M_DEPART, D_NAME, D_TIM, M_JOB, M_AGE, M_PHONE, M_EMAIL, M_ADDRESS, M_GENDER 
+	FROM MEMBER mem
+	JOIN DEPARTMENT dep
+	ON mem.m_depart = dep.d_id
 	<where>
 		<trim prefixOverrides="AND | OR">
 			<if test="code != null and code != '' "> and code = #{code} </if>
@@ -52,5 +55,10 @@
 	delete from member
 	where code = #{code}
 </delete>
+
+<select id="getDeptList" parameterType="pmap" resultType="pmap">
+	SELECT D_ID, D_NAME, D_TIM
+	FROM DEPARTMENT
+</select>
 
 </mapper>

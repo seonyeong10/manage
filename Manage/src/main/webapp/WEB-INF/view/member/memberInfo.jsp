@@ -34,29 +34,13 @@
 						<tr>
 							<td>부서</td>
 							<td>
-								<select name="m_depart">
+								<select name="m_depart" id="department">
 									<option value="">부서를 선택하세요.</option>
-									<option value="공공사업팀"
-										<c:if test="${empList.M_DEPART eq '공공사업팀' }">selected</c:if>
-									>공공사업팀</option>
-									<option value="SI사업팀"
-										<c:if test="${empList.M_DEPART eq 'SI사업팀' }">selected</c:if>
-									>SI사업팀</option>
-									<option value="전략제안팀"
-										<c:if test="${empList.M_DEPART eq '전략제안팀' }">selected</c:if>
-									>전략제안팀</option>
-									<option value="기술지원팀"
-										<c:if test="${empList.M_DEPART eq '기술지원팀' }">selected</c:if>
-									>기술지원팀</option>
-									<option value="재경팀"
-										<c:if test="${empList.M_DEPART eq '재경팀' }">selected</c:if>
-									>재경팀</option>
-									<option value="경영관리팀"
-										<c:if test="${empList.M_DEPART eq '경영관리팀' }">selected</c:if>
-									>경영관리팀</option>
-									<option value="전략구매실"
-										<c:if test="${empList.M_DEPART eq '전략구매실' }">selected</c:if>
-									>전략구매실</option>
+									<c:forEach items="${deptList }" var="item">
+										<option value="${item.D_ID}"
+											<c:if test="${empList.M_DEPART eq item.D_ID}">selected</c:if>
+										>${item.D_NAME } | ${item.D_TIM }</option>
+									</c:forEach>
 								</select>
 							</td>
 						</tr>
