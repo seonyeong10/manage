@@ -38,7 +38,7 @@
 				<br />
 				<div>
 					<select name="schThem">
-						<option value="">검색 항목을 선택하세요.</option>
+						<option value="">선택하세요.</option>
 						<option value="name">제품명</option>
 						<option value="ma_name">제조사</option>
 					</select>
@@ -75,7 +75,7 @@
 	<script type="text/javascript">
 		
 		// 검색
-		function schEquipment() {
+		function schDevice() {
 			document.getElementById('frm').action = "/device/schList";
 			document.getElementById('frm').method = "post";
 			document.getElementById('frm').submit();
@@ -89,7 +89,6 @@
 			var map = new Array();
 			const table = document.getElementById('equipment');
 			
-			console.log('${list}');
 			<c:forEach items="${list }" var="item">
 
 			var newRow = table.insertRow();
@@ -116,6 +115,10 @@
 			newRow.insertCell(15).innerText = "${item.SHAPE}";
 			
 			</c:forEach>
+			
+			if('${schParam}' != '') {
+				console.log('${schParam}');
+			}
 		}
 
 

@@ -144,8 +144,9 @@ public class DeviceController {
 	/**
 	 * 장비 목록 검색
 	 */
+	@RequestMapping(value = "schList", method = RequestMethod.POST)
 	public String schDeviceList(
-			@RequestParam(value = "gubun") String gubun
+			@RequestParam(value = "gubun", defaultValue = "") String gubun
 			,@RequestParam(value = "schThem") String schThem
 			,@RequestParam(value = "schVal") String schVal
 			,HttpServletResponse response
@@ -155,10 +156,12 @@ public class DeviceController {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gubun", gubun);
-		param.put("schThem", schThem);
-		param.put("schVal", schVal);
+		param.put(schThem, schVal);
 		
 		List<Map<String, Object>> list = repository.getDeviceList(param);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("schParam", param);
 		
 		return "device/deviceList";
 	}

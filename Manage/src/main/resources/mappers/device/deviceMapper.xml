@@ -34,6 +34,9 @@
 	<where>
 		<trim prefixOverrides="AND | OR">
 			<if test="id != null and id != '' ">id = #{id}</if>
+			<if test="gubun != null and gubun != '' ">gubun = #{gubun}</if>
+			<if test="name != null and name != '' ">(name like '%' || #{name} || '%' or name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' or name like '%' || initcap(#{name}) || '%')</if>
+			<if test="ma_name != null and ma_name != '' ">(ma_name like '%' || #{ma_name} || '%' or ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%' or ma_name like '%' || initcap(#{ma_name}) || '%')</if>
 		</trim>
 	</where>
 </select>
