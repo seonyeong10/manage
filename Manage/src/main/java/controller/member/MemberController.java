@@ -89,6 +89,34 @@ public class MemberController {
 		return "member/memberList";
 	}
 	
+	/**
+	 * 사원 목록 검색
+	 */
+	@RequestMapping(value = "schList", method = RequestMethod.POST)
+	public String schList(
+			@RequestParam(value = "m_depart", required = false) String[] m_depart,
+			@RequestParam(value = "schThem", required = false) String schThem,
+			@RequestParam(value = "schVal", required = false) String schVal,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("m_depart", m_depart);
+		param.put(schThem, schVal);
+		
+		List<Map<String, Object>> empList = repository.getEmployeeList(param);
+		
+		model.addAttribute("empList", empList);
+		
+		return "member/memberList";
+	}
+	
+	
+	/**
+	 * 사원정보 상세 검색
+	 */
 	@RequestMapping(value = "info", method = RequestMethod.GET)
 	public String getMemberInfo(
 			@RequestParam(value = "code") String code,

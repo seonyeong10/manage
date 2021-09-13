@@ -8,6 +8,8 @@
 					사원 관리 <span class="drop">▼</span>
 				</div>
 				<ul>
+					<li><a href="/department/add">부서 등록</a></li>
+					<li><a href="/department/list">부서 조회</a></li>
 					<li><a href="/employee/add">사원 등록</a></li>
 					<li><a href="/employee/list">사원 조회</a></li>
 				</ul>

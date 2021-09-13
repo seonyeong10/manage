@@ -17,12 +17,21 @@
 </select>
 
 <select id="getEmployeeList" parameterType="pmap" resultType="pmap">
-	select * from member
-	where 1=1
-	<if test="code != null and code != '' ">
-		and code = #{code}
-	</if>
-	order by code
+	SELECT * FROM member
+	<where>
+		<trim prefixOverrides="AND | OR">
+			<if test="code != null and code != '' "> and code = #{code} </if>
+			<if test="m_name != null and m_name != '' "> and m_name like '%' || #{m_name} || '%' </if>
+			<if test="m_depart != null and m_depart != '' ">
+				m_depart in
+				<foreach collection="m_depart" item="arr" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+		
+		</trim>
+	</where>
+	ORDER BY CODE
 </select>
 
 <update id="updateEmployee" parameterType="pmap">

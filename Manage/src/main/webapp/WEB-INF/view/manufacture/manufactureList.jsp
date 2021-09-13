@@ -18,8 +18,29 @@
 
 		<div id="right">
 			<form id="frm">
-			<input type="hidden" name="ma_code" />
+			<input type=hidden name="ma_code" />
 			<div class="section-title">제조사 조회</div>
+			
+			<div class="sch-box">
+				<div>
+					<span>제조물품</span>
+					<input type="checkbox" name="ma_kinds" value="100"/> PC
+					<input type="checkbox" name="ma_kinds" value="300"/> 모니터
+					<input type="checkbox" name="ma_kinds" value="400"/> 핸드폰
+				</div>
+				<br />
+				<div>
+					<select name="schThem">
+						<option value="">선택하세요.</option>
+						<option value="ma_name">제조사</option>
+					</select>
+					<input type="text" name="schVal" placeholder="검색어를 입력하세요."/>
+					<button onclick="schManufacture();" class="btn">검색</button>
+				</div>
+			</div>
+			
+			<br />
+			
 			<table border=1>
 				<thead>
 					<tr class="table-top">
@@ -56,6 +77,12 @@
 	var frm = document.getElementById('frm');
 	var param = document.getElementsByTagName('input');
 	
+		// 검색 버튼 클릭
+		function schManufacture() {
+			frm.action = '/manufacture/schList';
+			frm.method = 'POST';
+			frm.submit();
+		}
 		// 제조사 수정
 		function updateManu(ma_code) {
 			param[name='ma_code'].value = ma_code;

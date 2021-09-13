@@ -12,12 +12,18 @@
 </insert>
 
 <select id="selectManufactureList" parameterType="pmap" resultType="pmap">
-	select <include refid="baseColumn" />
-	from manufacture
-	where 1=1
-	<if test="ma_code != null and ma_code != '' ">
-		and ma_code = #{ma_code}
-	</if>
+	SELECT <include refid="baseColumn" />
+	FROM MANUFACTURE
+	<where>
+		<trim prefixOverrides="AND | OR" >
+			<if test="ma_code != null and ma_code != '' ">and ma_code = #{ma_code}</if>
+			<if test="ma_name != null and ma_name != '' ">and (ma_name like '%' || #{ma_name} || '%' or ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%' or ma_name like '%' || initcap(#{ma_name}) || '%')</if>
+			<if test="ma_kinds != null and ma_kinds != '' ">
+				ma_kinds in
+				<foreach collection="ma_kinds" item="arr" separator="," open="(" close=")">#{arr}</foreach>
+			</if>
+		</trim>
+	</where>
 	ORDER BY MA_CODE
 </select>
 

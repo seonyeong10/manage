@@ -18,8 +18,35 @@
 		<%@ include file="../include/left.jsp"%>
 		<div id="right">
 			
-			<div style="width:930px; overflow: auto; position:absolute; left:50%; transform:translateX(-50%);">
+			<div style="width:1500px; overflow: auto; position:absolute; left:50%; transform:translateX(-50%);">
 			<div class="section-title">사원 목록</div>
+			
+			<form action="#" method="post" id="frm" style="position: relative;">
+				<div class="sch-box">
+					<div>
+						<span>부서</span>
+						<input type="checkbox" name="m_depart" value="공공사업팀"/> 공공사업팀
+						<input type="checkbox" name="m_depart" value="SI사업팀"/> SI사업팀
+						<input type="checkbox" name="m_depart" value="전략제안팀"/> 전략제안팀
+						<input type="checkbox" name="m_depart" value="기술지원팀"/> 기술지원팀
+						<input type="checkbox" name="m_depart" value="재경팀"/> 재경팀
+						<input type="checkbox" name="m_depart" value="경영관리팀"/> 경영관리팀
+						<input type="checkbox" name="m_depart" value="전략구매실"/> 전략구매실
+					</div>
+					<br />
+					<div>
+						<select name="schThem">
+							<option value="">선택하세요.</option>
+							<option value="m_name">이름</option>
+						</select>
+						<input type="text" name="schVal" placeholder="검색어를 입력하세요."/>
+						<button onclick="schEmp();" class="btn">검색</button>
+					</div>
+				</div>
+			</form>
+			
+			<br />
+			
 			<div>
 			<table border=1 id="employee" >
 				<thead>
@@ -59,7 +86,7 @@
 			newRow.insertCell(1).innerHTML = "<a href='/employee/info?code=${item.CODE}'>${item.M_NAME}</a>";
 			newRow.insertCell(2).innerText = "${item.M_DEPART}";
 			newRow.insertCell(3).innerText = "${item.M_JOB}";
-			newRow.insertCell(4).innerText = "${item.M_AGE}";
+			newRow.insertCell(4).innerText = "${item.M_AGE}".substr(0,11);
 			newRow.insertCell(5).innerText = "${item.M_PHONE}";
 			newRow.insertCell(6).innerText = "${item.M_EMAIL}";
 			newRow.insertCell(7).innerText = "${item.M_ADDRESS}";
@@ -72,6 +99,14 @@
 			</c:if>
 
 		</c:forEach>
+	}
+	
+	// 검색 버튼 클릭
+	function schEmp() {
+		var frm = document.getElementById('frm');
+		frm.action = '/employee/schList';
+		frm.method = 'POST';
+		frm.submit();
 	}
 	
 	</script>

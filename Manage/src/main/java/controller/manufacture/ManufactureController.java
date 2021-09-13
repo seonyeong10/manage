@@ -52,9 +52,6 @@ public class ManufactureController {
 			@RequestParam(value = "ma_kinds") Integer ma_kinds,
 			Model model
 			) {
-//		System.out.println("ma_code : " + ma_code);
-//		System.out.println("ma_name : " + ma_name);
-//		System.out.println("ma_kinds : " + ma_kinds);
 		addManufactureService.insertManufacture(ma_code, ma_name, ma_kinds, model);
 		return "redirect:/manufacture";
 	}
@@ -143,6 +140,9 @@ public class ManufactureController {
 		return "redirect:/manufacture";
 	}
 	
+	/**
+	 * 제조사 삭제
+	 */
 	@RequestMapping(value = "delete", method = RequestMethod.POST)
 	public String deleteManufacture(
 			@RequestParam(value = "ma_code") String ma_code,
@@ -157,5 +157,28 @@ public class ManufactureController {
 		repository.deleteManu(param);
 		
 		return "redirect:/manufacture";
+	}
+	
+	/**
+	 * 제조사 검색
+	 */
+	@RequestMapping(value = "schList", method = RequestMethod.POST)
+	public String schList(
+			@RequestParam(value = "ma_kinds", required = false) String[] ma_kinds,
+			@RequestParam(value = "schThem", required = false) String schThem,
+			@RequestParam(value = "schVal", required = false) String schVal,
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("ma_kinds", ma_kinds);
+		param.put(schThem, schVal);
+		
+		List<Map<String, Object>> manufactureList = repository.selectManufactureList(param);
+		
+		model.addAttribute("manuList", manufactureList);
+		return "manufacture/manufactureList";
 	}
 }

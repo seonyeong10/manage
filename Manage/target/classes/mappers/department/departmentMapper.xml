@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.department.departmentMapper">
+
+<update id="insertDept" parameterType="pmap">
+	<foreach collection="d_tim" item="tim" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO DEPARTMENT (D_ID, D_NAME, D_TIM) VALUES ('DEPT' || GET_SEQ('DEPT_SEQ'), #{d_name}, #{tim})
+	</foreach>	
+</update>
+
+<select id="getDeptList" parameterType="pmap" resultType="pmap">
+	SELECT D_ID, D_NAME, D_TIM
+	FROM DEPARTMENT
+	<where>
+		<trim prefixOverrides="AND | OR">
+			<if test="d_id != null and d_id != '' ">and d_id = #{d_id}</if>
+		</trim>
+	</where>
+</select>
+
+<update id="updateDept" parameterType="pmap">
+	UPDATE DEPARTMENT
+	SET
+		D_NAME = #{d_name}
+		, D_TIM = #{d_tim}
+	WHERE D_ID = #{d_id}
+</update>
+
+<delete id="deleteDept" parameterType="pmap">
+	DELETE FROM DEPARTMENT
+	WHERE D_ID = #{d_id}
+</delete>
+
+</mapper>

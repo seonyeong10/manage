@@ -36,6 +36,7 @@
   			classpath:manufacture.xml
   			classpath:equipment.xml
   			classpath:device.xml
+  			classpath:department.xml
   		</param-value>
   	</init-param>
   </servlet>
