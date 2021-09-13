@@ -149,7 +149,7 @@
 			newRow.insertCell(1).innerText = "${item.GUBUN}";
 			newRow.insertCell(2).innerHTML = "<a href='/equipment/getEquipmentInfo?id=${item.ID}&code=${item.CODE}'>${item.M_NAME}</a>";
 			newRow.insertCell(3).innerText = "${item.NAME}";
-			newRow.insertCell(4).innerText = "${item.MANUFACTURE}";
+			newRow.insertCell(4).innerText = "${item.MA_NAME}";
 			newRow.insertCell(5).innerText = "${item.AP}";
 			newRow.insertCell(6).innerText = "${item.CPU}";
 			newRow.insertCell(7).innerText = "${item.OS}";
