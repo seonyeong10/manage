@@ -67,6 +67,7 @@
 	FROM MEMBER mem
 	JOIN DEPARTMENT dep
 	ON mem.m_depart = dep.d_id
+	ORDER BY CODE
 </select>
 
 <select id="selectManufactures" parameterType="pmap" resultType="pmap">

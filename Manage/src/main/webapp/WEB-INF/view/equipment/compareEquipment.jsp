@@ -201,7 +201,7 @@
 // 			for (var i = 0; i < 2; i++) {
 				<c:forEach items="${emp }" var="emp" varStatus="s">
 					var option = document.createElement('option');
-					option.innerText = "${emp.M_NAME}(${emp.M_DEPART})";
+					option.innerText = "${emp.M_NAME}(${emp.D_TIM})";
 					option.value = "${emp.CODE}";
 					
 					if('${emp.CODE}' === code1) {
