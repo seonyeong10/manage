@@ -137,4 +137,12 @@ public class EquipmentRepository {
 		return sqlSession.delete(statement, param);
 	}
 
+	/**
+	 * 부서 목록 조회
+	 */
+	public List<Map<String, Object>> selectDepts(Map<String, Object> param) {
+		statement = namespace + ".selectDepts";
+		return sqlSession.selectList(statement, param);
+	}
+
 }

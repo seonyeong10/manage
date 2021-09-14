@@ -19,7 +19,7 @@
 		<div id="right">
 			<form action="insert" method="post" name="frm"
 				modelAttribute="equipmentCommand" onsubmit="return checkParam();">
-			<div class="section-title">장비 등록</div>
+			<div class="section-title">장비 사용 등록</div>
 				<table>
 					<tr>
 						<td>구분</td>
@@ -34,11 +34,24 @@
 						</td>
 					</tr>
 					<tr>
-						<td>소유자</td>
+						<td>부서</td>
 						<td>
-							<select name="code" id="emp">
-								<option value="">사원을 선택하세요.</option>
+							<select name="d_id" id="department" onchange="getEmps(this.value);">
+								<option value="">부서를 선택하세요.</option>
 							</select>
+						</td>
+					</tr>
+<!-- 					<tr> -->
+<!-- 						<td>소유자</td> -->
+<!-- 						<td> -->
+<!-- 							<select name="code" id="emp"> -->
+<!-- 								<option value="">사원을 선택하세요.</option> -->
+<!-- 							</select> -->
+<!-- 						</td> -->
+<!-- 					</tr> -->
+					<tr>
+						<td>소유자</td>
+						<td id="checkbox-box">
 						</td>
 					</tr>
 					<tr>
@@ -157,6 +170,47 @@
 	var param = document.getElementsByTagName('input');
 	var select = document.getElementsByTagName('select');
 	
+		// 부서별 사원 조회
+		function getEmps(val) {
+			
+			$.ajax({
+				type : "post"
+				,url : "/equipment/getEmployees"
+				,data : {"d_id" : val}
+				,dataType : "json"
+				,error : function(request, stataus, error) {
+					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+				}
+				,success : function(responseText, statusText, xhr) {
+					var msg = responseText.message;
+					var dept = responseText.dept;
+					
+					console.log(dept);
+					
+					var target = document.getElementById('checkbox-box');
+					
+					for(var i=0 ; i<dept.length ; i++) {
+						if(i % 4 == 0) {
+							target.appendChild(document.createElement('br'));
+						}
+						
+						var box = document.createElement('input');
+						box.setAttribute('type', 'checkbox');
+						box.setAttribute('name', 'code');
+						box.setAttribute('value', dept[i].CODE);
+						box.setAttribute('id', dept[i].CODE);
+						target.appendChild(box);
+						
+						var label = document.createElement('label');
+						label.innerText = dept[i].M_NAME;
+						target.appendChild(label);
+					}
+				}
+				
+			});
+			
+		}
+	
 		// 제품 상세정보
 		function getDeviceInfo() {
 			var target = document.getElementsByTagName('select')[name='id'];
@@ -175,7 +229,6 @@
 					var msg = responseText.message;
 					var item = responseText.item;
 					
-					console.log(item[0].DIVISION);
 					if(gubun === 'PC') {
 						document.getElementById('pc_division').innerText = item[0].DIVISION;
 						document.getElementById('pc_os').innerText = item[0].OS;
@@ -337,22 +390,18 @@
 		window.onload = load();
 
 		function load() {
-// 			document.getElementById('phone-ability').style.display = 'none';
-// 			document.getElementById('pc-ability').style.display = 'none';
-// 			document.getElementById('monitor-ability').style.display = 'none';
 			
-			// 사원 리스트
-			// option 초기화
-			$('#emp').children('option:not(:first)').remove();
-			var target = document.getElementById('emp');
+			// 부서 리스트
+			$('#dept').children('option:not(:first)').remove();
+			target = document.getElementById('department');
 			
-			<c:forEach items="${emp }" var="emp" varStatus="s">
+			<c:forEach items="${dept }" var="dept" varStatus="s">
 				var option = document.createElement('option');
-				option.innerText = "${emp.M_NAME}(${emp.D_NAME})";
-				option.value = "${emp.CODE}";
+				option.innerText = "${dept.D_TIM}";
+				option.value = "${dept.D_ID}";
 				target.append(option);
 			</c:forEach>
-			
+		
 		}
 	</script>
 </body>

@@ -77,10 +77,10 @@ public class EquipmentController {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		
-		// 사원
-		List<Map<String, Object>> empList = repository.selectEmps(param);
+		// 부서
+		List<Map<String, Object>> deptList = repository.selectDepts(param);
 		
-		model.addAttribute("emp", empList);
+		model.addAttribute("dept", deptList);
 		
 		return "equipment/equipmentForm";
 	}
@@ -94,14 +94,14 @@ public class EquipmentController {
 	 */
 	@RequestMapping(value = "insert", method = RequestMethod.POST)
 	public String insertOwn(
-			@RequestParam(value = "code") String code
+			@RequestParam(value = "code") String[] code
 			,@RequestParam(value = "id") String id
 			,EquipmentCommand com 
 			,Model model) {
 		Map<String, Object> param = new HashMap<String, Object>();
 		int result = 0;
 		
-		param.put("code", com.getCode());
+		param.put("code", code);
 		param.put("id", id);
 		
 		repository.insertOwn(param);
@@ -414,6 +414,31 @@ public class EquipmentController {
 				
 		obj.put("message", "success");
 				
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
+	/**
+	 * 장비 양도
+	 */
+	@RequestMapping(value = "getEmployees", method = RequestMethod.POST)
+	public void getEmployees(
+			@RequestParam(value = "d_id", defaultValue = "") String d_id,
+			HttpServletRequest request, 
+			HttpServletResponse response, 
+			Model model
+			) throws Exception {
+		
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("d_id", d_id);
+		
+		List<Map<String, Object>> deptList = repository.selectEmps(param);
+		
+		obj.put("message", "success");
+		obj.put("dept", deptList);
+		
 		response.setContentType("text/plain; charset=UTF-8");
 		response.getWriter().write(obj.toString());
 	}

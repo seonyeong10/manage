@@ -22,10 +22,11 @@
 	</where>
 </select>
 
-<insert id="insertOwn" parameterType="pmap">
-	insert into own (code, id)
-	values(#{code}, #{id})
-</insert>
+<update id="insertOwn" parameterType="pmap">
+	<foreach collection="code" item="code" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
+		INTO OWN (ID, CODE) VALUES (#{id},#{code})
+	</foreach>	
+</update>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
 	SELECT ROWNUM, O.CODE, M_NAME, M_DEPART, M_JOB, MA.MA_CODE, MA_NAME, O.ID, GUBUN, DIVISION, NAME, AP, OS, CPU, RAM, CAPACITY, BATTERY, GPU, PANNEL, HZ, RESOLUTION, SPEED, SHAPE
@@ -72,10 +73,12 @@
 </select>
 
 <select id="selectEmps" parameterType="pmap" resultType="pmap">
- 	SELECT CODE, M_NAME, M_DEPART, D_NAME, D_TIM, M_JOB, M_AGE, M_PHONE, M_EMAIL, M_ADDRESS, M_GENDER 
+ 	SELECT CODE, M_NAME, M_DEPART, D_NAME, D_TIM, M_JOB, SUBSTR(M_AGE,0,11) AS M_AGE, M_PHONE, M_EMAIL, M_ADDRESS, M_GENDER 
 	FROM MEMBER mem
 	JOIN DEPARTMENT dep
 	ON mem.m_depart = dep.d_id
+	WHERE 1=1
+	<if test="d_id != null and d_id != '' ">and d_id = #{d_id}</if>
 	ORDER BY CODE
 </select>
 
@@ -105,5 +108,11 @@
 	DELETE FROM OWN
 	WHERE ID = #{id} AND CODE = #{code}
 </delete>
+
+<select id="selectDepts" parameterType="pmap" resultType="pmap">
+	SELECT D_ID, D_NAME, D_TIM
+	FROM DEPARTMENT
+	ORDER BY D_ID
+</select>
 
 </mapper>
