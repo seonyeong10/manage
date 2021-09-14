@@ -8,4 +8,7 @@
 	<bean id="MainController" class="controller.main.MainController" />
 	<bean class="controller.main.LoginController" />
 	
+	<bean class="controller.main.LoginController2" />
+	<bean class="repository.main.LoginRepository2" />
+	
 </beans>

@@ -1,26 +1,21 @@
 package model;
 
 public class AuthInfo {
-	private String userId;
-	private String email;
-	private String name;
+	private String id;
+	private String auth;
 
-	public AuthInfo(String userId, String email, String name) {
+	public AuthInfo(String id, String auth) {
 		super();
-		this.userId = userId;
-		this.email = email;
-		this.name = name;
+		this.id = id;
+		this.auth = auth;
 	}
 
-	public String getUserId() {
-		return userId;
+	public String getId() {
+		return id;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getAuthl() {
+		return auth;
 	}
 
-	public String getName() {
-		return name;
-	}
 }

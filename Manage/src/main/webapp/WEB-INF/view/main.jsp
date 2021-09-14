@@ -6,12 +6,12 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="<c:url value="/resources/css/base.css"/>" rel="stylesheet"
-	type="text/css" />
+<link href="<c:url value="/resources/css/base.css"/>" rel="stylesheet" type="text/css" />
 </head>
-<%-- <c:if test="${empty authInfo}"> --%>
-<form:form action="login" name="frm" method="post" id="frm"
-	modelAttribute="loginCommand">
+<c:if test="${empty authInfo}">
+벨렐ㄹㄹ
+</c:if>
+<c:if test="${!empty authInfo}">
 	<body>
 		<%@ include file="include/top.jsp"%>
 		<div id="content">
@@ -29,5 +29,5 @@
 			</div>
 		</div>
 	</body>
-</form:form>
+</c:if>
 </html>
