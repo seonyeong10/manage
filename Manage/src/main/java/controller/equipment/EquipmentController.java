@@ -419,7 +419,7 @@ public class EquipmentController {
 	}
 	
 	/**
-	 * 장비 양도
+	 * 사원 조회
 	 */
 	@RequestMapping(value = "getEmployees", method = RequestMethod.POST)
 	public void getEmployees(
