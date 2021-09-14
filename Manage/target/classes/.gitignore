@@ -3,3 +3,6 @@
 /repository/
 /command/
 /model/
+/interceptor/
+/WebMvcConfig.class
+/LoginCheckInterceptor.class
