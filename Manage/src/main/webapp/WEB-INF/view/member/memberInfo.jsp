@@ -18,14 +18,25 @@
 
 		<div id="right">
 			<form id="frm" method="post" onsubmit="return checkParam();" action="/employee/update">
-			<div class="section-title">사원 상세정보</div>
+				<div class="section-title">사원 상세정보</div>
+				<div class="section-sub-title">
+					<a onclick="show('personal-info', this);" class="color-line">인적정보</a>
+					<a onclick="show('device-info', this);" class="">장비정보</a>
+				</div>
+				<div class="section-divice-title">
+					<a href="#monitor" onclick="active(this);" class="device-btn">모니터</a>
+					<a href="#pc" class="device-btn"  onclick="active(this);">PC</a>
+					<a href="#phone" class="device-btn"  onclick="active(this);">핸드폰</a>
+				</div>
+				
+				<!-- 인적정보 -->
 				<input type="hidden" name="phPattern" value="true"/>
 				<input type="hidden" name="emailPattern" value="true"/>
-				<div style="width: 930px; overflow:auto;">
+				<div style="width: 930px; overflow:auto;" id="personal-info">
 					<table>
 						<tr>
 							<td>사번</td>
-							<td><input type="text" name="code" value="${empList.CODE }" readonly="readonly" /></td>
+							<td><input type="text" name="code" value="${empList.CODE }" readonly="readonly" style="background:#eee"/></td>
 						</tr>
 						<tr>
 							<td>이름</td>
@@ -113,6 +124,125 @@
 						</tr>
 					</table>
 				</div>
+				
+				<!-- 장비정보 -->
+				<div id="device-info">
+				
+				<c:forEach items="${devList }" var="item" varStatus="i">
+				<c:if test="${item.GUBUN eq 'MONITOR' }">
+				<c:if test="${item.NO eq '1' }"><div class="device-info-title" id="monitor">모니터</div></c:if>
+				<table >
+					<tr>
+						<td>제품명</td>
+						<td><span class="ability" id="mo_name">${item.NAME }</span></td>
+					</tr>
+					<tr>
+						<td>제조사</td>
+						<td><span class="ability" id="manufacture">${item.MA_NAME }</span></td>
+					</tr>
+					<tr>
+						<td>패널</td>
+						<td><span class="ability" id="mo_pannel">${item.PANNEL }</span></td>
+					</tr>
+					<tr>
+						<td>화면 주사율(hz)</td>
+						<td><span class="ability" id="mo_hz">${item.HZ }</span></td>
+					</tr>
+					<tr>
+						<td>해상도</td>
+						<td><span class="ability" id="mo_resolution">${item.RESOLUTION }</span></td>
+					</tr>
+					<tr>
+						<td>응답속도(ms)</td>
+						<td><span class="ability" id="mo_speed">${item.SPEED }</span></td>
+					</tr>
+					<tr>
+						<td>형태</td>
+						<td><span class="ability" id="mo_shape">${item.SHAPE }</span></td>
+					</tr>
+				</table>
+				</c:if>
+				
+				<c:if test="${item.GUBUN eq 'PC' }">
+				<c:if test="${item.NO eq '1' }"><div class="device-info-title" id="pc">PC</div></c:if>
+				<table >
+					<tr>
+						<td>종류</td>
+						<td><span class="ability" id="pc_division">${item.DIVISION }</span></td>
+					</tr>
+					<tr>
+						<td>제품명</td>
+						<td><span class="ability" id="pc_name">${item.NAME }</span></td>
+					</tr>
+					<tr>
+						<td>제조사</td>
+						<td><span class="ability" id="manufacture">${item.MA_NAME }</span></td>
+					</tr>
+					<tr>
+						<td>운영체제</td>
+						<td><span class="ability" id="pc_os">${item.OS }</span></td>
+					</tr>
+					<tr>
+						<td>CPU</td>
+						<td><span class="ability" id="pc_cpu">${item.CPU }</span></td>
+					</tr>
+					<tr>
+						<td>RAM(GB)</td>
+						<td><span class="ability" id="pc_ram">${item.RAM }</span></td>
+					</tr>
+					<tr>
+						<td>GPU</td>
+						<td><span class="ability" id="pc_gpu">${item.GPU }</span></td>
+					</tr>
+					<tr>
+						<td>저장공간(GB)</td>
+						<td><span class="ability" id="pc_capacity">${item.CAPACITY }</span></td>
+					</tr>
+				</table>
+				</c:if>
+				
+				<c:if test="${item.GUBUN eq 'PHONE' }">
+				<c:if test="${item.NO eq '1' }"><div class="device-info-title" id="phone">핸드폰</div></c:if>
+				<table >
+					<tr>
+						<td>제품명</td>
+						<td><span class="ability" id="p_name">${item.NAME }</span></td>
+					</tr>
+					<tr>
+						<td>제조사</td>
+						<td><span class="ability" id="manufacture">${item.MA_NAME }</span></td>
+					</tr>
+					<tr>
+						<td>AP칩셋</td>
+						<td><span class="ability" id="p_ap">${item.AP }</span></td>
+					</tr>
+					<tr>
+						<td>운영체제</td>
+						<td><span class="ability" id="p_os">${item.OS }</span></td>
+					</tr>
+					<tr>
+						<td>CPU</td>
+						<td><span class="ability" id="p_cpu">${item.CPU }</span></td>
+					</tr>
+					<tr>
+						<td>RAM(GB)</td>
+						<td><span class="ability" id="p_ram">${item.RAM }</span></td>
+					</tr>
+					<tr>
+						<td>저장공간(GB)</td>
+						<td><span class="ability" id="p_capacity">${item.CAPACITY }</span></td>
+					</tr>
+					<tr>
+						<td>배터리(mAh)</td>
+						<td><span class="ability" id="p_battery">${item.BATTERY }</span></td>
+					</tr>
+				</table>
+				</c:if>
+				
+				</c:forEach>
+
+				</div>	<!-- device-info 끝 -->
+				
 			</form>
 		</div>
 	</div>
@@ -123,6 +253,40 @@
 	var regExpEmail = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
 	window.onload = getInfo();
+	
+	// 장비 부제목 클릭
+	function active(section) {
+		var btn = document.getElementsByClassName('device-btn');
+		var length = btn.length;
+		
+		for(var i=0; i < length; i++) {
+			btn[i].style.background = '#eee';
+			btn[i].style.color = '#333';
+		}
+		section.style.background = '#fff';
+		section.style.color = '#0067a3';
+	}
+	
+	// 부제목 클릭
+	function show(sub, btn) {
+		var personal = 'personal-info';
+		var device = 'device-info';
+		var element = document.getElementsByClassName('color-line')[0];
+		
+		if(sub === personal) {
+			document.getElementById('personal-info').style.display="block";
+			document.getElementById('device-info').style.display="none";
+			document.getElementsByClassName('section-divice-title')[0].style.display="none";
+		} else if(sub === device) {
+			document.getElementById('personal-info').style.display="none";
+			document.getElementById('device-info').style.display="block";
+			document.getElementsByClassName('section-divice-title')[0].style.display="block";
+		}
+		
+		element.classList.remove('color-line');
+		btn.classList.add('color-line');
+		
+	}
 
 	function getInfo() {
 		var target = document.getElementsByTagName('input')[name='m_age'];

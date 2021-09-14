@@ -1,0 +1,80 @@
+@charset "UTF-8";
+
+#content {margin: 0 auto;}
+.input-area {
+  background: #fff;
+  margin: 0 auto 0;
+  width: 300px;
+}
+
+.frm, table {margin: 0 auto;}
+
+.input-area h2 {
+  font-size: 22px;
+  margin: 70px 0 0;
+  font-weight: 900;
+}
+
+.input-area .frm .input-name{
+  display: block;
+  color: #808080;
+  margin: 0 0 7px;
+  font-weight: 700;
+  font-size: 13px;
+}
+
+.frm table {width: 100%;}
+
+.frm table{
+  border-collapse: separate;
+  border-spacing: 0 20px;
+}
+
+.frm input[type=text], .frm input[type=password] {
+  width: 270px;
+  padding: 10px 15px;
+  border-radius: 5px;
+  border: 1px solid #d8ddde;
+}
+
+.frm input[type=submit] {
+  width: 100%;
+  border-radius: 5px;
+  padding: 10px 0;
+  text-align: center;
+  background: #0067a3;
+  color: #fff;
+  border: none;
+  font-weight: 700;
+}
+
+.frm input[type=submit]:hover {
+	background: #191970;
+}
+
+.agree {padding-left: 10px;}
+
+.btn-area, .nav-area {
+  border-top: 1px solid #d8ddde;
+  width: 300px;
+  margin: 0 auto;
+  padding: 22px 0;
+  font-size: 15px;
+}
+
+.btn-area i {padding-right: 7px;}
+
+.nav-area a::after, .nav-area a {
+  color: #333;
+  font-size: 13px;
+}
+
+.nav-area a::after{
+  display: inline-block;
+  content: "·";
+  padding: 0 10px;
+}
+
+.nav-area a:last-child::after {
+  content: "";
+}

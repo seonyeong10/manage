@@ -62,7 +62,7 @@
 						</tr>
 					</tfoot>
 
-					<tbody id="phone-ability">
+					<tbody id="phone-ability" class="ability-box">
 						<tr>
 							<td colspan="2" class="equip-title">핸드폰</td>
 						</tr>
@@ -91,7 +91,7 @@
 							<td><span class="ability" id="p_battery"></span></td>
 						</tr>
 					</tbody>
-					<tbody id="pc-ability">
+					<tbody id="pc-ability" class="ability-box">
 						<tr>
 							<td colspan="2" class="equip-title">PC</td>
 						</tr>
@@ -121,7 +121,7 @@
 
 						</tr>
 					</tbody>
-					<tbody id="monitor-ability">
+					<tbody id="monitor-ability" class="ability-box">
 						<tr>
 							<td colspan="2" class="equip-title">모니터</td>
 						</tr>
@@ -267,25 +267,37 @@
 			
 			var gubun = document.getElementById('gubun').options[document.getElementById('gubun').selectedIndex].value;
 			var category = null;
+			var phone = document.getElementById('phone-ability');
+			var pc = document.getElementById('pc-ability');
+			var monitor = document.getElementById('monitor-ability');
 
+			hideTable(); // 화면 초기화
+			
 			// gubun에 따라 tBody 변경
 			if (gubun === 'PC') {
-				category = document.getElementById('pc-ability');
+				pc.classList.remove('ability-box');
 				
 			} else if (gubun === 'MONITOR') {
-				category = document.getElementById('monitor-ability');
+				monitor.classList.remove('ability-box');
 				
 			} else if (gubun === 'PHONE') {
-				category = document.getElementById('phone-ability');
+				phone.classList.remove('ability-box');
 				
 			}
 
-			load(); // 화면 초기화
-			category.style.display = 'block';
 			
 			getDevice(gubun);
-// 			getManufactures(gubun);
 		
+		}
+		
+		function hideTable() {
+			var phone = document.getElementById('phone-ability');
+			var pc = document.getElementById('pc-ability');
+			var monitor = document.getElementById('monitor-ability');
+			
+			phone.classList.add('ability-box');
+			pc.classList.add('ability-box');
+			monitor.classList.add('ability-box');
 		}
 		
 		// 제조사 리스트
@@ -325,9 +337,9 @@
 		window.onload = load();
 
 		function load() {
-			document.getElementById('phone-ability').style.display = 'none';
-			document.getElementById('pc-ability').style.display = 'none';
-			document.getElementById('monitor-ability').style.display = 'none';
+// 			document.getElementById('phone-ability').style.display = 'none';
+// 			document.getElementById('pc-ability').style.display = 'none';
+// 			document.getElementById('monitor-ability').style.display = 'none';
 			
 			// 사원 리스트
 			// option 초기화
@@ -336,7 +348,7 @@
 			
 			<c:forEach items="${emp }" var="emp" varStatus="s">
 				var option = document.createElement('option');
-				option.innerText = "${emp.M_NAME}(${emp.M_DEPART})";
+				option.innerText = "${emp.M_NAME}(${emp.D_NAME})";
 				option.value = "${emp.CODE}";
 				target.append(option);
 			</c:forEach>

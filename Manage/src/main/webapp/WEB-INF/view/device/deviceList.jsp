@@ -24,16 +24,19 @@
 				<input type="hidden" name="code" id="code" />
 				
 			
-			<div style="overflow: auto; position:absolute; transform:translateX(-50%);">
+			<div >
 			<div class="sch-box">
 				<div>
 					<span>종류</span>
-					<input type="radio" name="gubun" value="MONITOR" id="g-monitor"/>
-					<label for="g-monitor">모니터	</label>
-					<input type="radio" name="gubun" value="PC" id="g-pc" />
-					<label for="g-pc">PC</label>
-					<input type="radio" name="gubun" value="PHONE" id="g-phone" />
-					<label for="g-phone">핸드폰</label>
+					<input type="checkbox" name="gubun" value="MONITOR"/> 모니터
+					<input type="checkbox" name="gubun" value="PC"/> PC
+					<input type="checkbox" name="gubun" value="PHONE"/> 핸드폰
+<!-- 					<input type="radio" name="gubun" value="MONITOR" id="g-monitor"/> -->
+<!-- 					<label for="g-monitor">모니터	</label> -->
+<!-- 					<input type="radio" name="gubun" value="PC" id="g-pc" /> -->
+<!-- 					<label for="g-pc">PC</label> -->
+<!-- 					<input type="radio" name="gubun" value="PHONE" id="g-phone" /> -->
+<!-- 					<label for="g-phone">핸드폰</label> -->
 				</div>
 				<br />
 				<div>

@@ -19,24 +19,27 @@
 
 		<div id="right" >
 			<form action="#" method="post" id="frm" >
-			<div class="section-title">장비 조회</div>
+			<div class="section-title">사용 장비 조회</div>
 				<input type="hidden" name="table" id="gubun" />
 				<input type="hidden" name="code" id="code" />
 				
 			
-			<div style="overflow: auto; position:absolute; transform:translateX(-50%);">
+			<div >
 			<div class="sch-box">
 				<div>
 					<span>종류</span>
-					<input type="radio" name="gubun" value="MONITOR" id="g-monitor" onclick="activeBox(this.value);"/>
-					<label for="g-monitor">모니터	</label>
-					<input type="radio" name="gubun" value="PC" id="g-pc" onclick="activeBox(this.value);"/>
-					<label for="g-pc">PC</label>
-					<input type="radio" name="gubun" value="PHONE" id="g-phone" onclick="activeBox(this.value);"/>
-					<label for="g-phone">핸드폰</label>
+					<input type="checkbox" name="gubun" value="MONITOR" onclick="activeBox(this.value);"/> 모니터
+					<input type="checkbox" name="gubun" value="PC" onclick="activeBox(this.value);"/> PC
+					<input type="checkbox" name="gubun" value="PHONE" onclick="activeBox(this.value);"/> 핸드폰
+<!-- 					<input type="radio" name="gubun" value="MONITOR" id="g-monitor" onclick="activeBox(this.value);"/> -->
+<!-- 					<label for="g-monitor">모니터	</label> -->
+<!-- 					<input type="radio" name="gubun" value="PC" id="g-pc" onclick="activeBox(this.value);"/> -->
+<!-- 					<label for="g-pc">PC</label> -->
+<!-- 					<input type="radio" name="gubun" value="PHONE" id="g-phone" onclick="activeBox(this.value);"/> -->
+<!-- 					<label for="g-phone">핸드폰</label> -->
 				</div>
 				<br />
-				<div>
+				<div class="ability-box">
 					<select name="ability" id="sch-ability"></select>
 					<input type="text" name="aVal" placeholder="검색어를 입력하세요."/>
 				</div>
@@ -81,6 +84,8 @@
 	</div>
 	<script type="text/javascript">
 		function activeBox(gubun) {
+			document.getElementsByClassName('ability-box')[0].style.display = 'block';
+			
 			var target = document.getElementById('sch-ability');
 			let monitors =  new Map([
 					['패널', 'pannel'], ['주사율','hz'], ['해상도','resolution'], ['응답속도','speed']
@@ -134,7 +139,9 @@
 		// 	var lists = "${list}";
 		// 	console.log(lists);
 		function getEquipmentList() {
-			var map = new Array();
+			// 성능정보 검색 박스 안보이게 변경
+			document.getElementsByClassName('ability-box')[0].style.display = 'none';
+			
 			const table = document.getElementById('equipment');
 
 			<c:forEach items="${list }" var="item">
@@ -172,8 +179,6 @@
 				newRow.insertCell(16).innerText = "평면";
 			}
 			
-// 			newRow.insertCell(16).innerText = "${item.SHAPE}";
-
 			</c:forEach>
 		}
 

@@ -2,7 +2,7 @@
 
 table {
 	margin: 0 auto 50px;
-	width: 100%;
+	width: auto;
 	border-top: 2px solid #333;
 	border-bottom: 2px solid #333;
 }
@@ -66,3 +66,5 @@ tr td .not-duplicate {
 	font-size: 11px;
 	color: red;
 }
+
+.ability-box {display: none;}

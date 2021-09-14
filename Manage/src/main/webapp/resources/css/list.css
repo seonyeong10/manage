@@ -14,7 +14,7 @@ td,th {
 }
 
 td:first-child , th:first-child{
-	border: none;
+/* 	border-top: none; */
 }
 
 table .table-top {

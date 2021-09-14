@@ -24,8 +24,6 @@ import service.member.MemberAddServcie;
 @Controller
 @RequestMapping("employee")
 public class MemberController {
-//	@Autowired
-//	MemberJoinService memberJoinService;
 	
 	@Autowired
 	MemberAddServcie memberAddServcie;
@@ -66,7 +64,6 @@ public class MemberController {
 			HttpServletResponse response,
 			Model model
 			) throws Exception {
-//		System.out.println(1);
 		
 		JSONObject obj = new JSONObject();
 		
@@ -141,11 +138,13 @@ public class MemberController {
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("code", code);
 		
-		List<Map<String, Object>> empList = repository.getEmployeeList(param);
-		List<Map<String, Object>> deptList = repository.getDeptList(param);
+		List<Map<String, Object>> empList = repository.getEmployeeList(param);		// 사원 정보
+		List<Map<String, Object>> deptList = repository.getDeptList(param);			// 부서 목록
+		List<Map<String, Object>> devList = repository.getDeviceList(param);		// 장비 목록
 		
 		model.addAttribute("empList", empList.get(0));
 		model.addAttribute("deptList", deptList);
+		model.addAttribute("devList", devList);
 		
 		return "member/memberInfo";
 	}

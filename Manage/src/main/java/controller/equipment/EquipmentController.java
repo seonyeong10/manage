@@ -46,18 +46,18 @@ public class EquipmentController {
 	 * @return
 	 */
 	@RequestMapping(method = RequestMethod.GET)
-	public String openEquipmentList(@RequestParam(value = "gubun", required = false) String gubun,
+	public String openEquipmentList(@RequestParam(value = "gubun", required = false) String[] gubun,
 			@RequestParam(value = "schThem", required = false) String schThem,
-			@RequestParam(value = "schVal", required = false, defaultValue = "") String schVal, 
+			@RequestParam(value = "schVal", required = false) String schVal, 
 			@RequestParam(value = "ability", required = false) String ability,
-			@RequestParam(value = "aVal", required = false, defaultValue = "") String aVal, 
+			@RequestParam(value = "aVal", required = false) String aVal, 
 			Model model) {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("gubun", gubun);
 		
-		if(schVal.equals("")) schVal = null;
-		if(aVal.equals("")) aVal = null;
+//		if(schVal.equals("")) schVal = null;
+//		if(aVal.equals("")) aVal = null;
 		param.put(schThem, schVal);
 		param.put(ability, aVal);
 
@@ -237,126 +237,6 @@ public class EquipmentController {
 		response.getWriter().write(obj.toString());
 	}
 
-//	@RequestMapping(value = "updatePhone", method = RequestMethod.POST)
-//	public String updatePhone(@RequestParam(value = "code", defaultValue = "") String code,
-//			@RequestParam(value = "id", defaultValue = "") String id,
-//			@RequestParam(value = "p_name", defaultValue = "") String p_name,
-//			@RequestParam(value = "p_ap", defaultValue = "") String p_ap,
-//			@RequestParam(value = "p_os", defaultValue = "") String p_os,
-//			@RequestParam(value = "p_cpu", defaultValue = "") String p_cpu,
-//			@RequestParam(value = "p_ram", defaultValue = "") String p_ram,
-//			@RequestParam(value = "p_capacity", defaultValue = "") String p_capacity,
-//			@RequestParam(value = "p_battery", defaultValue = "") String p_battery, Model model) {
-//
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		param.put("p_name", p_name);
-//		param.put("p_ap", p_ap);
-//		param.put("p_os", p_os);
-//		param.put("p_cpu", p_cpu);
-//		param.put("p_ram", p_ram);
-//		param.put("p_capacity", p_capacity);
-//		param.put("p_battery", p_battery);
-//		param.put("id", id);
-//
-//		repository.updatePhone(param);
-//
-//		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
-//	}
-//
-//	@RequestMapping(value = "updatePC", method = RequestMethod.POST)
-//	public String updatePC(@RequestParam(value = "code", defaultValue = "") String code,
-//			@RequestParam(value = "id", defaultValue = "") String id,
-//			@RequestParam(value = "pc_name", defaultValue = "") String p_name,
-//			@RequestParam(value = "pc_gpu", defaultValue = "") String p_gpu,
-//			@RequestParam(value = "pc_os", defaultValue = "") String p_os,
-//			@RequestParam(value = "pc_cpu", defaultValue = "") String p_cpu,
-//			@RequestParam(value = "pc_ram", defaultValue = "") String p_ram,
-//			@RequestParam(value = "pc_capacity", defaultValue = "") String p_capacity, 
-//			@RequestParam(value = "pc_division", defaultValue = "") String pc_division, 
-//			Model model) {
-//
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		String division = null;
-//		
-//		param.put("pc_name", p_name);
-//		param.put("pc_gpu", p_gpu);
-//		param.put("pc_os", p_os);
-//		param.put("pc_cpu", p_cpu);
-//		param.put("pc_ram", p_ram);
-//		param.put("pc_capacity", p_capacity);
-//		param.put("id", id);
-//		
-//		if(pc_division.equals("100")) {
-//			division = "DESKTOP";
-//		} else if(pc_division.equals("200")) {
-//			division = "NOTEBOOK";
-//		}
-//		
-//		param.put("pc_division", division);
-//		
-//		repository.updatePC(param);
-//
-//		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
-//	}
-//
-//	@RequestMapping(value = "updateMonitor", method = RequestMethod.POST)
-//	public String updateMonitor(@RequestParam(value = "code", defaultValue = "") String code,
-//			@RequestParam(value = "id", defaultValue = "") String id,
-//			@RequestParam(value = "mo_name", defaultValue = "") String mo_name,
-//			@RequestParam(value = "mo_pannel", defaultValue = "") String mo_pannel,
-//			@RequestParam(value = "mo_hz", defaultValue = "") String mo_hz,
-//			@RequestParam(value = "mo_resolution", defaultValue = "") String mo_resolution,
-//			@RequestParam(value = "mo_speed", defaultValue = "") String mo_speed,
-//			@RequestParam(value = "mo_shape", defaultValue = "") String mo_shape, Model model) {
-//
-//		Map<String, Object> param = new HashMap<String, Object>();
-//		
-//		String shape = null;
-//		
-//		param.put("mo_name", mo_name);
-//		param.put("mo_pannel", mo_pannel);
-//		param.put("mo_hz", mo_hz);
-//		param.put("mo_resolution", mo_resolution);
-//		param.put("mo_speed", mo_speed);
-//		
-//		if(shape.equals("100")) shape = "커브드";
-//		else if(shape.equals("200")) shape = "와이드";
-//		else if(shape.equals("300")) shape = "평면";
-//		param.put("mo_shape", shape);
-//		param.put("id", id);
-//
-//		repository.updateMonitor(param);
-//
-//		return "redirect:/equipment/getEquipmentInfo?code=" + code + "&id=" + id;
-//	}
-
-	/**
-	 * 장비 성능정보 삭제
-	 * 
-	 * @return
-	 */
-	@RequestMapping(value = "delEquipment", method = RequestMethod.POST)
-	public String delEquipment(
-			@RequestParam(value = "id") String id,
-			@RequestParam(value = "gubun", defaultValue = "") String gubun, 
-			Model model
-			) {
-
-		Map<String, Object> param = new HashMap<String, Object>();
-		param.put("id", id);
-		
-
-		if (gubun.equals("MONITOR"))
-			repository.delMonitor(param);
-		else if (gubun.equals("PC")) {
-			repository.delPC(param);
-		}
-		else if (gubun.equals("PHONE"))
-			repository.delPhone(param);
-
-		return "redirect:/equipment";
-	}
-
 	/**
 	 * 장비 성능 비교
 	 * @throws Exception 
@@ -367,9 +247,6 @@ public class EquipmentController {
 			@RequestParam(value = "code2", defaultValue = "") String code2,
 			HttpServletRequest request,
 			Model model) throws Exception {
-		
-//		if(gubun.equals("phone")) gubun = "핸드폰";
-//		else if(gubun.equals("monitor")) gubun = "모니터";
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		
@@ -409,7 +286,7 @@ public class EquipmentController {
 	@RequestMapping(value = "compare/getEquipmentList", method = RequestMethod.POST)
 	public void getEquipmentList(
 			@RequestParam(value = "code") String code		// 사원번호
-			,@RequestParam(value = "gubun") String gubun	// 장치 종류(PC, Phone, Monitor)
+			,@RequestParam(value = "gubun") String[] gubun	// 장치 종류(PC, Phone, Monitor)
 			,HttpServletRequest request
 			,HttpServletResponse response
 			,Model model

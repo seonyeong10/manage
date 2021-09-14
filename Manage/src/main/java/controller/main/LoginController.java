@@ -17,9 +17,10 @@ import validator.LoginCommandValidator;
 public class LoginController {
 	@Autowired
 	AuthService authService;
+	
 	@RequestMapping(method = RequestMethod.GET)
-	public String main() {
-		return "redirect:/";	// 맨 처음으로 복귀 /main
+	public String openForm() {
+		return "login";	
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)

@@ -62,8 +62,8 @@
 									<c:when test="${list.MA_KINDS eq '400' }">핸드폰</c:when>
 								</c:choose></td>
 							<td>
-								<button onclick="updateManu(${list.MA_CODE});">수정</button>
-								<button onclick="deleteManu(${list.MA_CODE});">삭제</button>
+								<button onclick="updateManu(${list.MA_CODE});" class="small-btn">수정</button>
+								<button onclick="deleteManu(${list.MA_CODE});" class="small-btn">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>

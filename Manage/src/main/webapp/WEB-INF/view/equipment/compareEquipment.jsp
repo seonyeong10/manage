@@ -67,7 +67,7 @@
 						</tr>
 					</thead>
 				</table>
-				<table id="phone-ability">
+				<table id="phone-ability" class="ability-box">
 						<tr>
 							<td><input type="text" name="name1" readonly="readonly" class="ph1"/></td>
 							<td class="col">제품명</td>
@@ -104,7 +104,7 @@
 							<td><input type="text" name="p_battery2" readonly="readonly" class="ph2"/></td>
 						</tr>
 				</table>
-				<table id="pc-ability">
+				<table id="pc-ability" class="ability-box">
 						<tr>
 							<td><input type="text" name="pc_division1" readonly="readonly" class="pc1"/></td>
 							<td class="col">종류</td>
@@ -142,7 +142,7 @@
 
 						</tr>
 				</table>
-				<table id="monitor-ability">
+				<table id="monitor-ability" class="ability-box">
 						<tr>
 							<td><input type="text" name="name1" readonly="readonly" class="mo1"/></td>
 							<td class="col">제품명</td>
@@ -198,7 +198,11 @@
 			var target = document.getElementsByClassName('emp');
 			var code1 = "${selected.code1}";
 			var code2 = "${selected.code2}";
-// 			for (var i = 0; i < 2; i++) {
+			
+			var phone = document.getElementById('phone-ability');
+			var pc = document.getElementById('pc-ability');
+			var monitor = document.getElementById('monitor-ability');
+			
 				<c:forEach items="${emp }" var="emp" varStatus="s">
 					var option = document.createElement('option');
 					option.innerText = "${emp.M_NAME}(${emp.D_TIM})";
@@ -223,33 +227,41 @@
 					target[1].append(option);
 				</c:forEach>
 
-// 			}
-			if(table === 'PHONE') document.getElementById('phone-ability').style.display = 'block';
-			else if(table === 'MONITOR') document.getElementById('monitor-ability').style.display = 'block';
-			else if(table === 'PC') document.getElementById('pc-ability').style.display = 'block';
-			
+
+			if(table === 'PHONE') phone.classList.remove('ability-box');
+			else if(table === 'MONITOR') monitor.classList.remove('ability-box');
+			else if(table === 'PC') pc.classList.remove('ability-box');
+
 		}
 
 		// 테이블 숨김
 		function hideTable() {
-			document.getElementById('phone-ability').style.display = 'none';
-			document.getElementById('pc-ability').style.display = 'none';
-			document.getElementById('monitor-ability').style.display = 'none';
+			var phone = document.getElementById('phone-ability');
+			var pc = document.getElementById('pc-ability');
+			var monitor = document.getElementById('monitor-ability');
+			
+			phone.classList.add('ability-box');
+			pc.classList.add('ability-box');
+			monitor.classList.add('ability-box');
 		}
 
 		// 항목 선택하면 테이블 표시
 		function showEquipment() {
 			var target = document.getElementById('gubun');
 			var selected = target.options[target.selectedIndex].value;
+			
+			var phone = document.getElementById('phone-ability');
+			var pc = document.getElementById('pc-ability');
+			var monitor = document.getElementById('monitor-ability');
 
 			hideTable();
 
 			if (selected === 'PC') {
-				document.getElementById('pc-ability').style.display = 'block';
+				pc.classList.remove('ability-box');
 			} else if (selected === 'PHONE') {
-				document.getElementById('phone-ability').style.display = 'block';
+				phone.classList.remove('ability-box');
 			} else if (selected === 'MONITOR') {
-				document.getElementById('monitor-ability').style.display = 'block';
+				monitor.classList.remove('ability-box');
 			}
 		}
 		

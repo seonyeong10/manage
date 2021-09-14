@@ -33,12 +33,18 @@
 	JOIN MANUFACTURE MA ON E.M_CODE = MA.MA_CODE
 	<where>
 		<trim prefixOverrides="AND | OR">
-			<if test="id != null and id != '' ">id = #{id}</if>
-			<if test="gubun != null and gubun != '' ">gubun = #{gubun}</if>
-			<if test="name != null and name != '' ">(name like '%' || #{name} || '%' or name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' or name like '%' || initcap(#{name}) || '%')</if>
-			<if test="ma_name != null and ma_name != '' ">(ma_name like '%' || #{ma_name} || '%' or ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%' or ma_name like '%' || initcap(#{ma_name}) || '%')</if>
+			<if test="id != null and id != '' ">and id = #{id}</if>
+			<if test="gubun != null and gubun != '' ">
+				and gubun in
+				<foreach collection="gubun" item="arr" separator="," open="(" close=")">
+					#{arr}
+				</foreach>
+			</if>
+			<if test="name != null and name != '' ">and (name like '%' || #{name} || '%' or name like '%' || upper(#{name}) || '%' or name like '%' || lower(#{name}) || '%' or name like '%' || initcap(#{name}) || '%')</if>
+			<if test="ma_name != null and ma_name != '' "> and (ma_name like '%' || #{ma_name} || '%' or ma_name like '%' || upper(#{ma_name}) || '%' or ma_name like '%' || lower(#{ma_name}) || '%' or ma_name like '%' || initcap(#{ma_name}) || '%')</if>
 		</trim>
 	</where>
+	ORDER BY ID, E. M_CODE
 </select>
 
 <update id="updatePhone" parameterType="pmap">

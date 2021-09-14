@@ -406,8 +406,9 @@
 		
 		// 삭제 버튼 클릭 시 
 		function delDevice() {
+			select[name='gubun'].disabled = false;
 			var params = $('#frm').serialize();
-
+			
 			$.ajax({
 				type : "post"
 				,url : "/device/delete"

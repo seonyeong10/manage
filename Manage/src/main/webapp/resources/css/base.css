@@ -21,11 +21,13 @@ body {
 }
 
 #content {
-	position: relative;
+	display: flex;
+	justify-content: space-between;
 }
 
 #top {
 	max-height: 300px;
+	min-width: 100vw;
 	text-align: right;
 	padding: 20px 20px;
 	border-bottom: 1px solid #eee;
@@ -34,27 +36,20 @@ body {
 
 #left-bar {
 	min-height: 100vh;
-	min-width: 160px;
-	float:left;	
-/* 	position: absolute; */
-/* 	top: 0; */
-/* 	left: 0; */
-/* 	text-align: center; */
+/* 	min-width: 160px; */
 	padding: 30px 20px 10px;
 	border-right: 1px solid #808080;
+	
+	flex-basis: 160px;
+	flex-shrink: 0;
 }
 
 #right {
 	min-height: 100vh;
 	min-width: 960px;
-	position:relative;
-	top: 0;
-	left: 200px;
-/* 	position:absolute; */
-/* 	top:0; */
-/* 	right:0; */
 	padding: 30px 20px 10px;
-	margin: 0 auto;
+	
+	flex-grow: 1;
 }
 
 .title {
@@ -110,8 +105,78 @@ body {
 }
 
 #right form {
-	position: absolute;
-	left:50%;
-	transform: translateX(-50%);
+/* 	position: absolute; */
+/* 	left:50%; */
+/* 	transform: translateX(-50%); */
 
+}
+
+.section-sub-title, .section-divice-title {
+	text-align: center;
+	margin: 20px 0;	
+	font-size: 20px;
+}
+
+.section-sub-title {
+	color: #808080;
+}
+
+.section-sub-title a, .section-divice-title a {
+	margin-left: 20px;
+	cursor: pointer;
+	color: #333;
+}
+
+.section-sub-title a:first-child, .section-divice-title a:first-child {
+	margin: 0;
+}
+
+.section-divice-title {
+	display: none;
+	margin: 0 0 30px 0;
+	font-size: 0px;
+	color: #808080;
+	border-bottom: 1px solid #333;
+	text-align: left;
+	padding: 10px 0;
+}
+
+#right .section-divice-title a {
+	padding: 10px;
+	border-top: 1px solid #333;
+	border-right: 1px solid #333;
+	margin: 0;
+	background: #eee;
+	font-size: 18px;
+}
+
+#right .section-divice-title a:first-child {
+	border-left: 1px solid #333;
+	border-radius: 5px 0 0 0;
+}
+
+#right .section-divice-title a:last-child {
+	border-radius: 0 5px 0 0;
+}
+
+#device-info {
+	display: none;
+}
+
+#device-info .device-info-title {
+	font-size: 24px;
+	font-weight: 700;
+	color: #808080;
+	margin-bottom: 10px;
+	
+}
+
+.color-line {
+	background: linear-gradient(to top, #ffe400 50%, transparent 50%);
+}
+
+.small-btn {
+	border-radius: 5px;
+	padding: 3px 8px;
+	cursor: pointer;
 }

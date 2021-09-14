@@ -18,7 +18,7 @@
 		<%@ include file="../include/left.jsp"%>
 		<div id="right">
 			
-			<div style="width:1500px; overflow: auto; position:absolute; left:50%; transform:translateX(-50%);">
+			<div >
 			<div class="section-title">사원 목록</div>
 			
 			<form action="#" method="post" id="frm" style="position: relative;">

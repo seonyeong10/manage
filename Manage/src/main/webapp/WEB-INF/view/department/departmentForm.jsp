@@ -32,7 +32,7 @@
 							<td id="tim_name">
 								<div>
 									<input type="text" name="d_tim"  required="required" placeholder="팀 이름을 입력하세요." style="width: 80%"/> 
-									<button onclick="createInput();">추가</button>
+									<button onclick="createInput();" class="small-btn">추가</button>
 								</div>
 							</td>
 						</tr>
@@ -123,7 +123,7 @@
 		var element = document.createElement('div');
 		var target = document.getElementById('tim_name');
 		
-		element.innerHTML = '<input type="text" name="d_tim"  required="required" placeholder="팀 이름을 입력하세요." style="width: 80%;"/>	<button onclick="removeInput(this);">삭제</button>';
+		element.innerHTML = '<input type="text" name="d_tim"  required="required" placeholder="팀 이름을 입력하세요." style="width: 80%;"/>	<button onclick="removeInput(this);" class="small-btn">삭제</button>';
 		target.appendChild(element);
 		
 	}

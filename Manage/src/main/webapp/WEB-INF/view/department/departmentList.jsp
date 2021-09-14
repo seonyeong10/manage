@@ -36,8 +36,8 @@
 							<td>${list.D_NAME }</td>
 							<td>${list.D_TIM }</td>
 							<td>
-								<button onclick="updateDept('${list.D_ID}');">수정</button>
-								<button onclick="deleteDept('${list.D_ID}');">삭제</button>
+								<button onclick="updateDept('${list.D_ID}');" class="small-btn">수정</button>
+								<button onclick="deleteDept('${list.D_ID}');" class="small-btn">삭제</button>
 							</td>
 						</tr>
 					</c:forEach>

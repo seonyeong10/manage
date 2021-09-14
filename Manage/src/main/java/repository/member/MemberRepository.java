@@ -70,4 +70,12 @@ public class MemberRepository {
 		statement = namespace + ".getDeptList";	
 		return sqlSession.selectList(statement, param);
 	}
+
+	/**
+	 * 사원 상세정보 - 장비조회
+	 */
+	public List<Map<String, Object>> getDeviceList(Map<String, Object> param) {
+		statement = namespace + ".getDeviceList";	
+		return sqlSession.selectList(statement, param);
+	}
 } 

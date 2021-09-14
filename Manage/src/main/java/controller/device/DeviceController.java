@@ -146,9 +146,9 @@ public class DeviceController {
 	 */
 	@RequestMapping(value = "schList", method = RequestMethod.POST)
 	public String schDeviceList(
-			@RequestParam(value = "gubun", defaultValue = "") String gubun
-			,@RequestParam(value = "schThem") String schThem
-			,@RequestParam(value = "schVal") String schVal
+			@RequestParam(value = "gubun", required = false) String[] gubun
+			,@RequestParam(value = "schThem", required = false) String schThem
+			,@RequestParam(value = "schVal", required = false) String schVal
 			,HttpServletResponse response
 			,HttpServletRequest request
 			,Model model
@@ -281,6 +281,7 @@ public class DeviceController {
 			,HttpServletRequest request
 			,Model model
 			) throws Exception {
+		
 		// JSON 객체
 		JSONObject obj = new JSONObject();
 		Map<String, Object> param = new HashMap<String, Object>();
@@ -297,7 +298,7 @@ public class DeviceController {
 		} else if(gubun.equals("300")) {
 			result = repository.delMonitor(param);
 		}
-				
+		
 		if(result > 0) {
 			obj.put("message", "success");
 		} else {
