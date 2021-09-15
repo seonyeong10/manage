@@ -13,6 +13,9 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<c:if test="${empty authInfo}">
+<script type="text/javascript">location.href="/login"</script>
+</c:if>
 	<%@ include file="../include/top.jsp"%>
 	<div id="content">
 		<%@ include file="../include/left.jsp"%>
@@ -30,7 +33,7 @@
 					<tr>
 						<td>소유자</td>
 						<td>
-							<select name="owner" id="emp">
+							<select name="owner" id="emp" <c:if test="${authInfo.auth ne 'ADMIN' }">disabled</c:if>>
 								<option value="">사원을 선택하세요.</option>
 							</select>
 						</td>
@@ -40,7 +43,7 @@
 						<td><span class="ability" id="manufacture"></span></td>
 					</tr>
 				</table>
-				<table id="monitor">
+				<table id="monitor" class="ability-box">
 					<tr>
 						<td>제품명</td>
 						<td><span class="ability" id="mo_name"></span></td>
@@ -65,14 +68,16 @@
 						<td>형태</td>
 						<td><span class="ability" id="mo_shape"></span></td>
 					</tr>
+					<c:if test="${authInfo.auth eq 'ADMIN' }">
 					<tr>
 						<td colspan="2" class="btn-area">
 							<button onclick="updateOwn();" class="btn submit">수정</button>
 							<button onclick="deleteOwn();" class="btn">삭제</button>
 						</td>
 					</tr>
+					</c:if>
 				</table>
-				<table id="pc">
+				<table id="pc" class="ability-box">
 					<tr>
 						<td>종류</td>
 						<td><span class="ability" id="pc_division"></span></td>
@@ -101,14 +106,16 @@
 						<td>저장공간(GB)</td>
 						<td><span class="ability" id="pc_capacity"></span></td>
 					</tr>
+					<c:if test="${authInfo.auth eq 'ADMIN' }">
 					<tr>
 						<td colspan="2" class="btn-area">
 							<button onclick="updateOwn();" class="btn submit">수정</button>
 							<button onclick="deleteOwn();" class="btn">삭제</button>
 						</td>
 					</tr>
+					</c:if>
 				</table>
-				<table id="phone">
+				<table id="phone" class="ability-box">
 					<tr>
 						<td>제품명</td>
 						<td><span class="ability" id="p_name"></span></td>
@@ -137,12 +144,14 @@
 						<td>배터리(mAh)</td>
 						<td><span class="ability" id="p_battery"></span></td>
 					</tr>
+					<c:if test="${authInfo.auth eq 'ADMIN' }">
 					<tr>
 						<td colspan="2" class="btn-area">
 							<button onclick="updateOwn();" class="btn submit">수정</button>
 							<button onclick="deleteOwn();" class="btn">삭제</button>
 						</td>
 					</tr>
+					</c:if>
 				</table>
 				<table id="equipment"></table>
 			</form>
@@ -155,9 +164,14 @@
 
 	function getInfo() {
 		
-		document.getElementById('monitor').style.display = 'none';
-		document.getElementById('pc').style.display = 'none';
-		document.getElementById('phone').style.display = 'none';
+		// 테이블 초기화
+		var phone = document.getElementById('phone');
+		var pc = document.getElementById('pc');
+		var monitor = document.getElementById('monitor');
+		
+		phone.classList.add('ability-box');
+		pc.classList.add('ability-box');
+		monitor.classList.add('ability-box');
 
 		var tag = document.getElementsByTagName('input');
 		var select = document.getElementsByTagName('select');
@@ -169,7 +183,7 @@
 		
 		<c:forEach items="${emp }" var="emp" varStatus="s">
 			var option = document.createElement('option');
-			option.innerText = "${emp.M_NAME}(${emp.M_DEPART})";
+			option.innerText = "${emp.M_NAME}(${emp.D_TIM})";
 			option.value = "${emp.CODE}";
 			target.append(option);
 		</c:forEach>
@@ -179,10 +193,11 @@
 		select.owner.value = '${item.CODE}';
 		document.getElementById('manufacture').innerText = '${item.MA_NAME}';
 		
+		console.log('${item}');
+		
 		if ("${item.GUBUN}" === 'MONITOR') {
-			document.getElementById('monitor').style.display = 'block';
+			monitor.classList.remove('ability-box');
 			
-			document.getElementById('pc_division').innerText = '${item.DIVISION}';
 			document.getElementById('mo_name').innerText = '${item.NAME}';
 			document.getElementById('mo_pannel').innerText = '${item.PANNEL}';
 			document.getElementById('mo_hz').innerText = '${item.HZ}';
@@ -191,7 +206,7 @@
 			document.getElementById('mo_shape').innerText = '${item.SHAPE}';
 			
 		} else if ("${item.GUBUN}" === 'PC') {
-			document.getElementById('pc').style.display = 'block';
+			pc.classList.remove('ability-box');
 			
 			document.getElementById('pc_division').innerText = '${item.DIVISION}';
 			document.getElementById('pc_name').innerText = '${item.NAME}';
@@ -202,7 +217,7 @@
 			document.getElementById('pc_capacity').innerText = '${item.CAPACITY}';
 
 		} else if ("${item.GUBUN}" === 'PHONE') {
-			document.getElementById('phone').style.display = 'block';
+			phone.classList.remove('ability-box');
 			
 			document.getElementById('p_name').innerText = '${item.NAME}';
 			document.getElementById('p_os').innerText = '${item.OS}';

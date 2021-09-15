@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<!-- member만 관리하는 객체조립기 -->
 <beans xmlns="http://www.springframework.org/schema/beans"
       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
       xsi:schemaLocation="
       http://www.springframework.org/schema/beans 
       http://www.springframework.org/schema/beans/spring-beans.xsd
       ">
-	<bean id="MainController" class="controller.main.MainController" />
-	<bean class="controller.main.LoginController" />
-	<bean id="loginReposiroty" class="repository.login.LoginRepository"/>
-	
-	<bean class="controller.main.LoginController2" />
-	<bean class="repository.main.LoginRepository2" />
+	<bean id="userController" class="controller.user.UserController" />
+	<bean id="userAddServcie" class="service.user.UserAddService" />
+	<bean id="userRepository" class="repository.user.UserRepository" />
 	
 </beans>

@@ -26,7 +26,7 @@
 					</tr>
 					<tr>
 						<th>비밀번호</th>
-						<td><input type="text" name="pw" placeholder="비밀번호를 입력하세요." style="width:90%;" required="required"/></td>
+						<td><input type="password" name="pw" placeholder="비밀번호를 입력하세요." style="width:90%;" required="required"/></td>
 					</tr>
 					<tr>
 						<th>사원번호</th>

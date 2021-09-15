@@ -7,6 +7,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.collections.map.HashedMap;
 import org.json.simple.JSONObject;
@@ -37,7 +38,15 @@ public class ManufactureController {
 	 * @return
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.GET)
-	public String openManufactureForm(Model model) {
+	public String openManufactureForm(
+			Model model
+			,HttpSession session
+			) {
+		
+		if(session.getAttribute("authInfo") == null) {
+			return "redirect:/login2";
+		}
+		
 		model.addAttribute("title", "제조사 등록");
 		return "manufacture/manufactureForm";
 	}

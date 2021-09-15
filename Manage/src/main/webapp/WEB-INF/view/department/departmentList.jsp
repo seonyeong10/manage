@@ -12,6 +12,9 @@
 	type="text/css" />
 </head>
 <body>
+<c:if test="${empty authInfo}">
+<script type="text/javascript">location.href="/login"</script>
+</c:if>
 	<%@ include file="../include/top.jsp"%>
 	<div id="content">
 		<%@ include file="../include/left.jsp"%>
@@ -32,12 +35,14 @@
 				<tfoot></tfoot>
 				<tbody>
 					<c:forEach items="${list }" var="list" varStatus="status">
-						<tr>
+						<tr onclick="updateDept('${list.D_ID}');">
 							<td>${list.D_NAME }</td>
 							<td>${list.D_TIM }</td>
 							<td>
 								<button onclick="updateDept('${list.D_ID}');" class="small-btn">수정</button>
+								<c:if test="${authInfo.auth eq 'ADMIN' }">
 								<button onclick="deleteDept('${list.D_ID}');" class="small-btn">삭제</button>
+								</c:if>
 							</td>
 						</tr>
 					</c:forEach>

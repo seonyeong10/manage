@@ -13,6 +13,9 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<c:if test="${empty authInfo}">
+<script type="text/javascript">location.href="/login"</script>
+</c:if>
 	<%@ include file="../include/top.jsp"%>
 	<div id="content">
 		<%@ include file="../include/left.jsp"%>

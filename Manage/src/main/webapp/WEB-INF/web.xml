@@ -37,6 +37,7 @@
   			classpath:equipment.xml
   			classpath:device.xml
   			classpath:department.xml
+  			classpath:spring-user.xml
   		</param-value>
   	</init-param>
   </servlet>

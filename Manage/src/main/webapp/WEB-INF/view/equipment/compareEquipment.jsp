@@ -13,6 +13,9 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<c:if test="${empty authInfo}">
+<script type="text/javascript">location.href="/login"</script>
+</c:if>
 	<%@ include file="../include/top.jsp"%>
 	<div id="content">
 		<%@ include file="../include/left.jsp"%>
@@ -22,39 +25,41 @@
 				<div class="section-title">장비 성능 비교</div>
 				<div>
 					
-					<table>
-						<thead>
-							<tr>
-								<td>
-									<select name="gubun" onchange="showEquipment();" id="gubun">
-										<option value="">항목을 선택하세요.</option>
-										<option value="PC"
-											<c:if test="${selected.gubun eq 'PC' }">selected</c:if>
-										>PC</option>
-										<option value="PHONE"
-											<c:if test="${selected.gubun eq 'PHONE' }">selected</c:if>
-										>핸드폰</option>
-										<option value="MONITOR"
-											<c:if test="${selected.gubun eq 'MONITOR' }">selected</c:if>
-										>모니터</option>
-									</select>
-								</td>
-							</tr>
-							<tr>
-								<td>
-									<select name="code1" class="emp" onchange="getEquipment('1');">
-										<option value="">사원을 선택하세요.</option>
-									</select>
-									<br/>
-									<select name="device1" class="device" onchange="getDevice('1');">
-										<option>장비를 선택하세요.</option>
-									</select>
-								</td>
-								<td>
-									<button onclick="giveEquipment('1');" class="give">→</button>
-									<br />
-									<button onclick="giveEquipment('2');" class="give">←</button>
-								</td>
+				<table>
+					<thead>
+						<tr>
+							<td>
+								<select name="gubun" onchange="showEquipment();" id="gubun">
+									<option value="">항목을 선택하세요.</option>
+									<option value="PC"
+										<c:if test="${selected.gubun eq 'PC' }">selected</c:if>
+									>PC</option>
+									<option value="PHONE"
+										<c:if test="${selected.gubun eq 'PHONE' }">selected</c:if>
+									>핸드폰</option>
+									<option value="MONITOR"
+										<c:if test="${selected.gubun eq 'MONITOR' }">selected</c:if>
+									>모니터</option>
+								</select>
+							</td>
+						</tr>
+						<tr>
+							<td>
+								<select name="code1" class="emp" onchange="getEquipment('1');">
+									<option value="">사원을 선택하세요.</option>
+								</select>
+								<br/>
+								<select name="device1" class="device" onchange="getDevice('1');">
+									<option>장비를 선택하세요.</option>
+								</select>
+							</td>
+							<c:if test="${authInfo.auth eq 'ADMIN' }">
+							<td>
+								<button onclick="giveEquipment('1');" class="give">→</button>
+								<br />
+								<button onclick="giveEquipment('2');" class="give">←</button>
+							</td>
+							</c:if>
 							<td>
 								<select name="code2" class="emp" onchange="getEquipment('2');">
 									<option value="">사원을 선택하세요.</option>
@@ -174,6 +179,7 @@
 							<td><input type="text" name="mo_shape2" readonly="readonly" class="mo2"/></td>
 						</tr>
 				</table>
+				<c:if test="${authInfo.auth eq 'ADMIN' }">
 				<table>
 					<tr class="btn-area">
 							<td colspan="3">
@@ -181,6 +187,7 @@
 							</td>
 						</tr>
 				</table>
+				</c:if>
 			</div>
 			</form>
 		</div>
@@ -299,18 +306,18 @@
 						className[1].value = ability.AP;
 						className[2].value = ability.OS;
 						className[3].value = ability.CPU;
-						className[4].value = ability.RAM;
-						className[5].value = ability.CAPACITY;
-						className[6].value = ability.BATTERY;
+						className[4].value = ability.RAM + 'GB';
+						className[5].value = ability.CAPACITY + 'GB';
+						className[6].value = ability.BATTERY + 'mAh';
 						
 					} else if(ability.GUBUN === 'MONITOR') {
 						className = document.getElementsByClassName('mo' + no);
 						
 						className[0].value = ability.NAME;
 						className[1].value = ability.PANNEL;
-						className[2].value = ability.HZ;
+						className[2].value = ability.HZ + 'hz';
 						className[3].value = ability.RESOLUTION;
-						className[4].value = ability.SPEED;
+						className[4].value = ability.SPEED + 'ms';
 						className[5].value = ability.SHAPE;
 						
 					} else if(ability.GUBUN === 'PC') {
@@ -320,9 +327,9 @@
 						className[1].value = ability.NAME;
 						className[2].value = ability.OS;
 						className[3].value = ability.CPU;
-						className[4].value = ability.RAM;
+						className[4].value = ability.RAM + 'GB';
 						className[5].value = ability.GPU;
-						className[6].value = ability.CAPACITY;
+						className[6].value = ability.CAPACITY + 'GB';
 						
 					}
 				}

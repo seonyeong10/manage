@@ -98,7 +98,7 @@ public class DepartmentController {
 			,HttpServletResponse response
 			,Model model
 			) {
-		String title = "부서 정보 수정";
+		String title = "부서 정보";
 		
 		Map<String, Object> param = new HashMap<String, Object>();
 		param.put("d_id", d_id);
@@ -106,7 +106,7 @@ public class DepartmentController {
 		List<Map<String, Object>> deptList = repository.getDeptList(param);
 		
 		model.addAttribute("title", title);
-		model.addAttribute("item", deptList.get(0));
+		model.addAttribute("list", deptList.get(0));
 		
 		return "department/departmentForm";
 	}

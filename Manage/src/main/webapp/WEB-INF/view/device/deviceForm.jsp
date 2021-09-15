@@ -13,6 +13,15 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<c:if test="${empty authInfo}">
+	<script type="text/javascript">location.href="/login"</script>
+</c:if>
+<c:if test="${authInfo.auth ne 'ADMIN'}">
+	<script type="text/javascript">
+		alert('접근 권한이 없습니다.');
+		location.href='/device/list';
+	</script>
+</c:if>
 	<%@ include file="../include/top.jsp" %>
 	<div id="content">
 	<%@ include file="../include/left.jsp" %>

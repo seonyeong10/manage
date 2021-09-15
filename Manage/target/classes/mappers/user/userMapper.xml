@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTO Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="mapper.user.userMapper">
+<sql id = "baseColumn">
+	id, pw, m_code, property
+</sql>
+
+<insert id="insertUser" parameterType="user" >
+	INSERT INTO USERS (ID, PW, CODE, AUTH)
+	VALUES (#{id}, #{pw}, #{code}, 'NORMAL')
+</insert>
+
+<select id="compareId"  parameterType="String" resultType="int">
+	SELECT COUNT(*) FROM USERS WHERE ID = #{id}
+</select>
+
+	<select id="loginPermit" parameterType="user" resultType="user">
+		SELECT ID, PW, CODE, AUTH
+		FROM USERS
+		WHERE ID = #{id}
+	</select>
+
+
+
+
+
+
+
+</mapper>

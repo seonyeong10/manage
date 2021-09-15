@@ -81,8 +81,6 @@ public class DeviceController {
 			param.put("pc_gpu", pc_gpu);
 			param.put("pc_capacity", pc_capacity);
 			
-			System.out.println(param.entrySet());
-			
 			result = repository.insertPC(param);
 			
 		} else if(gubun.equals("300")) {

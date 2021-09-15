@@ -9,7 +9,7 @@
 <link href="<c:url value="/resources/css/base.css"/>" rel="stylesheet" type="text/css" />
 </head>
 <c:if test="${empty authInfo}">
-벨렐ㄹㄹ
+<script type="text/javascript">location.href="/login"</script>
 </c:if>
 <c:if test="${!empty authInfo}">
 	<body>

@@ -13,6 +13,9 @@
 <script src="http://code.jquery.com/jquery-latest.js"></script>
 </head>
 <body>
+<c:if test="${empty authInfo}">
+<script type="text/javascript">location.href="/login"</script>
+</c:if>
 	<%@ include file="../include/top.jsp" %>
 	<div id="content">
 	<%@ include file="../include/left.jsp" %>
@@ -34,12 +37,12 @@
 					</tr>
 					<tr>
 						<td>제품명</td>
-						<td><input type="text" name="name" required="required"/></td>
+						<td><input type="text" name="name" required="required" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 					</tr>
 					<tr>
 						<td>제조사</td>
 						<td>
-							<select name="m_code" id="man">
+							<select name="m_code" id="man" <c:if test="${authInfo.auth ne 'ADMIN' }">disabled</c:if>>
 							</select>
 						</td>
 					</tr>
@@ -48,12 +51,14 @@
 					<thead>
 					</thead>
 					<tfoot>
+						<c:if test="${authInfo.auth eq 'ADMIN' }">
 						<tr>
 							<td colspan="2" class="btn-area">
 								<button class="btn submit" onclick="update();">수정</button>
 								<button onclick="delDevice();" class="btn">삭제</button>
 							</td>
 						</tr>
+						</c:if>
 					</tfoot>
 
 					<tbody id="phone-ability">
@@ -62,27 +67,27 @@
 						</tr>
 						<tr>
 							<td>AP칩셋</td>
-							<td><input type="text" name="p_ap" /></td>
+							<td><input type="text" name="p_ap" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>운영체제</td>
-							<td><input type="text" name="p_os" /></td>
+							<td><input type="text" name="p_os" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>CPU</td>
-							<td><input type="text" name="p_cpu"/></td>
+							<td><input type="text" name="p_cpu" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>RAM</td>
-							<td><input type="text" name="p_ram" pattern="[0-9]+" ></td>
+							<td><input type="text" name="p_ram" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>저장공간</td>
-							<td><input type="text" name="p_capacity" pattern="[0-9]+" /></td>
+							<td><input type="text" name="p_capacity" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>배터리</td>
-							<td><input type="text" name="p_battery" pattern="[0-9]+" /></td>
+							<td><input type="text" name="p_battery" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 					</tbody>
 					<tbody id="pc-ability">
@@ -92,7 +97,7 @@
 						<tr>
 							<td>pc_division</td>
 							<td>
-								<select name="pc_division">
+								<select name="pc_division" <c:if test="${authInfo.auth ne 'ADMIN' }">disabled</c:if>>
 									<option value="">PC 구분을 선택하세요.</option>
 									<option value="DESKTOP">데스크탑</option>
 									<option value="NOTEBOOK">노트북</option>
@@ -101,23 +106,23 @@
 						</tr>
 						<tr>
 							<td>운영체제</td>
-							<td><input type="text" name="pc_os" /></td>
+							<td><input type="text" name="pc_os" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>CPU</td>
-							<td><input type="text" name="pc_cpu" /></td>
+							<td><input type="text" name="pc_cpu" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>RAM</td>
-							<td><input type="text" name="pc_ram" pattern="[0-9]+" /></td>
+							<td><input type="text" name="pc_ram" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>GPU</td>
-							<td><input type="text" name="pc_gpu" /></td>
+							<td><input type="text" name="pc_gpu" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>저장공간</td>
-							<td><input type="text" name="pc_capacity" pattern="[0-9]+" /></td>
+							<td><input type="text" name="pc_capacity" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 
 						</tr>
 					</tbody>
@@ -127,16 +132,16 @@
 						</tr>
 						<tr>
 							<td>패널</td>
-							<td><input type="text" name="mo_pannel"/></td>
+							<td><input type="text" name="mo_pannel" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>화면 주사율(Hz)</td>
-							<td><input type="text" name="mo_Hz" pattern="[0-9]+" /></td>
+							<td><input type="text" name="mo_Hz" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>해상도(픽셀)</td>
 							<td>
-								<select name="mo_resolution">
+								<select name="mo_resolution" <c:if test="${authInfo.auth ne 'ADMIN' }">disabled</c:if>>
 									<option value="">해상도를 선택하세요.</option>
 									<option value="HD(1280 x 720)">HD(1280 x 720)</option>
 									<option value="1680 x 1050">1680 x 1050</option>
@@ -149,12 +154,12 @@
 						</tr>
 						<tr>
 							<td>응답속도(ms)</td>
-							<td><input type="text" name="mo_speed" pattern="[0-9]+" /></td>
+							<td><input type="text" name="mo_speed" pattern="[0-9]+" <c:if test="${authInfo.auth ne 'ADMIN' }">readonly</c:if>/></td>
 						</tr>
 						<tr>
 							<td>형태</td>
 							<td>
-								<select name="mo_shape">
+								<select name="mo_shape" <c:if test="${authInfo.auth ne 'ADMIN' }">disabled</c:if>>
 									<option value="">형태를 선택하세요.</option>
 									<option value="커브드">커브드</option>
 									<option value="와이드">와이드</option>
