@@ -20,12 +20,6 @@
 <c:if test="${empty authInfo }">
 	<script>location.href="/";</script>
 </c:if>
-<c:if test="${authInfo.auth ne 'ADMIN' }">
-	<script>
-		alert('권한이 없습니다.');
-		location.href="/";
-	</script>
-</c:if>
 	<%@ include file="../include/top.jsp"%>
 		<div id="content">
 			<%@ include file="../include/left.jsp"%>
@@ -43,7 +37,7 @@
 						<td>이름</td>
 						<td>부서</td>
 						<td>직책</td>
-						<td>비고</td>
+						<td cols>비고</td>
 <!-- 						<td>생년월일</td> -->
 <!-- 						<td>핸드폰</td> -->
 <!-- 						<td>이메일</td> -->
@@ -66,7 +60,7 @@
 	window.onload = getEmployeeList();
 
 // 	window.onload= getCode();
-	
+
 	function getEmployeeList() {
 		const table = document.getElementById('users');
 		
@@ -88,13 +82,23 @@
 			newRow.insertCell(4).innerText = "${item.D_NAME}";
 			newRow.insertCell(5).innerText = "${item.D_TIM}";
 			
+			<c:if test="${authInfo.auth eq 'ADMIN' }">
+			
 			if("${item.AUTH}" === 'ADMIN') {
-				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='grant(this, 1);'>권한삭제</button>";
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='openUpdate(this);'>수정</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 1);'>권한삭제</button>";
 				
 			} else if("${item.AUTH}" === 'NORMAL') {
-				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='grant(this, 2);'>권한부여</button>";
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='openUpdate(this);'>수정</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 2);'>권한부여</button>";
 				
-			}		
+			}
+			
+			</c:if>
+			
+			<c:if test="${authInfo.auth ne 'ADMIN' }">
+			
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='openUpdate(this);'>수정</button>";
+			
+			</c:if>
 			
 		</c:forEach>
 			
@@ -102,8 +106,29 @@
 
 	}
 	
+	function openUpdate(btn) {
+		var id = btn.value;
+		
+// 		$.ajax({
+// 			type : "POST"
+// 			,url : "/userinfo/openUpdate"
+// 			,data : {"id" : id}
+// 			,dataType : "json"
+// 			,error : function(request, stataus, error) {
+// 				console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+// 			}
+// 			,success : function(responseText, statusText, xhr) {
+// 				var msg = responseText.message;
+				
+// 				if(msg === 'success') {
+// 					alert('권한이 변경되었습니다.');
+// 					location.reload();
+// 				}
+// 			}
+// 		});
+	}
+	
 	function grant(btn, no) {
-		console.log(btn.value);
 		var id = btn.value;
 		var auth = null;
 		if(no == 1) auth = 'NORMAL';
