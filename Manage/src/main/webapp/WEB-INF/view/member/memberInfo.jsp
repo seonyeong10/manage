@@ -32,7 +32,7 @@
 				<!-- 인적정보 -->
 				<input type="hidden" name="phPattern" value="true"/>
 				<input type="hidden" name="emailPattern" value="true"/>
-				<div style="width: 930px; overflow:auto;" id="personal-info">
+				<div id="personal-info">
 					<table>
 						<tr>
 							<td>사번</td>

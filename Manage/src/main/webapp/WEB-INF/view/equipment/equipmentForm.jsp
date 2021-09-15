@@ -199,7 +199,7 @@
 					var target = document.getElementById('checkbox-box');
 					
 					for(var i=0 ; i<dept.length ; i++) {
-						if(i % 4 == 0) {
+						if(i % 4 == 0 && i != 0) {
 							target.appendChild(document.createElement('br'));
 						}
 						

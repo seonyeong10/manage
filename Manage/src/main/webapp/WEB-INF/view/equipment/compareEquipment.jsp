@@ -363,6 +363,9 @@
 					var deviceBox = document.getElementsByTagName('select')[name=device];
 					var equipList = responseText.equip;
 					
+					// 장비 리스트 초기화
+					$('select[name=' + device + ']').children('option:not(:first)').remove();
+					
 					if(msg === 'success') {
 						for(var i=0 ; i < equipList.length ; i++) {
 							var option = document.createElement('option');

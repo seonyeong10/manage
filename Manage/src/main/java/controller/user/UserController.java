@@ -61,16 +61,12 @@ public class UserController {
 			) {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-		List<Map<String, Object>> empList = memrepository.getEmployeeList(param);
-		System.out.println("확인 "+empList);
-		model.addAttribute("empList", empList);
+//		List<Map<String, Object>> empList = memrepository.getEmployeeList(param);
+		List<Map<String, Object>> userList = repository.getUserList(param);
+		model.addAttribute("userList", userList);
 		
 		return "user/userMember";
 	}
-	
-	
-	
-	
 	
 	@RequestMapping(value = "idCheck", method = RequestMethod.POST)
 	private void idCheck(@RequestParam(value = "id", defaultValue = "") String id, 

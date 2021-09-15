@@ -65,7 +65,7 @@
 				</div>
 				<ul>
 					<li><a href="/userinfo/form">회원 등록</a></li>
-					<li><a href="#">회원 조회</a></li>
+					<li><a href="/userinfo/userMem">회원 조회</a></li>
 				</ul>
 			</div>
 		</li>

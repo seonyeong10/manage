@@ -68,3 +68,13 @@ tr td .not-duplicate {
 }
 
 .ability-box {display: none;}
+
+#checkbox-box {font-size: 18px;}
+
+#checkbox-box input[type=checkbox] {
+	margin: 0 5px 0 10px; 
+}
+
+#checkbox-box input[type=checkbox]:first-child {
+	margin-left: 0;
+}

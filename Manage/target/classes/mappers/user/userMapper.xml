@@ -15,13 +15,20 @@
 	SELECT COUNT(*) FROM USERS WHERE ID = #{id}
 </select>
 
-	<select id="loginPermit" parameterType="user" resultType="user">
-		SELECT ID, PW, CODE, AUTH
-		FROM USERS
-		WHERE ID = #{id}
-	</select>
+<select id="loginPermit" parameterType="user" resultType="user">
+	SELECT ID, PW, CODE, AUTH
+	FROM USERS
+	WHERE ID = #{id}
+</select>
 
-
+<select id="getUserList" parameterType="pmap" resultType="pmap">
+	SELECT ID, U.CODE, AUTH, M_NAME, D_NAME, D_TIM, M_JOB
+	FROM USERS U
+	JOIN MEMBER M
+	ON U.CODE = M.CODE
+	JOIN DEPARTMENT D
+	ON M.M_DEPART = D.D_ID
+</select>
 
 
 

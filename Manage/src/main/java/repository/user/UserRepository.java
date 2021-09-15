@@ -1,5 +1,8 @@
 package repository.user;
 
+import java.util.List;
+import java.util.Map;
+
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -42,6 +45,11 @@ public class UserRepository {
 		
 		
 		return res;
+	}
+
+	public List<Map<String, Object>> getUserList(Map<String, Object> param) {
+		statement = namespace + ".getUserList";
+		return sqlSession.selectList(statement, param);
 	}
 
 	
