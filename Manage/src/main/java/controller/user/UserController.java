@@ -98,4 +98,26 @@ public class UserController {
 		
 	}
 	
+	@RequestMapping(value = "grant", method = RequestMethod.POST)
+	public void grant(
+			@RequestParam(value = "id") String id
+			,@RequestParam(value = "auth") String auth
+			,HttpServletResponse response
+			,HttpServletRequest request
+			,Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		param.put("auth", auth);
+		
+		int result = repository.updateGrant(param);
+		
+		obj.put("message", "success");
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
 }

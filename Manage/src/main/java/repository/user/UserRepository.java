@@ -52,6 +52,11 @@ public class UserRepository {
 		return sqlSession.selectList(statement, param);
 	}
 
+	public int updateGrant(Map<String, Object> param) {
+		statement = namespace + ".updateGrant";
+		return sqlSession.update(statement, param);
+	}
+
 	
 	
 	

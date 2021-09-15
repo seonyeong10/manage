@@ -17,6 +17,15 @@
 
 </head>
 <body>
+<c:if test="${empty authInfo }">
+	<script>location.href="/";</script>
+</c:if>
+<c:if test="${authInfo.auth ne 'ADMIN' }">
+	<script>
+		alert('권한이 없습니다.');
+		location.href="/";
+	</script>
+</c:if>
 	<%@ include file="../include/top.jsp"%>
 		<div id="content">
 			<%@ include file="../include/left.jsp"%>
@@ -80,10 +89,10 @@
 			newRow.insertCell(5).innerText = "${item.D_TIM}";
 			
 			if("${item.AUTH}" === 'ADMIN') {
-				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='revoke(this);'>권한삭제</button>";
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='grant(this, 1);'>권한삭제</button>";
 				
 			} else if("${item.AUTH}" === 'NORMAL') {
-				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='grant(this);'>권한부여</button>";
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='grant(this, 2);'>권한부여</button>";
 				
 			}		
 			
@@ -93,14 +102,31 @@
 
 	}
 	
-	function grant(btn) {
+	function grant(btn, no) {
 		console.log(btn.value);
+		var id = btn.value;
+		var auth = null;
+		if(no == 1) auth = 'NORMAL';
+		else if(no == 2) auth = 'ADMIN';
+		
+		$.ajax({
+			type : "POST"
+			,url : "/userinfo/grant"
+			,data : {"id" : id, "auth" : auth}
+			,dataType : "json"
+			,error : function(request, stataus, error) {
+				console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);
+			}
+			,success : function(responseText, statusText, xhr) {
+				var msg = responseText.message;
+				
+				if(msg === 'success') {
+					alert('권한이 변경되었습니다.');
+					location.reload();
+				}
+			}
+		});
 	}
-	
-	function revoke(btn) {
-		console.log(btn.value);
-	}
-	
 	
 // 	function getCode(){
 // 		$("table").on('click', 'tr', function(e) {

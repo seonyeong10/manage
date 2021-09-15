@@ -30,7 +30,12 @@
 	ON M.M_DEPART = D.D_ID
 </select>
 
-
+<update id="updateGrant" parameterType="pmap">
+	UPDATE USERS
+	SET
+		<if test="auth != null and auth != '' ">auth = #{auth}</if>
+	WHERE ID = #{id}
+</update>
 
 
 
