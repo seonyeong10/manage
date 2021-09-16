@@ -43,7 +43,7 @@
 						<td>이름</td>
 						<td>부서</td>
 						<td>직책</td>
-						<td cols>비고</td>
+						<td colspan="2">비고</td>
 <!-- 						<td>생년월일</td> -->
 <!-- 						<td>핸드폰</td> -->
 <!-- 						<td>이메일</td> -->
@@ -87,26 +87,27 @@
 			newRow.insertCell(3).innerText = "${item.M_NAME}";
 			newRow.insertCell(4).innerText = "${item.D_NAME}";
 			newRow.insertCell(5).innerText = "${item.D_TIM}";
-			
-			<c:if test="${authInfo.auth eq 'ADMIN' }">
-			
+// 			newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='delUser(this);'>삭제</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 1);'>권한회수</button>";
 			if("${item.AUTH}" === 'ADMIN') {
-				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='openUpdate(this);'>수정</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 1);'>권한회수</button>";
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='delUser(this);'>삭제</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 1);'>권한회수</button>";
 				
 			} else if("${item.AUTH}" === 'NORMAL') {
-				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='openUpdate(this);'>수정</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 2);'>권한부여</button>";
+				newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='delUser(this);'>삭제</button>  <button class='small-btn' value='${item.ID}' onclick='grant(this, 2);'>권한부여</button>";
 				
 			}
 			
-			</c:if>
+// 			<c:if test="${authInfo.auth eq 'ADMIN'} ">
 			
-			<c:if test="${authInfo.auth ne 'ADMIN' }">
 			
-				if("${item.AUTH}" != 'ADMIN') {
-					newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='delUser(this);'>삭제</button>";
-				}
+// 			</c:if>
 			
-			</c:if>
+// 			<c:if test="${authInfo.auth ne 'ADMIN' }">
+			
+// 				if("${item.AUTH}" != 'ADMIN') {
+// 					newRow.insertCell(6).innerHTML = "<button class='small-btn' value='${item.ID}' onclick='delUser(this);'>삭제</button>";
+// 				}
+			
+// 			</c:if>
 			
 		</c:forEach>
 			

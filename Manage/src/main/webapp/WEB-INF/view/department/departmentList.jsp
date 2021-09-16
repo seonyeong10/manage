@@ -39,8 +39,8 @@
 							<td>${list.D_NAME }</td>
 							<td>${list.D_TIM }</td>
 							<td>
-								<button onclick="updateDept('${list.D_ID}');" class="small-btn">수정</button>
 								<c:if test="${authInfo.auth eq 'ADMIN' }">
+								<button onclick="updateDept('${list.D_ID}');" class="small-btn">수정</button>
 								<button onclick="deleteDept('${list.D_ID}');" class="small-btn">삭제</button>
 								</c:if>
 							</td>
