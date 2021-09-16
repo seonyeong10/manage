@@ -272,6 +272,12 @@
 			} else if (selected === 'MONITOR') {
 				monitor.classList.remove('ability-box');
 			}
+			
+			$('select[name=code1] option:selected').prop('selected', false);
+			$('select[name=code2] option:selected').prop('selected', false);
+			$('select[name=device1').children('option:not(:first)').remove();
+			$('select[name=device2').children('option:not(:first)').remove();
+// 			console.log($('select[name=code1] option:selected').val());
 		}
 		
 		// 장치 성능정보 가져오기(0909 수정)
