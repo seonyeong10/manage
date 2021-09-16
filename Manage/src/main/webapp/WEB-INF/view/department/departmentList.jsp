@@ -20,7 +20,7 @@
 		<%@ include file="../include/left.jsp"%>
 
 		<div id="right">
-			<form id="frm">
+			<form id="frm" onsubmit="return false;">
 			<input type=hidden name="d_id" />
 			<div class="section-title">부서 목록</div>
 			
@@ -35,7 +35,7 @@
 				<tfoot></tfoot>
 				<tbody>
 					<c:forEach items="${list }" var="list" varStatus="status">
-						<tr onclick="updateDept('${list.D_ID}');">
+						<tr>
 							<td>${list.D_NAME }</td>
 							<td>${list.D_TIM }</td>
 							<td>
@@ -59,6 +59,7 @@
 	// 삭제 버튼 클릭
 	function deleteDept(d_id) {
 		document.getElementsByTagName('input')[name='d_id'].value = d_id;
+		
 		frm.action = '/department/delete';
 		frm.method = 'POST';
 		frm.submit();

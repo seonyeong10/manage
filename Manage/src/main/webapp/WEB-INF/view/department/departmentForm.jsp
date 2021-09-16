@@ -23,22 +23,24 @@
 		<div id="right">
 			<form action="#" method="post" name="frm" id="frm" onsubmit="return false;">
 			<div class="section-title">${title }</div>
-			<input type="hidden" name="d_id"/>
+			<input type="hidden" name="d_id" value="${list.D_ID }"/>
 				<table>
-					<c:if test="${title eq '부서 등록' }">
 						<tr>
 							<td>부서명</td>
-							<td><input type="text" name="d_name" required="required" placeholder="부서 이름을 입력하세요."/></td>
+							<td><input type="text" name="d_name" required="required" placeholder="부서 이름을 입력하세요." value="${list.D_NAME }"/></td>
 						</tr>
 						<tr>
 							<td>팀 이름</td>
 							<td id="tim_name">
 								<div>
-									<input type="text" name="d_tim"  required="required" placeholder="팀 이름을 입력하세요." style="width: 80%"/> 
+									<input type="text" name="d_tim"  required="required" placeholder="팀 이름을 입력하세요." style="width: 80%" value="${list.D_TIM }"/> 
+									<c:if test="${title eq '부서 등록' }">
 									<button onclick="createInput();" class="small-btn">추가</button>
+									</c:if>
 								</div>
 							</td>
 						</tr>
+					<c:if test="${title eq '부서 등록' }">
 						<tr>
 							<td colspan="2" class="btn-area">
 								<button value="등록" class="btn submit" onclick="insertDept();">등록</button>
@@ -47,18 +49,18 @@
 						</tr>
 					</c:if>
 					<c:if test="${title eq '부서 정보' }">
-						<tr>
-							<td>부서명</td>
-							<td><input type="text" name="d_name" readonly="readonly" placeholder="부서 이름을 입력하세요." value="${list.D_NAME }"/></td>
-						</tr>
-						<tr>
-							<td>팀 이름</td>
-							<td id="tim_name">
-								<div>
-									<input type="text" name="d_tim"  readonly="readonly" placeholder="팀 이름을 입력하세요." value="${list.D_TIM }"/> 
-								</div>
-							</td>
-						</tr>
+<!-- 						<tr> -->
+<!-- 							<td>부서명</td> -->
+<%-- 							<td><input type="text" name="d_name_up" placeholder="부서 이름을 입력하세요." value="${list.D_NAME }"/></td> --%>
+<!-- 						</tr> -->
+<!-- 						<tr> -->
+<!-- 							<td>팀 이름</td> -->
+<!-- 							<td id="tim_name"> -->
+<!-- 								<div> -->
+<%-- 									<input type="text" name="d_tim_up" placeholder="팀 이름을 입력하세요." value="${list.D_TIM }"/>  --%>
+<!-- 								</div> -->
+<!-- 							</td> -->
+<!-- 						</tr> -->
 						<c:if test="${authInfo.auth eq 'ADMIN' }">
 						<tr>
 							<td colspan="2" class="btn-area">

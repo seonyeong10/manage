@@ -218,6 +218,7 @@ public class EquipmentController {
 			@RequestParam(value = "id") String id,		// 장비 ID
 			@RequestParam(value = "code") String code,	// 장비 상세정보 사번
 			@RequestParam(value = "owner") String owner,	// 장비 소유자
+			@RequestParam(value = "no") String no,	// 장비 소유자
 			HttpServletRequest request, 
 			HttpServletResponse response, 
 			Model model
@@ -228,6 +229,7 @@ public class EquipmentController {
 		param.put("id", id);
 		param.put("code", code);
 		param.put("owner", owner);
+		param.put("no", no);
 		
 		repository.deleteOwner(param);
 		
@@ -345,6 +347,8 @@ public class EquipmentController {
 			@RequestParam(value = "code2", defaultValue = "") String code2,		// 사원2 사번
 			@RequestParam(value = "device1", defaultValue = "") String id1,		// 사원1의 장비 ID
 			@RequestParam(value = "device2", defaultValue = "") String id2,		// 사원2의 장비 ID
+			@RequestParam(value = "no1", defaultValue = "") String no1,		// 소유번호 ID
+			@RequestParam(value = "no2", defaultValue = "") String no2,		// 소유번호 ID
 			HttpServletRequest request
 			,HttpServletResponse response
 			,Model model) throws Exception {
@@ -356,11 +360,13 @@ public class EquipmentController {
 		param.put("code", code2);
 		param.put("id", id2);
 		param.put("owner", code1);
+		param.put("no", no2);
 		
 		// 사원2에게 사원1의 장비
 		param2.put("code", code1);
 		param2.put("id", id1);
 		param2.put("owner", code2);
+		param2.put("no", no1);
 		
 		repository.updateOwner(param);
 		repository.updateOwner(param2);
@@ -399,6 +405,7 @@ public class EquipmentController {
 			@RequestParam(value = "receiver", defaultValue = "") String receiver,
 			@RequestParam(value = "id", defaultValue = "") String id,
 			@RequestParam(value = "table", defaultValue = "") String table,
+			@RequestParam(value = "no", defaultValue = "") String no,		// 소유번호 ID
 			HttpServletRequest request, 
 			HttpServletResponse response, 
 			Model model
@@ -409,6 +416,7 @@ public class EquipmentController {
 		param.put("code", giver);
 		param.put("owner", receiver);
 		param.put("id", id);
+		param.put("no", no);
 		
 		repository.updateOwner(param);
 				

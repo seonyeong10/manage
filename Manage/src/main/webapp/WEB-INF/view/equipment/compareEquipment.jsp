@@ -22,6 +22,8 @@
 
 		<div id="right">
 			<form action="#" method="post" id="frm"  onsubmit="return false;">
+				<input type="text" name="no1" value=""/>
+				<input type="text" name="no2" value=""/>
 				<div class="section-title">장비 성능 비교</div>
 				<div>
 					
@@ -49,7 +51,7 @@
 									<option value="">사원을 선택하세요.</option>
 								</select>
 								<br/>
-								<select name="device1" class="device" onchange="getDevice('1');">
+								<select name="device1" class="device" onchange="getDevice('1');" id="device1">
 									<option>장비를 선택하세요.</option>
 								</select>
 							</td>
@@ -65,7 +67,7 @@
 									<option value="">사원을 선택하세요.</option>
 								</select>
 								<br/>
-								<select name="device2" class="device" onchange="getDevice('2');">
+								<select name="device2" class="device" onchange="getDevice('2');" id="device2">
 									<option>장비를 선택하세요.</option>
 								</select>
 							</td>
@@ -371,6 +373,8 @@
 							var option = document.createElement('option');
 							option.innerText = equipList[i].NAME;
 							option.value = equipList[i].ID;
+// 							option.value2 = equipList[i].NO;
+							$(option).attr("value2", equipList[i].NO);
 							
 							deviceBox.append(option);
 						}
@@ -382,6 +386,11 @@
 		
 		// 장비 교체 버튼 클릭
 		function changeEquipment() {
+			var no1 = $('#device1 option:selected').attr('value2');
+			$('input[name=no1]').val(no1);
+			var no2 = $('#device2 option:selected').attr('value2');
+			$('input[name=no2]').val(no2);
+			
 			frm.action = '/equipment/changeEquipment';
 			frm.submit();
 		}
@@ -392,6 +401,7 @@
 			var table = target[name='gubun'].options[target[name='gubun'].selectedIndex].value;	
 			var giver = target[name='code' + no].options[target[name='code' + no].selectedIndex].value;	// 주는 사람
 			var id = target[name='device' + no].options[target[name='device' + no].selectedIndex].value;;	// 장비 id
+			var num = $('#device' + no + ' option:selected').attr('value2');
 			
 			if(no === '1') no = 2;
 			else no = 1;
@@ -400,7 +410,7 @@
 			$.ajax({
 				type: 'post'
 				,url: '/equipment/compare/giveEquipment'
-				,data: {'giver' : giver, 'receiver' : receiver, 'id' : id, 'table' : table}
+				,data: {'giver' : giver, 'receiver' : receiver, 'id' : id, 'table' : table, 'no' : num}
 				,dataType: 'json'
 				,error: function(request, stataus, error) {
 					console.log("에러 : " + error + "\n" + "메시지 : " + request.responseText);

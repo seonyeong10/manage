@@ -61,11 +61,28 @@ public class UserController {
 			) {
 		
 		Map<String, Object> param = new HashMap<String, Object>();
-//		List<Map<String, Object>> empList = memrepository.getEmployeeList(param);
+		List<Map<String, Object>> empList = memrepository.getEmployeeList(param);
+//		List<Map<String, Object>> userList = repository.getUserList(param);
+		model.addAttribute("empList", empList);
+		
+		return "user/userMember";
+	}
+	
+	/**
+	 * 사용자 목록 조회
+	 */
+	@RequestMapping(value = "list", method = RequestMethod.GET)
+	public String getUserList(
+			HttpServletRequest request,
+			HttpServletResponse response,
+			Model model
+			) {
+		
+		Map<String, Object> param = new HashMap<String, Object>();
 		List<Map<String, Object>> userList = repository.getUserList(param);
 		model.addAttribute("userList", userList);
 		
-		return "user/userMember";
+		return "user/userList";
 	}
 	
 	@RequestMapping(value = "idCheck", method = RequestMethod.POST)
@@ -98,6 +115,9 @@ public class UserController {
 		
 	}
 	
+	/**
+	 * 권한 부여
+	 */
 	@RequestMapping(value = "grant", method = RequestMethod.POST)
 	public void grant(
 			@RequestParam(value = "id") String id
@@ -113,6 +133,29 @@ public class UserController {
 		param.put("auth", auth);
 		
 		int result = repository.updateGrant(param);
+		
+		obj.put("message", "success");
+		
+		response.setContentType("text/plain; charset=UTF-8");
+		response.getWriter().write(obj.toString());
+	}
+	
+	/**
+	 * 계정 삭제
+	 */
+	@RequestMapping(value = "delete", method = RequestMethod.POST)
+	public void deleteUser(
+			@RequestParam(value = "id") String id
+			,HttpServletResponse response
+			,HttpServletRequest request
+			,Model model
+			) throws Exception {
+		// JSON 객체
+		JSONObject obj = new JSONObject();
+		Map<String, Object> param = new HashMap<String, Object>();
+		param.put("id", id);
+		
+		int result = repository.deleteUser(param);
 		
 		obj.put("message", "success");
 		

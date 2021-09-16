@@ -58,6 +58,7 @@
 				</ul>
 			</div>
 		</li>
+		<c:if test="${authInfo.auth eq 'ADMIN' }">
 		<li>
 			<div class="left-menu">
 				<div class="title">
@@ -65,9 +66,10 @@
 				</div>
 				<ul>
 					<li><a href="/userinfo/form">회원 등록</a></li>
-					<li><a href="/userinfo/userMem">회원 조회</a></li>
+					<li><a href="/userinfo/list">회원 조회</a></li>
 				</ul>
 			</div>
 		</li>
+		</c:if>
 	</ul>
 </div>

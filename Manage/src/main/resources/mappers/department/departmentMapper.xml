@@ -23,7 +23,7 @@
 	UPDATE DEPARTMENT
 	SET
 		D_NAME = #{d_name}
-		, D_TIM = #{d_tim}
+		,D_TIM = #{d_tim}
 	WHERE D_ID = #{d_id}
 </update>
 

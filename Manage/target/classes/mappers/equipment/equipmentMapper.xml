@@ -24,12 +24,12 @@
 
 <update id="insertOwn" parameterType="pmap">
 	<foreach collection="code" item="code" separator=" " open="INSERT ALL" close="SELECT * FROM DUAL">
-		INTO OWN (ID, CODE) VALUES (#{id},#{code})
+		INTO OWN (NO, ID, CODE) VALUES (GET_SEQ('OWN_SEQ'),#{id},#{code})
 	</foreach>	
 </update>
 
 <select id="selectEquipments" parameterType="pmap" resultType="pmap">
-	SELECT ROWNUM, O.CODE, M_NAME, M_DEPART, M_JOB, MA.MA_CODE, MA_NAME, O.ID, GUBUN, DIVISION, NAME, AP, OS, CPU, RAM, CAPACITY, BATTERY, GPU, PANNEL, HZ, RESOLUTION, SPEED, SHAPE
+	SELECT ROWNUM, O.NO, O.CODE, M_NAME, M_DEPART, M_JOB, MA.MA_CODE, MA_NAME, O.ID, GUBUN, DIVISION, NAME, AP, OS, CPU, RAM, CAPACITY, BATTERY, GPU, PANNEL, HZ, RESOLUTION, SPEED, SHAPE
 	FROM OWN O
 	JOIN MEMBER MEM ON O.CODE = MEM.CODE
 	JOIN EQUIPMENTVIEW E ON O.ID = E.ID
@@ -101,12 +101,12 @@
 <update id="updateOwner" parameterType="pmap">
 	UPDATE OWN
 	SET CODE = #{owner}
-	WHERE ID = #{id} AND CODE = #{code}
+	WHERE ID = #{id} AND CODE = #{code} AND no = #{no}
 </update>
 
 <delete id="deleteOwner" parameterType="pmap">
 	DELETE FROM OWN
-	WHERE ID = #{id} AND CODE = #{code}
+	WHERE ID = #{id} AND CODE = #{code} AND NO = #{no}
 </delete>
 
 <select id="selectDepts" parameterType="pmap" resultType="pmap">

@@ -25,6 +25,7 @@
 			<div class="section-title">장비 상세정보</div>
 				<input type="hidden" name="code" value="${item.CODE }" />
 				<input type="hidden" name="id" value="${item.ID }" />
+				<input type="hidden" name="no" value="${item.NO }" />
 				<table>
 					<tr>
 						<td>구분</td>

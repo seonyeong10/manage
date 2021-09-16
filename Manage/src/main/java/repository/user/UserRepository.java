@@ -57,6 +57,11 @@ public class UserRepository {
 		return sqlSession.update(statement, param);
 	}
 
+	public int deleteUser(Map<String, Object> param) {
+		statement = namespace + ".deleteUser";
+		return sqlSession.delete(statement, param);
+	}
+
 	
 	
 	
